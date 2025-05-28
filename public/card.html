@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <style></style>
+  <body
+    class="body gap-5 font-montserrat w-screen h-screen bg-[#fbfbfb] flex justify-center items-center"
+  >
+    <script>
+      // Global variable
+      let caketos_1 = false;
+
+      function toggleCaketos(no) {
+        const el = document.getElementById("caketos-1");
+        caketos_1 = !caketos_1;
+        el.classList.remove("-right-[110%]");
+        if (caketos_1 === true) {
+          el.classList.add("-right-[110%]");
+        }
+      }
+    </script>
+
+    <div onclick="open1 = true;" class="flex items-center relative">
+      <div
+        class="bg-white z-10 card w-[14rem] hover:cursor-pointer border-2 border-gray-200 rounded-xl shadow-lg hover:shadow-xl hover:border-[#2F2575] transition-all duration-300 overflow-hidden max-w-sm group"
+      >
+        <div class="flex gap-3 p-6 border-b border-gray-100">
+          <h3 class="font-bold text-[#1b1b1b] text-xl leading-6">
+            SHABIRA<br />
+            <span class="text-gray-500 text-[1rem] font-medium"
+              >Syahla Alvaliza</span
+            >
+          </h3>
+        </div>
+        <div
+          class="h-48 bg-gradient-to-br from-gray-50 to-gray-200 flex items-center justify-center overflow-hidden relative"
+        >
+          <h1
+            class="absolute duration-200 ease-in-out top-3 m-0 left-4 font-lato font-black opacity-20 text-7xl"
+          >
+            01
+          </h1>
+          <img
+            class="size-[140%] object-cover absolute -top-3 -right-7"
+            src="img/shabira.png"
+            alt=""
+          />
+        </div>
+        <div class="p-6 space-y-3">
+          <div class="flex justify-between text-sm">
+            <span class="text-gray-500 font-medium">VOTERS</span>
+            <span class="text-[#2F2575] font-semibold">42</span>
+          </div>
+        </div>
+      </div>
+      <div
+        id="caketos-1"
+        class="absolute z-0 pl-5 p-3 h-[90%] -right-[110%] max-w-[16rem] bg-primary border-l-0 border-2 border-gray-200 rounded-r-lg shadow-lg"
+      >
+        <h1 class="font-semibold text-[1.2rem]">Visi</h1>
+        <p class="leading-5 font-normal text-[0.9rem] text-wrap">
+          Menjadikan OSIS sebagai organisasi yang inspiratif dan aktif dalam
+          mengembangkan potensi siswa.
+        </p>
+        <h1 class="font-semibold text-[1.2rem] mt-3">Misi</h1>
+        <p class="leading-5 font-normal text-[0.9rem] text-wrap">
+          Mengadakan kegiatan positif, mendukung aspirasi siswa, dan membangun
+          kerja sama antar warga sekolah.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
