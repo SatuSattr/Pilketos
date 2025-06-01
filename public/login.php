@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+if (isset($_SESSION['user_id'])) {
+    header('Location: admin.php');
+    exit();
+}
+
 include 'conn.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -18,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['user_name'] = $user['nama_lengkap'];
         $_SESSION['user_email'] = $user['email'];
 
-        header('Location: dashboard.php');
+        header('Location: admin.php');
         exit();
     } else {
         $error = "Email atau password salah!";

@@ -3,7 +3,10 @@ session_start();
 include 'conn.php';
 
 $page_title = 'Laporan';
-include 'header.php';
+include 'islogin.php';
+
+$file = 'config.json';
+$config = json_decode(file_get_contents($file), true);
 
 // Query untuk mendapatkan data laporan
 $query = "SELECT c.*, k.name as nama_kelas, COUNT(v.id) as jumlah_vote 
@@ -19,176 +22,261 @@ $total_vote_query = "SELECT COUNT(*) as total FROM vote";
 $total_vote_result = mysqli_query($conn, $total_vote_query);
 $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
 
-// Query untuk vote per hari (7 hari terakhir)
-$vote_per_hari_query = "SELECT DATE(created_at) as tanggal, COUNT(*) as jumlah 
-                        FROM vote 
-                        WHERE created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)
-                        GROUP BY DATE(created_at) 
-                        ORDER BY tanggal DESC";
-$vote_per_hari_result = mysqli_query($conn, $vote_per_hari_query);
-?>
+// Query untuk total vote
+$calon_query = "SELECT COUNT(*) as total FROM calon_ketua";
+$calon_result = mysqli_query($conn, $calon_query);
+$total_calon = mysqli_fetch_assoc($calon_result)['total'];
 
-<?php include 'sidebar.php'; ?>
+$total_every_query = "SELECT calon_ketua.nama, COUNT(*) AS jumlah_vote FROM vote JOIN calon_ketua ON vote.id_calon = calon_ketua.id GROUP BY calon_ketua.nama;
+";
+$total_every_result = mysqli_query($conn, $total_every_query);
 
-<!-- Main Content -->
-<div class="flex-1 lg:ml-0 pt-16 lg:pt-0">
-    <div class="p-6">
-        <!-- Header -->
-        <div class="mb-8">
-            <h1 class="text-3xl font-bold text-accent">Laporan Pilketos</h1>
-            <p class="text-gray-600 mt-2">Laporan perolehan suara pemilihan ketua OSIS</p>
-        </div>
-        
-        <!-- Summary Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div class="bg-secondary rounded-xl shadow-sm p-6 border border-gray-100">
-                <h3 class="text-lg font-semibold text-accent mb-4">Total Suara Masuk</h3>
-                <div class="text-4xl font-bold text-accent"><?php echo $total_vote; ?></div>
-                <p class="text-gray-600 mt-2">Total suara yang telah masuk</p>
-            </div>
-            
-            <div class="bg-secondary rounded-xl shadow-sm p-6 border border-gray-100">
-                <h3 class="text-lg font-semibold text-accent mb-4">Tingkat Partisipasi</h3>
-                <div class="text-4xl font-bold text-accent"><?php echo $total_vote > 0 ? number_format(($total_vote / 100) * 100, 1) : 0; ?>%</div>
-                <p class="text-gray-600 mt-2">Dari total siswa yang memiliki hak pilih</p>
-            </div>
-        </div>
-        
-        <!-- Hasil Perolehan Suara -->
-        <div class="bg-secondary rounded-xl shadow-sm border border-gray-100 mb-8">
-            <div class="p-6 border-b border-gray-200">
-                <h2 class="text-xl font-bold text-accent">Perolehan Suara Calon Ketua OSIS</h2>
-            </div>
-            
-            <div class="p-6">
-                <?php if (mysqli_num_rows($result) > 0): ?>
-                    <div class="space-y-6">
-                        <?php 
-                        $ranking = 1;
-                        while ($calon = mysqli_fetch_assoc($result)): 
-                            $persentase = $total_vote > 0 ? ($calon['jumlah_vote'] / $total_vote) * 100 : 0;
-                        ?>
-                            <div class="border border-gray-200 rounded-lg p-6">
-                                <div class="flex items-center justify-between mb-4">
-                                    <div class="flex items-center">
-                                        <div class="w-12 h-12 bg-accent text-secondary rounded-full flex items-center justify-center font-bold text-lg mr-4">
-                                            <?php echo $ranking; ?>
-                                        </div>
-                                        <div>
-                                            <h3 class="text-xl font-bold text-accent"><?php echo $calon['nama']; ?></h3>
-                                            <p class="text-gray-600">Kelas: <?php echo $calon['nama_kelas']; ?></p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="text-right">
-                                        <div class="text-3xl font-bold text-accent"><?php echo $calon['jumlah_vote']; ?></div>
-                                        <div class="text-sm text-gray-600">suara</div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Progress Bar -->
-                                <div class="mb-2">
-                                    <div class="flex justify-between text-sm text-gray-600 mb-1">
-                                        <span>Persentase</span>
-                                        <span><?php echo number_format($persentase, 1); ?>%</span>
-                                    </div>
-                                    <div class="w-full bg-gray-200 rounded-full h-3">
-                                        <div class="bg-accent h-3 rounded-full transition-all duration-500" 
-                                             style="width: <?php echo $persentase; ?>%"></div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Visi Misi Preview -->
-                                <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <h4 class="font-semibold text-accent mb-2">Visi:</h4>
-                                        <p class="text-sm text-gray-600"><?php echo substr($calon['visi'], 0, 150) . '...'; ?></p>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-semibold text-accent mb-2">Misi:</h4>
-                                        <p class="text-sm text-gray-600"><?php echo substr($calon['misi'], 0, 150) . '...'; ?></p>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php 
-                        $ranking++;
-                        endwhile; 
-                        ?>
-                    </div>
-                <?php else: ?>
-                    <div class="text-center py-12">
-                        <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                        </svg>
-                        <h3 class="text-lg font-medium text-gray-900 mb-2">Belum ada data</h3>
-                        <p class="text-gray-500">Belum ada calon atau vote yang masuk.</p>
-                    </div>
-                <?php endif; ?>
-            </div>
-        </div>
-        
-        <!-- Vote per Hari -->
-        <div class="bg-secondary rounded-xl shadow-sm border border-gray-100">
-            <div class="p-6 border-b border-gray-200">
-                <h2 class="text-xl font-bold text-accent">Aktivitas Voting (7 Hari Terakhir)</h2>
-            </div>
-            
-            <div class="p-6">
-                <?php if (mysqli_num_rows($vote_per_hari_result) > 0): ?>
-                    <div class="space-y-4">
-                        <?php while ($vote_hari = mysqli_fetch_assoc($vote_per_hari_result)): ?>
-                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                                <div>
-                                    <div class="font-semibold text-accent">
-                                        <?php echo date('d F Y', strtotime($vote_hari['tanggal'])); ?>
-                                    </div>
-                                    <div class="text-sm text-gray-600">
-                                        <?php echo date('l', strtotime($vote_hari['tanggal'])); ?>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <div class="text-2xl font-bold text-accent"><?php echo $vote_hari['jumlah']; ?></div>
-                                    <div class="text-sm text-gray-600">suara</div>
-                                </div>
-                            </div>
-                        <?php endwhile; ?>
-                    </div>
-                <?php else: ?>
-                    <div class="text-center py-8">
-                        <p class="text-gray-500">Belum ada aktivitas voting dalam 7 hari terakhir.</p>
-                    </div>
-                <?php endif; ?>
-            </div>
-        </div>
-        
-        <!-- Print Button -->
-        <div class="mt-8 text-center">
-            <button onclick="window.print()" class="bg-accent text-secondary py-3 px-6 rounded-xl font-medium hover:bg-gray-800 transition-colors">
-                <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
-                </svg>
-                Cetak Laporan
-            </button>
-        </div>
-    </div>
-</div>
+$labels = [];
+$data = [];
 
-<style>
-@media print {
-    .no-print {
-        display: none !important;
-    }
-    
-    body {
-        background: white !important;
-    }
-    
-    .bg-secondary {
-        background: white !important;
-        box-shadow: none !important;
+if ($total_every_result->num_rows > 0) {
+    while ($row = $total_every_result->fetch_assoc()) {
+        $labels[] = strtok($row['nama'], " ");
+        $data[] = (int)$row['jumlah_vote'];
     }
 }
-</style>
+?>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<?php include 'header.php'; ?>
+
+<body class="flex">
+    <?php include 'sidebar.php'; ?>
+    <!-- Main Content -->
+    <div class="flex-1 lg:ml-0 pt-16 lg:pt-0">
+        <div class="p-6">
+            <!-- Header -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-accent">Laporan Pilketos</h1>
+                <p class="text-gray-600 mt-2">Laporan perolehan suara pemilihan ketua OSIS</p>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+
+
+                <div class="rounded-xl shadow-md bg-white">
+                    <div class="px-4 py-2">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-sm mb-1 capitalize text-gray-600">Total Suara Masuk</p>
+                                <h4 class="text-3xl font-semibold text-gray-800"><?= $total_vote; ?><span class="ml-2 text-gray-600 text-[1rem] font-normal">/ <?= $config['haksuara']; ?></span></h4>
+                            </div>
+                            <div class="size-13 p-3 flex items-center justify-center bg-accent shadow-lg rounded-lg">
+                                <i class="text-[1.3rem] far fa-circle-check text-primary"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="border-t border-gray-200 my-0">
+                    <div class="px-4 py-2">
+                        <p class="text-sm text-gray-600 mb-0">
+                            <span class="text-green-600 font-semibold">+3% </span>than last month
+                        </p>
+                    </div>
+                </div>
+
+                <div class="rounded-xl shadow-md bg-white">
+                    <div class="px-4 py-2">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-sm mb-1 capitalize text-gray-600">Jumlah Calon</p>
+                                <h4 class="text-3xl font-semibold text-gray-800"><?= $total_calon; ?></h4>
+                            </div>
+                            <div class="size-13 p-3 flex items-center justify-center bg-accent shadow-lg rounded-lg">
+                                <i class="fas text-[1.2rem] fa-user-group text-primary"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="border-t border-gray-200 my-0">
+                    <div class="px-4 py-2">
+                        <p class="text-sm text-gray-600 mb-0">
+                            <span class="text-green-600 font-semibold">+3% </span>than last month
+                        </p>
+                    </div>
+                </div>
+
+                <div class="rounded-xl shadow-md bg-white">
+                    <div class="px-4 py-2">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-sm mb-1 capitalize text-gray-600">Tingkat Partisipasi</p>
+                                <h4 class="text-3xl font-semibold text-gray-800"><?= $total_vote > 0 ? number_format(($total_vote / $config['haksuara']) * 100, 1) : 0; ?>%</h4>
+                            </div>
+                            <div class="size-13 p-3 flex items-center justify-center bg-accent shadow-lg rounded-lg">
+                                <i class="fas text-[1.2rem] fa-chart-simple text-primary"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="border-t border-gray-200 my-0">
+                    <div class="px-4 py-2">
+                        <p class="text-sm text-gray-600 mb-0">
+                            <span class="text-green-600 font-semibold">+3% </span>than last month
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex gap-6 mb-8">
+                <!-- Perolehan -->
+                <div class="bg-secondary rounded-xl max-w-[55rem] shadow-lg border border-gray-100 mb-8">
+                    <div class="p-6 border-b border-gray-200">
+                        <h2 class="text-xl font-bold text-accent">Perolehan Suara Calon Ketua OSIS</h2>
+                    </div>
+
+                    <div class="p-6">
+                        <?php if (mysqli_num_rows($result) > 0): ?>
+                            <div class="space-y-6">
+                                <?php
+                                $ranking = 1;
+                                while ($calon = mysqli_fetch_assoc($result)):
+                                    $persentase = $total_vote > 0 ? ($calon['jumlah_vote'] / $total_vote) * 100 : 0;
+                                ?>
+                                    <div class="border border-gray-200 rounded-lg p-6">
+
+
+                                        <div class="flex items-center justify-between mb-4">
+                                            <div class="flex items-center">
+                                                <?php if ($ranking == 1): ?>
+                                                    <div class="w-12 h-12 bg-yellow-500 text-secondary relative rounded-full flex items-center justify-center font-bold text-lg mr-4">
+                                                        #<?php echo $ranking; ?>
+                                                        <i class="fa-solid fa-crown absolute text-yellow-500 -top-[10px] -left-[2px] -rotate-[27deg]"></i>
+                                                    </div>
+                                                <?php else: ?>
+                                                    <div class="w-12 h-12 bg-accent text-secondary rounded-full flex items-center justify-center font-bold text-lg mr-4">
+                                                        #<?php echo $ranking; ?>
+                                                    </div>
+                                                <?php endif ?>
+                                                <div>
+                                                    <h3 class="text-xl font-bold text-accent"><?php echo $calon['nama']; ?></h3>
+                                                    <div class="mini-info flex gap-3">
+                                                        <p class="text-gray-600">Nomor Urut: <?php echo $calon['nomor']; ?></p>
+                                                        <p class="text-gray-600">Kelas: <?php echo $calon['nama_kelas']; ?></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="text-right">
+                                                <div class="text-3xl font-bold text-accent"><?php echo $calon['jumlah_vote']; ?></div>
+                                                <div class="text-sm text-gray-600">suara</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-2">
+                                            <div class="flex justify-between text-sm text-gray-600 mb-1">
+                                                <span>Persentase</span>
+                                                <span><?php echo number_format($persentase, 1); ?>%</span>
+                                            </div>
+                                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                                <div class="bg-gradient-to-r from-neutral-800 via-zinc-800 to-zinc-600 h-3 rounded-full transition-all duration-500"
+                                                    style="width: <?php echo $persentase; ?>%"></div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div>
+                                                <h4 class="font-semibold text-accent mb-2">Visi:</h4>
+                                                <p class="text-sm text-gray-600"><?php echo substr($calon['visi'], 0, 150) . '...'; ?></p>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold text-accent mb-2">Misi:</h4>
+                                                <p class="text-sm text-gray-600"><?php echo substr($calon['misi'], 0, 150) . '...'; ?></p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                <?php
+                                    $ranking++;
+                                endwhile;
+                                ?>
+                            </div>
+                        <?php else: ?>
+                            <div class="text-center py-12">
+                                <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                </svg>
+                                <h3 class="text-lg font-medium text-gray-900 mb-2">Belum ada data</h3>
+                                <p class="text-gray-500">Belum ada calon atau vote yang masuk.</p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+
+                <!-- Chart -->
+                <div class="bg-secondary rounded-xl min-w-[40rem] h-fit shadow-lg border border-gray-100 mb-8">
+                    <div class="p-6 border-b border-gray-200">
+                        <h2 class="text-xl font-bold text-accent">Grafik Statistik Perolehan Suara</h2>
+                    </div>
+
+                    <div class="p-6 relative w-full h-full">
+                        <canvas id="voteChart"></canvas>
+                    </div>
+                </div>
+
+                <script>
+                    const labels = <?php echo json_encode($labels); ?>;
+                    const data = <?php echo json_encode($data); ?>;
+
+                    const config = {
+                        type: 'polarArea',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Suara',
+                                data: data,
+                                backgroundColor: [
+                                    '#3D3B40b0',
+                                    '#525CEBb0',
+                                    '#BFCFE7b0',
+                                    '#7AC6D2b0',
+                                    '#DDA853b0'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                r: {
+                                    pointLabels: {
+                                        display: true,
+                                        centerPointLabels: true,
+                                        font: {
+                                            size: 16
+                                        }
+                                    }
+                                }
+                            },
+                            plugins: {
+                                legend: {
+                                    position: 'top'
+                                },
+                                title: {
+                                    display: false,
+                                    text: 'Vote Polar Area Chart per Calon'
+                                }
+                            }
+                        }
+                    };
+
+                    new Chart(document.getElementById('voteChart'), config);
+                </script>
+            </div>
+
+        </div>
+    </div>
+
+
 
 </body>
+
 </html>
