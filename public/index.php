@@ -199,7 +199,7 @@ $result = mysqli_query($conn, $query);
                         $third = isset($words[2]) ? $words[2] : "";
                     ?>
                         <div id="caketos-container-<?php echo $no; ?>" class="transition-all duration-150 ease-in">
-                            <div class="flex w-[20rem] group items-center relative">
+                            <div class="flex w-[22rem] group items-center relative">
                                 <div class="bg-white z-10 card w-full border-2 border-gray-200 rounded-xl shadow-lg hover:cursor-pointer hover:shadow-xl hover:border-birupesat transition-all duration-300 overflow-hidden max-w-sm group relative">
                                     <!-- Selection Indicator -->
                                     <i class="selection-indicator opacity-0 text-birupesat absolute top-2.5 right-2.5 text-2xl  fa-solid fa-circle-check z-20 transition-opacity duration-150 ease-in-out"></i>
