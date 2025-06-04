@@ -48,10 +48,14 @@ Proyek ini bertujuan untuk membuat proses pemilihan ketua OSIS jadi lebih modern
    git clone https://github.com/SattrFev/Pilketos-Sertikom.git
    ```
 2. **Buka Terminal** di dalam folder hasil clone repository nya.
-2. **Jalankan Command** via terminal *pastikan kamu sudah memiliki node.js 
+3. **Jalankan Command** via terminal *pastikan kamu sudah memiliki node.js 
 ```bash
    npm i
    ```
 4. **Import database** dari file `db_pilketos.sql` ke phpMyAdmin atau tool database favoritmu.
 5. **Edit koneksi database** di `conn.php` sesuai dengan environment kamu.
-6. Buka website dari Laragon atau Xampp
+6. **Setup Tailwind** dengan menjalankan command
+  ```bash
+   npm run dev
+   ```
+7. Buka website dari Laragon atau Xampp
