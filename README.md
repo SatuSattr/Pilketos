@@ -39,4 +39,8 @@ Proyek ini bertujuan untuk membuat proses pemilihan ketua OSIS jadi lebih modern
 
 > 🖼️ *Kiri-Atas: Halaman Voting — Kanan-Atas: Panel Dashboard | Kiri-Bawah: Panel Laporan — Kanan-Bawah: Panel Calon*
 
+---
 
+
+> 🕒 **Waktu Pengerjaan:** 34 Jam  
+> 🏆 **Nilai : N/A
