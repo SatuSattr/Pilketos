@@ -140,7 +140,12 @@ $kelas_result = mysqli_query($conn, $kelas_query);
 
 <!DOCTYPE html>
 <html lang="en">
-<?php include 'header.php'; ?>
+
+<head>
+    <?php include 'header.php'; ?>
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="styles.css" />
+</head>
 
 <body>
 
@@ -169,7 +174,7 @@ $kelas_result = mysqli_query($conn, $kelas_query);
 
             <div class="flex flex-col flex-wrap 2xl:flex-row gap-4">
                 <!-- Form -->
-                <div class="bg-secondary rounded-xl shadow-sm max-w-[50rem] border border-gray-100">
+                <div class="bg-secondary rounded-xl shadow-sm max-w-[42rem] border border-gray-100">
 
                     <div class="p-6 bg-neutral-100 rounded-t-lg border-b border-gray-200">
                         <h2 class="text-xl font-bold text-accent"><?php echo $edit_data ? 'Edit Calon' : 'Tambah Calon Baru'; ?></h2>
@@ -276,12 +281,12 @@ $kelas_result = mysqli_query($conn, $kelas_query);
                         </div>
 
                         <div class="flex gap-4">
-                            <button type="submit" class="bg-accent text-secondary py-3 px-6 rounded-xl font-medium hover:bg-gray-800 transition-colors">
+                            <button type="submit" class="bg-accent cursor-pointer text-secondary py-3 px-6 rounded-xl font-medium hover:bg-gray-800 transition-colors">
                                 <?php echo $edit_data ? 'Update Calon' : 'Tambah Calon'; ?>
                             </button>
 
                             <?php if ($edit_data): ?>
-                                <a href="calon.php" class="bg-gray-500 text-white py-3 px-6 rounded-xl font-medium hover:bg-gray-600 transition-colors">
+                                <a href="calon.php" class="bg-gray-500 cursor-pointer text-white py-3 px-6 rounded-xl font-medium hover:bg-gray-600 transition-colors">
                                     Batal
                                 </a>
                             <?php endif; ?>

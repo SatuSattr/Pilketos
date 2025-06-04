@@ -5,26 +5,53 @@ include 'conn.php';
 $vote_success = false;
 $error_message = '';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_calon'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_calon'], $_POST['nisn'])) {
     $id_calon = $_POST['id_calon'];
+    $nisn_voter = $_POST['nisn'];
 
-    // Validate that the candidate exists
-    $check_query = "SELECT id FROM calon_ketua WHERE id = '$id_calon'";
-    $check_result = mysqli_query($conn, $check_query);
-
-    if (mysqli_num_rows($check_result) > 0) {
-        // Insert vote
-        $vote_query = "INSERT INTO vote (id_calon) VALUES ('$id_calon')";
-
-        if (mysqli_query($conn, $vote_query)) {
-            $vote_success = true;
-        } else {
-            $error_message = "Terjadi kesalahan saat menyimpan vote. Silakan coba lagi.";
-        }
+    // Validasi format NISN: hanya angka, 8-10 digit
+    if (!preg_match('/^\d{8,10}$/', $nisn_voter)) {
+        $error_message = "Format NISN tidak valid. Harus terdiri dari 8-10 digit angka.";
     } else {
-        $error_message = "Calon yang dipilih tidak valid.";
+        // Cek apakah NISN terdaftar di tabel hak_suara
+        $check_nisn_query = "SELECT nisn FROM hak_suara WHERE nisn = '$nisn_voter'";
+        $check_nisn_result = mysqli_query($conn, $check_nisn_query);
+
+        if (mysqli_num_rows($check_nisn_result) === 0) {
+            $error_message = "NISN tidak terdaftar sebagai pemilih sah.";
+        } else {
+            // Cek apakah calon valid
+            $check_calon_query = "SELECT id FROM calon_ketua WHERE id = '$id_calon'";
+            $check_calon_result = mysqli_query($conn, $check_calon_query);
+
+            if (mysqli_num_rows($check_calon_result) === 0) {
+                $error_message = "Calon yang dipilih tidak valid.";
+            } else {
+                // Cek apakah NISN sudah pernah voting
+                $check_vote_query = "SELECT id FROM vote WHERE nisn = '$nisn_voter'";
+                $check_vote_result = mysqli_query($conn, $check_vote_query);
+
+                if (mysqli_num_rows($check_vote_result) > 0) {
+                    $error_message = "NISN ini sudah pernah melakukan voting. Anda tidak dapat memilih dua kali.";
+                } else {
+                    // Semua valid, simpan vote
+                    $vote_query = "INSERT INTO vote (id_calon, nisn) VALUES ('$id_calon', '$nisn_voter')";
+                    if (mysqli_query($conn, $vote_query)) {
+                        $vote_success = true;
+                    } else {
+                        $error_message = "Terjadi kesalahan saat menyimpan vote. Silakan coba lagi.";
+                    }
+                }
+            }
+        }
     }
 }
+
+
+
+$file = 'config.json';
+$config = json_decode(file_get_contents($file), true);
+
 
 // Get all candidates with vote count for ranking
 $query = "SELECT c.*, k.name as nama_kelas, COUNT(v.id) as jumlah_vote
@@ -35,6 +62,11 @@ $query = "SELECT c.*, k.name as nama_kelas, COUNT(v.id) as jumlah_vote
           ORDER BY c.id ASC";
 $result = mysqli_query($conn, $query);
 
+$total_vote_query = "SELECT COUNT(*) as total FROM vote";
+$total_vote_result = mysqli_query($conn, $total_vote_query);
+$total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
+
+
 ?>
 
 <!DOCTYPE html>
@@ -44,30 +76,19 @@ $result = mysqli_query($conn, $query);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pilketos | Pilih Calon Ketua OSIS</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://kit.fontawesome.com/35d8865ade.js" crossorigin="anonymous"></script>
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <script src="https://kit.fontawesome.com/35d8865ade.js" crossorigin="anonymous"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#FAFBF8',
-                        secondary: '#FFFFFF',
-                        accent: '#1A1A1B',
-                        birupesat: '#2f2575'
-                    },
-                    fontFamily: {
-                        'montserrat': ['Montserrat', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
+
     <style>
         /* Custom SweetAlert2 Styling */
         .swal2-popup {
@@ -181,7 +202,11 @@ $result = mysqli_query($conn, $query);
         <!-- Title Section -->
         <div class="text-center mb-12">
             <h1 class="text-4xl font-bold text-accent mb-4">Pemilihan Ketua OSIS</h1>
-            <p class="text-xl text-gray-600 mb-2">Pilih satu calon ketua OSIS favorit Anda</p>
+            <?php if ($config['haksuara'] - $total_vote > 0): ?>
+                <p class="text-xl text-gray-600 mb-2">Pilih satu calon ketua OSIS favorit Anda</p>
+            <?php else: ?>
+                <p class="text-xl text-red-600 mb-2">Pemilihan suara ditutup! hak suara sudah mencapai batas</p>
+            <?php endif; ?>
         </div>
 
         <!-- Voting Form -->
@@ -198,18 +223,18 @@ $result = mysqli_query($conn, $query);
                         $second = isset($words[1]) ? $words[1] : "";
                         $third = isset($words[2]) ? $words[2] : "";
                     ?>
-                        <div id="caketos-container-<?php echo $no; ?>" class="transition-all duration-150 ease-in">
+                        <div id="caketos-container-<?php echo $no; ?>" class=" transition-all duration-150 ease-in">
                             <div class="flex w-[22rem] group items-center relative">
-                                <div class="bg-white z-10 card w-full border-2 border-gray-200 rounded-xl shadow-lg hover:cursor-pointer hover:shadow-xl hover:border-birupesat transition-all duration-300 overflow-hidden max-w-sm group relative">
+                                <div class="bg-white z-10 card w-full border-2 border-gray-200 rounded-xl shadow-lg hover:shadow-xl <?php if ($config['haksuara'] - $total_vote > 0) echo "hover:border-birupesat"; ?> transition-all duration-300 overflow-hidden max-w-sm group relative">
                                     <!-- Selection Indicator -->
                                     <i class="selection-indicator opacity-0 text-birupesat absolute top-2.5 right-2.5 text-2xl  fa-solid fa-circle-check z-20 transition-opacity duration-150 ease-in-out"></i>
 
 
                                     <!-- Radio Input (Hidden) -->
-                                    <input type="radio" name="id_calon" value="<?php echo $calon['id']; ?>" id="calon_<?php echo $calon['id']; ?>" class="hidden candidate-radio">
+                                    <input type="radio" name="id_calon" <?php if ($config['haksuara'] - $total_vote <= 0) echo "disabled"; ?> value="<?php echo $calon['id']; ?>" id="calon_<?php echo $calon['id']; ?>" class="hidden candidate-radio">
 
                                     <!-- Card Content -->
-                                    <label for="calon_<?php echo $calon['id']; ?>" class="block cursor-pointer">
+                                    <label for="calon_<?php echo $calon['id']; ?>" class="<?php if ($config['haksuara'] - $total_vote <= 0) echo "saturate-0 cursor-not-allowed"; ?> block">
                                         <div class="flex gap-3 p-6 border-b border-gray-100">
                                             <h3 class="font-bold text-2xl leading-6">
                                                 <?php echo $first; ?><br />
@@ -350,14 +375,42 @@ $result = mysqli_query($conn, $query);
             Swal.fire({
                 icon: 'question',
                 title: 'Konfirmasi Pilihan',
-                html: `Apakah Anda yakin ingin memilih <strong>${candidateName}</strong> sebagai calon ketua OSIS?<br><br><small class="text-gray-500">Pilihan tidak dapat diubah setelah dikonfirmasi.</small>`,
+                html: `Apakah Anda yakin ingin memilih <strong>${candidateName}</strong> sebagai calon ketua OSIS?<br><br><small class="text-gray-500">Masukkan NISN Anda untuk konfirmasi. Pilihan tidak dapat diubah setelah dikonfirmasi.</small>`,
+                input: 'text',
+                inputLabel: 'Masukkan NISN',
+                inputPlaceholder: 'Contoh: 1234567890',
+                inputAttributes: {
+                    maxlength: 10,
+                    autocapitalize: 'off',
+                    autocorrect: 'off'
+                },
                 showCancelButton: true,
                 confirmButtonText: 'Ya, Pilih Calon Ini',
                 cancelButtonText: 'Batal',
-                reverseButtons: true
+                reverseButtons: true,
+                preConfirm: (nisn) => {
+                    if (!nisn) {
+                        Swal.showValidationMessage('NISN tidak boleh kosong!');
+                    } else if (!/^\d+$/.test(nisn)) {
+                        Swal.showValidationMessage('NISN harus berupa angka!');
+                    } else if (nisn.length < 8 || nisn.length > 10) {
+                        Swal.showValidationMessage('NISN tidak valid!');
+                    }
+                    return nisn;
+                }
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Show loading
+                    const nisn = result.value;
+
+                    // Tambahkan input hidden ke form untuk mengirim NISN ke backend
+                    const form = document.getElementById('votingForm');
+                    const hiddenInput = document.createElement('input');
+                    hiddenInput.type = 'hidden';
+                    hiddenInput.name = 'nisn';
+                    hiddenInput.value = nisn;
+                    form.appendChild(hiddenInput);
+
+                    // Tampilkan loading
                     Swal.fire({
                         title: 'Memproses Vote...',
                         text: 'Mohon tunggu sebentar',
@@ -369,13 +422,13 @@ $result = mysqli_query($conn, $query);
                         }
                     });
 
-                    // Submit form
-                    this.submit();
+                    form.submit();
                 }
             });
+
         });
 
-        // Show success/error alerts
+
         <?php if ($vote_success): ?>
             window.addEventListener('load', function() {
                 Swal.fire({
