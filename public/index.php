@@ -14,12 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_calon'], $_POST['ni
         $error_message = "Format NISN tidak valid. Harus terdiri dari 8-10 digit angka.";
     } else {
         // Cek apakah NISN terdaftar di tabel hak_suara
-        $check_nisn_query = "SELECT nisn FROM hak_suara WHERE nisn = '$nisn_voter'";
+        $check_nisn_query = "SELECT id FROM hak_suara WHERE nisn = '$nisn_voter'";
         $check_nisn_result = mysqli_query($conn, $check_nisn_query);
 
         if (mysqli_num_rows($check_nisn_result) === 0) {
             $error_message = "NISN tidak terdaftar sebagai pemilih sah.";
         } else {
+            $nisn_id = mysqli_fetch_assoc($check_nisn_result)['id'];
             // Cek apakah calon valid
             $check_calon_query = "SELECT id FROM calon_ketua WHERE id = '$id_calon'";
             $check_calon_result = mysqli_query($conn, $check_calon_query);
@@ -28,14 +29,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_calon'], $_POST['ni
                 $error_message = "Calon yang dipilih tidak valid.";
             } else {
                 // Cek apakah NISN sudah pernah voting
-                $check_vote_query = "SELECT id FROM vote WHERE nisn = '$nisn_voter'";
+                $check_vote_query = "SELECT v.id FROM vote v LEFT JOIN hak_suara c ON v.id_nisn = c.id WHERE c.nisn = '$nisn_voter';";
                 $check_vote_result = mysqli_query($conn, $check_vote_query);
 
                 if (mysqli_num_rows($check_vote_result) > 0) {
                     $error_message = "NISN ini sudah pernah melakukan voting. Anda tidak dapat memilih dua kali.";
                 } else {
                     // Semua valid, simpan vote
-                    $vote_query = "INSERT INTO vote (id_calon, nisn) VALUES ('$id_calon', '$nisn_voter')";
+                    $vote_query = "INSERT INTO vote (id_calon, id_nisn) VALUES ('$id_calon', '$nisn_id')";
                     if (mysqli_query($conn, $vote_query)) {
                         $vote_success = true;
                     } else {

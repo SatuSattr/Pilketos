@@ -18,10 +18,15 @@ $query = "SELECT c.*, k.name as nama_kelas, COUNT(v.id) as jumlah_vote
           ORDER BY jumlah_vote DESC";
 $result = mysqli_query($conn, $query);
 
-$file = 'config.json';
-$config = json_decode(file_get_contents($file), true);
+
 $last_refresh = 0;
 if (isset($_COOKIE["last_refresh"])) $last_refresh = time() - (int) $_COOKIE["last_refresh"];
+
+
+$hak_suara_query = "SELECT COUNT(*) as total FROM hak_suara";
+$hak_suara_result = mysqli_query($conn, $hak_suara_query);
+$hak_suara = mysqli_fetch_assoc($hak_suara_result)['total'];
+
 
 
 $total_vote_query = "SELECT COUNT(*) as total FROM vote";
@@ -117,7 +122,7 @@ if ($total_every_result->num_rows > 0) {
                         <div class="flex justify-between items-center">
                             <div>
                                 <p class="text-sm mb-1 capitalize text-gray-600">Total Suara Masuk</p>
-                                <h4 class="text-3xl font-semibold text-gray-800"><?= $total_vote; ?><span class="ml-2 text-gray-600 text-[1rem] font-normal">/ <?= $config['haksuara']; ?></span></h4>
+                                <h4 class="text-3xl font-semibold text-gray-800"><?= $total_vote; ?><span class="ml-2 text-gray-600 text-[1rem] font-normal">/ <?= $hak_suara; ?></span></h4>
                             </div>
                             <div class="size-13 p-3 flex items-center justify-center bg-accent shadow-lg rounded-lg">
                                 <i class="text-[1.3rem] far fa-circle-check text-primary"></i>
@@ -139,7 +144,7 @@ if ($total_every_result->num_rows > 0) {
                         <div class="flex justify-between items-center">
                             <div>
                                 <p class="text-sm mb-1 capitalize text-gray-600">Tingkat Partisipasi</p>
-                                <h4 class="text-3xl font-semibold text-gray-800"><?= $total_vote > 0 ? number_format(($total_vote / $config['haksuara']) * 100, 1) : 0; ?>%</h4>
+                                <h4 class="text-3xl font-semibold text-gray-800"><?= $total_vote > 0 ? number_format(($total_vote / $hak_suara) * 100, 1) : 0; ?>%</h4>
                             </div>
                             <div class="size-13 p-3 flex items-center justify-center bg-accent shadow-lg rounded-lg">
                                 <i class="fas text-[1.2rem] fa-chart-simple text-primary"></i>

@@ -14,11 +14,13 @@ $query = "SELECT c.*, k.name as nama_kelas, COUNT(v.id) as jumlah_vote
           ORDER BY jumlah_vote DESC";
 $result = mysqli_query($conn, $query);
 
-$file = 'config.json';
-$config = json_decode(file_get_contents($file), true);
 $last_refresh = 0;
 if (isset($_COOKIE["last_refresh"])) $last_refresh = time() - (int) $_COOKIE["last_refresh"];
 
+
+$hak_suara_query = "SELECT COUNT(*) as total FROM hak_suara";
+$hak_suara_result = mysqli_query($conn, $hak_suara_query);
+$hak_suara = mysqli_fetch_assoc($hak_suara_result)['total'];
 
 $total_vote_query = "SELECT COUNT(*) as total FROM vote";
 $total_vote_result = mysqli_query($conn, $total_vote_query);
@@ -38,7 +40,7 @@ if (isset($_COOKIE["total_calon"])) {
 }
 setcookie("total_calon", $total_calon, time() + 1200, "/");
 
-$partisipasi = $total_vote > 0 ? number_format(($total_vote / $config['haksuara']) * 100, 1) : 0;
+$partisipasi = $total_vote > 0 ? number_format(($total_vote / $hak_suara) * 100, 1) : 0;
 $partisipasi_add = 0;
 if (isset($_COOKIE["partisipasi"])) {
     $partisipasi_add =  number_format(($partisipasi - (int) $_COOKIE["partisipasi"]), 1);

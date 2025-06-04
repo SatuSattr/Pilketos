@@ -363,24 +363,6 @@ $kelas_result = mysqli_query($conn, $kelas_query);
                     </div>
                 </div>
 
-
-                <!-- Jumlah Siswa Dengan Hak Suara -->
-                <div class="bg-secondary max-w-[15rem] max-h-[15rem] rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                    <div class="p-6 border-b bg-neutral-100 rounded-t-lg border-gray-200">
-                        <h2 class="text-xl font-bold text-accent">Jumlah Hak Suara</h2>
-                    </div>
-
-                    <form method="post" class="p-6 flex flex-col gap-4 h-[90%] w-full">
-                        <input type="hidden" name="action" value="haksuara">
-                        <input type="number" id="haksuara" name="haksuara" required
-                            value="<?= $config['haksuara'] ?? '0' ?>"
-                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all duration-200">
-
-                        <button type="submit" class="bg-accent text-secondary py-3 px-6 rounded-xl font-medium hover:bg-gray-800 transition-colors">
-                            Update
-                        </button>
-                    </form>
-                </div>
             </div>
         </div>
     </div>
