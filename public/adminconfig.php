@@ -107,6 +107,13 @@ $users_result = mysqli_query($conn, $query);
 </head>
 
 <body class="flex">
+
+    <script>
+        if (window.innerWidth < 1024) {
+            window.location.href = "no-access.php";
+        }
+    </script>
+
     <?php include 'sidebar.php'; ?>
 
     <div class="flex-1 lg:ml-0 pt-16 lg:pt-0">

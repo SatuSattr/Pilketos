@@ -48,9 +48,6 @@ if (isset($_COOKIE["partisipasi"])) {
 setcookie("partisipasi", $partisipasi, time() + 1200, "/");
 
 
-
-
-
 ?>
 
 
@@ -64,10 +61,13 @@ setcookie("partisipasi", $partisipasi, time() + 1200, "/");
 </head>
 
 <body class="flex">
-    <?php include 'sidebar.php'; ?>
+
+    <div class="hidden lg:block">
+        <?php include 'sidebar.php'; ?>
+    </div>
     <!-- Main Content -->
-    <div class="flex-1 lg:ml-0 pt-16 lg:pt-0">
-        <div class="p-6">
+    <div class="flex-1">
+        <div class="p-4">
             <!-- Header -->
             <div class="mb-8">
                 <h1 class="text-3xl font-bold text-accent">Dashboard</h1>
@@ -75,10 +75,10 @@ setcookie("partisipasi", $partisipasi, time() + 1200, "/");
             </div>
 
             <!-- Stats Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="flex lg:grid lg:grid-cols-3 flex-wrap gap-3 lg:gap-6 mb-8">
 
 
-                <div class="rounded-xl shadow-md bg-white">
+                <div class="w-full rounded-xl shadow-md bg-white">
                     <div class="px-4 py-2">
                         <div class="flex justify-between items-center">
                             <div>
@@ -98,7 +98,7 @@ setcookie("partisipasi", $partisipasi, time() + 1200, "/");
                     </div>
                 </div>
 
-                <div class="rounded-xl shadow-md bg-white">
+                <div class="w-full rounded-xl shadow-md bg-white">
                     <div class="px-4 py-2">
                         <div class="flex justify-between items-center">
                             <div>
@@ -121,7 +121,7 @@ setcookie("partisipasi", $partisipasi, time() + 1200, "/");
 
 
 
-                <div class="rounded-xl shadow-md bg-white">
+                <div class="w-full rounded-xl shadow-md bg-white">
                     <div class="px-4 py-2">
                         <div class="flex justify-between items-center">
                             <div>
@@ -135,7 +135,7 @@ setcookie("partisipasi", $partisipasi, time() + 1200, "/");
                     </div>
                     <hr class="border-t border-gray-200 my-0">
                     <div class="px-4 py-2">
-                        <p class="text-sm text-gray-600 mb-0">
+                        <p class="text-xs lg:text-sm text-gray-600 mb-0">
                             <span class="text-green-600 font-semibold">+<?= $partisipasi_add; ?>% </span>than last <?= $last_refresh; ?> seconds
                         </p>
                     </div>
@@ -148,13 +148,14 @@ setcookie("partisipasi", $partisipasi, time() + 1200, "/");
                 <h2 class="text-[1.4rem] font-semibold text-accent mb-6">Calon Ketos</h2>
 
                 <?php if (mysqli_num_rows($result) > 0): ?>
-                    <div class="flex gap-6">
+                    <div class="flex gap-3 flex-wrap lg:gap-6">
                         <script>
                             function toggleCaketos(id) {
+                                // Cek apakah ukuran layar termasuk 'lg' ke atas (min-width: 1024px)
+                                if (!window.matchMedia("(min-width: 1024px)").matches) return;
+
                                 const panel = document.getElementById(`caketos-${id}`);
-                                const panel_container = document.getElementById(
-                                    `caketos-container-${id}`
-                                );
+                                const panel_container = document.getElementById(`caketos-container-${id}`);
                                 const isVisible = panel.classList.contains("-right-[105%]");
 
                                 if (!isVisible) {
@@ -178,12 +179,12 @@ setcookie("partisipasi", $partisipasi, time() + 1200, "/");
                             $second = isset($words[1]) ? $words[1] : "";
                             $third  = isset($words[2]) ? $words[2] : "";
                             ?>
-                            <div id="caketos-container-<?php echo $calon['nomor'] ?>" class="transition-all duration-150 ease-in">
-                                <div class="flex w-[15rem] items-center relative">
+                            <div id="caketos-container-<?php echo $calon['nomor'] ?>" class="w-[48%] lg:w-auto transition-all duration-150 ease-in">
+                                <div class="flex lg:w-[15rem] items-center relative">
                                     <div
                                         onclick="toggleCaketos(<?php echo $calon['nomor'] ?>);"
                                         class="bg-white z-10 card w-full border-2 border-gray-200 rounded-xl shadow-lg hover:cursor-pointer hover:shadow-xl hover:border-birupesat transition-all duration-300 overflow-hidden max-w-sm group">
-                                        <div class="flex gap-3 p-6 border-b border-gray-100">
+                                        <div class="flex gap-3 p-3 lg:p-6 border-b border-gray-100">
                                             <h3 class="font-bold text-xl leading-6">
                                                 <?php echo $first; ?><br />
                                                 <span class="text-gray-500 text-[1rem] font-medium"><?php echo $second . " " . $third; ?></span>
@@ -192,7 +193,7 @@ setcookie("partisipasi", $partisipasi, time() + 1200, "/");
                                         <div
                                             class="h-48 bg-gradient-to-br from-gray-50 to-gray-200 flex items-center justify-center overflow-hidden relative">
                                             <h1
-                                                class="absolute duration-200 ease-in-out top-3 m-0 left-4 font-black opacity-20 text-7xl">
+                                                class="absolute duration-200 ease-in-out top-3 m-0 left-4 font-black opacity-20 text-6xl lg:text-7xl">
                                                 <?php echo "0" . $calon['nomor'];
                                                 $no++ ?>
                                             </h1>
@@ -206,7 +207,7 @@ setcookie("partisipasi", $partisipasi, time() + 1200, "/");
                                             <?php endif; ?>
 
                                         </div>
-                                        <div class="p-6 space-y-3">
+                                        <div class="p-3 lg:p-6 space-y-3">
                                             <div class="flex justify-between text-sm">
                                                 <span class="text-gray-500 font-medium">VOTERS</span>
                                                 <span class="text-birupesat font-semibold"><?php echo $calon['jumlah_vote']; ?></span>

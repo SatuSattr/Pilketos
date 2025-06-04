@@ -184,9 +184,9 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex gap-3 items-center">
-                    <img src="img/logo.png" alt="" class="size-9">
+                    <img src="img/logo.png" alt="" class="size-7 lg:size-9">
                     <div>
-                        <h1 class="text-xl font-bold text-accent">PILKETOS</h1>
+                        <h1 class="text-sm lg:text-xl font-bold text-accent">PILKETOS</h1>
                         <p class="text-xs text-gray-600">v1.0</p>
                     </div>
                 </div>
@@ -199,12 +199,12 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
     </div>
 
     <!-- Main Content -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-7xl mx-auto p-6 lg:py-6 lg:px-8">
         <!-- Title Section -->
-        <div class="text-center mb-12">
-            <h1 class="text-4xl font-bold text-accent mb-4">Pemilihan Ketua OSIS</h1>
+        <div class="text-center px-6 lg:p-0 mb-6 lg:mb-12">
+            <h1 class="text-2xl lg:text-4xl font-bold text-accent mb-2 lg:mb-4">Pemilihan Ketua OSIS</h1>
             <?php if ($config['haksuara'] - $total_vote > 0): ?>
-                <p class="text-xl text-gray-600 mb-2">Pilih satu calon ketua OSIS favorit Anda</p>
+                <p class="text-lg lg:text-xl text-gray-600 mb-2">Pilih satu calon ketua OSIS favorit Anda</p>
             <?php else: ?>
                 <p class="text-xl text-red-600 mb-2">Pemilihan suara ditutup! hak suara sudah mencapai batas</p>
             <?php endif; ?>
@@ -214,7 +214,7 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
         <form id="votingForm" method="POST" class="space-y-8">
             <!-- Candidates Grid -->
             <?php if (mysqli_num_rows($result) > 0): ?>
-                <div class="flex gap-8 items-center justify-center">
+                <div class="flex flex-wrap gap-2 lg:gap-8 items-center justify-center">
                     <?php
                     $no = 1;
                     while ($calon = mysqli_fetch_assoc($result)):
@@ -225,10 +225,10 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
                         $third = isset($words[2]) ? $words[2] : "";
                     ?>
                         <div id="caketos-container-<?php echo $no; ?>" class=" transition-all duration-150 ease-in">
-                            <div class="flex w-[22rem] group items-center relative">
+                            <div class="flex w-[10rem] lg:w-[22rem] group items-center relative">
                                 <div class="bg-white z-10 card w-full border-2 border-gray-200 rounded-xl shadow-lg hover:shadow-xl <?php if ($config['haksuara'] - $total_vote > 0) echo "hover:border-birupesat"; ?> transition-all duration-300 overflow-hidden max-w-sm group relative">
                                     <!-- Selection Indicator -->
-                                    <i class="selection-indicator opacity-0 text-birupesat absolute top-2.5 right-2.5 text-2xl  fa-solid fa-circle-check z-20 transition-opacity duration-150 ease-in-out"></i>
+                                    <i class="selection-indicator opacity-0 text-birupesat absolute top-2.5 right-2.5 text-lg lg:text-2xl  fa-solid fa-circle-check z-20 transition-opacity duration-150 ease-in-out"></i>
 
 
                                     <!-- Radio Input (Hidden) -->
@@ -236,14 +236,14 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
 
                                     <!-- Card Content -->
                                     <label for="calon_<?php echo $calon['id']; ?>" class="<?php if ($config['haksuara'] - $total_vote <= 0) echo "saturate-0 cursor-not-allowed"; ?> block">
-                                        <div class="flex gap-3 p-6 border-b border-gray-100">
-                                            <h3 class="font-bold text-2xl leading-6">
+                                        <div class="flex gap-3 p-3 lg:p-6 border-b border-gray-100">
+                                            <h3 class="font-bold text-lg lg:text-2xl leading-5 lg:leading-6">
                                                 <?php echo $first; ?><br />
-                                                <span class="text-gray-500 text-xl font-medium"><?php echo $second . " " . $third; ?></span>
+                                                <span class="text-gray-500 text-sm lg:text-xl font-medium"><?php echo $second . " " . $third; ?></span>
                                             </h3>
                                         </div>
-                                        <div class="h-[22rem] bg-gradient-to-br from-gray-50 to-gray-200 flex items-center justify-center overflow-hidden relative">
-                                            <h1 class="absolute duration-200 ease-in-out top-3 m-0 left-4 font-bold opacity-20 text-9xl">
+                                        <div class="h-[10rem] lg:h-[22rem] bg-gradient-to-br from-gray-50 to-gray-200 flex items-center justify-center overflow-hidden relative">
+                                            <h1 class="absolute duration-200 ease-in-out top-3 m-0 left-4 font-bold opacity-20 text-6xl lg:text-9xl">
                                                 <?php echo "0" . $calon['nomor']; ?>
                                             </h1>
                                             <?php if (!empty($calon['url_foto'])): ?>
@@ -254,8 +254,8 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
                                                 </svg>
                                             <?php endif; ?>
                                         </div>
-                                        <div class="p-6 space-y-3">
-                                            <div class="flex justify-between text-xl">
+                                        <div class="p-3 lg:p-6 space-y-3">
+                                            <div class="flex justify-between text-sm lg:text-xl">
                                                 <span class="text-gray-500 font-medium">KELAS</span>
                                                 <span class="text-accent font-semibold"><?php echo $calon['nama_kelas']; ?></span>
                                             </div>

@@ -3,7 +3,12 @@ $current_page = basename($_SERVER['PHP_SELF']);
 ?>
 
 <!-- Sidebar -->
-<div id="sidebar" class="sticky left-0 top-0 h-screen z-40 min-w-64 bg-secondary shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
+<script>
+    if (window.innerWidth < 1024) {
+        window.location.href = "no-access.php?x=<?= $current_page ?>";
+    }
+</script>
+<div id="sidebar" class=" sticky left-0 top-0 h-screen z-40 min-w-64 bg-secondary shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
     <div class="flex flex-col h-full">
         <!-- Logo -->
         <div class="flex items-center justify-center h-20 bg-accent">
