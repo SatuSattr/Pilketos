@@ -58,7 +58,9 @@ Proyek ini bertujuan untuk membuat proses pemilihan ketua OSIS jadi lebih modern
   ```bash
    npm run dev
    ```
-7. Buka website dari Laragon atau Xampp
+7. **Buka website** dari Laragon atau Xampp lalu menuju ke `\public`
+8. **Akses admin** dengan membuka `public\admin.php` lewat url fields di browser mu
+9. gunakan email `admin@gmail.com` dan password `admin1232`
 
 ## 📖 Cara Menggunakan (Basic)
 
