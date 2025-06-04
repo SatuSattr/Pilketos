@@ -43,4 +43,4 @@ Proyek ini bertujuan untuk membuat proses pemilihan ketua OSIS jadi lebih modern
 
 
 > 🕒 **Waktu Pengerjaan:** 34 Jam  
-> 🏆 **Nilai : N/A
+> 🏆 **Nilai** : N/A
