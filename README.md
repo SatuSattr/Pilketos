@@ -43,8 +43,15 @@ Proyek ini bertujuan untuk membuat proses pemilihan ketua OSIS jadi lebih modern
 
 ## 🚀 Cara Menjalankan
 
-
-1. **Download** project ini dari halaman [📦 Releases](https://github.com/SattrFev/Pilketos-Sertikom) Repository ini.
-2. **Import database** dari file `db_pilketos.sql` ke phpMyAdmin atau tool database favoritmu.
-3. **Edit koneksi database** di `conn.php` sesuai dengan environment kamu.
-4. Jalankan project di `localhost` menggunakan XAMPP / Laragon / dsb.
+1. **Clone** repository ini ke folder `\www` *jika anda pakai Laragon atau `\htdocs` jika ada pakai XAMPP
+ ```bash
+   git clone https://github.com/SattrFev/Pilketos-Sertikom.git
+   ```
+2. **Buka Terminal** di dalam folder hasil clone repository nya.
+2. **Jalankan Command** via terminal *pastikan kamu sudah memiliki node.js 
+```bash
+   npm i
+   ```
+4. **Import database** dari file `db_pilketos.sql` ke phpMyAdmin atau tool database favoritmu.
+5. **Edit koneksi database** di `conn.php` sesuai dengan environment kamu.
+6. Buka website dari Laragon atau Xampp
