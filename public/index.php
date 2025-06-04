@@ -26,6 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_calon'])) {
     }
 }
 
+$file = 'config.json';
+$config = json_decode(file_get_contents($file), true);
+
+
 // Get all candidates with vote count for ranking
 $query = "SELECT c.*, k.name as nama_kelas, COUNT(v.id) as jumlah_vote
           FROM calon_ketua c 
@@ -34,6 +38,11 @@ $query = "SELECT c.*, k.name as nama_kelas, COUNT(v.id) as jumlah_vote
           GROUP BY c.id
           ORDER BY c.id ASC";
 $result = mysqli_query($conn, $query);
+
+$total_vote_query = "SELECT COUNT(*) as total FROM vote";
+$total_vote_result = mysqli_query($conn, $total_vote_query);
+$total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
+
 
 ?>
 
@@ -44,30 +53,19 @@ $result = mysqli_query($conn, $query);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pilketos | Pilih Calon Ketua OSIS</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://kit.fontawesome.com/35d8865ade.js" crossorigin="anonymous"></script>
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <script src="https://kit.fontawesome.com/35d8865ade.js" crossorigin="anonymous"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#FAFBF8',
-                        secondary: '#FFFFFF',
-                        accent: '#1A1A1B',
-                        birupesat: '#2f2575'
-                    },
-                    fontFamily: {
-                        'montserrat': ['Montserrat', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
+
     <style>
         /* Custom SweetAlert2 Styling */
         .swal2-popup {
@@ -181,7 +179,11 @@ $result = mysqli_query($conn, $query);
         <!-- Title Section -->
         <div class="text-center mb-12">
             <h1 class="text-4xl font-bold text-accent mb-4">Pemilihan Ketua OSIS</h1>
-            <p class="text-xl text-gray-600 mb-2">Pilih satu calon ketua OSIS favorit Anda</p>
+            <?php if ($config['haksuara'] - $total_vote > 0): ?>
+                <p class="text-xl text-gray-600 mb-2">Pilih satu calon ketua OSIS favorit Anda</p>
+            <?php else: ?>
+                <p class="text-xl text-red-600 mb-2">Pemilihan suara ditutup! hak suara sudah mencapai batas</p>
+            <?php endif; ?>
         </div>
 
         <!-- Voting Form -->
@@ -198,18 +200,18 @@ $result = mysqli_query($conn, $query);
                         $second = isset($words[1]) ? $words[1] : "";
                         $third = isset($words[2]) ? $words[2] : "";
                     ?>
-                        <div id="caketos-container-<?php echo $no; ?>" class="transition-all duration-150 ease-in">
+                        <div id="caketos-container-<?php echo $no; ?>" class=" transition-all duration-150 ease-in">
                             <div class="flex w-[22rem] group items-center relative">
-                                <div class="bg-white z-10 card w-full border-2 border-gray-200 rounded-xl shadow-lg hover:cursor-pointer hover:shadow-xl hover:border-birupesat transition-all duration-300 overflow-hidden max-w-sm group relative">
+                                <div class="bg-white z-10 card w-full border-2 border-gray-200 rounded-xl shadow-lg hover:shadow-xl <?php if ($config['haksuara'] - $total_vote > 0) echo "hover:border-birupesat"; ?> transition-all duration-300 overflow-hidden max-w-sm group relative">
                                     <!-- Selection Indicator -->
                                     <i class="selection-indicator opacity-0 text-birupesat absolute top-2.5 right-2.5 text-2xl  fa-solid fa-circle-check z-20 transition-opacity duration-150 ease-in-out"></i>
 
 
                                     <!-- Radio Input (Hidden) -->
-                                    <input type="radio" name="id_calon" value="<?php echo $calon['id']; ?>" id="calon_<?php echo $calon['id']; ?>" class="hidden candidate-radio">
+                                    <input type="radio" name="id_calon" <?php if ($config['haksuara'] - $total_vote <= 0) echo "disabled"; ?> value="<?php echo $calon['id']; ?>" id="calon_<?php echo $calon['id']; ?>" class="hidden candidate-radio">
 
                                     <!-- Card Content -->
-                                    <label for="calon_<?php echo $calon['id']; ?>" class="block cursor-pointer">
+                                    <label for="calon_<?php echo $calon['id']; ?>" class="<?php if ($config['haksuara'] - $total_vote <= 0) echo "saturate-0 cursor-not-allowed"; ?> block">
                                         <div class="flex gap-3 p-6 border-b border-gray-100">
                                             <h3 class="font-bold text-2xl leading-6">
                                                 <?php echo $first; ?><br />
@@ -351,6 +353,11 @@ $result = mysqli_query($conn, $query);
                 icon: 'question',
                 title: 'Konfirmasi Pilihan',
                 html: `Apakah Anda yakin ingin memilih <strong>${candidateName}</strong> sebagai calon ketua OSIS?<br><br><small class="text-gray-500">Pilihan tidak dapat diubah setelah dikonfirmasi.</small>`,
+                input: "text",
+                inputAttributes: {
+                    autocapitalize: "off"
+                    place
+                },
                 showCancelButton: true,
                 confirmButtonText: 'Ya, Pilih Calon Ini',
                 cancelButtonText: 'Batal',

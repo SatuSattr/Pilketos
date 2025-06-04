@@ -102,6 +102,8 @@ $users_result = mysqli_query($conn, $query);
 
 <head>
     <?php include 'header.php'; ?>
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body class="flex">
@@ -128,134 +130,136 @@ $users_result = mysqli_query($conn, $query);
                 </div>
             <?php endif; ?>
 
-            <!-- Form -->
-            <div class="bg-secondary rounded-xl shadow-sm border border-gray-100 p-6 mb-8">
-                <h2 class="text-xl font-bold text-accent mb-6">
-                    <?php echo $edit_data ? 'Edit Admin' : 'Tambah Admin Baru'; ?>
-                </h2>
+            <div class="flex gap-6">
+                <!-- Form -->
+                <div class="bg-secondary w-[40%] rounded-xl shadow-sm border border-gray-100 p-6">
+                    <h2 class="text-xl font-bold text-accent mb-6">
+                        <?php echo $edit_data ? 'Edit Admin' : 'Tambah Admin Baru'; ?>
+                    </h2>
 
-                <form method="POST" class="space-y-6">
-                    <input type="hidden" name="action" value="<?php echo $edit_data ? 'edit' : 'add'; ?>">
-                    <?php if ($edit_data): ?>
-                        <input type="hidden" name="id" value="<?php echo $edit_data['id']; ?>">
-                    <?php endif; ?>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="nama_lengkap" class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap</label>
-                            <input type="text" id="nama_lengkap" name="nama_lengkap" required
-                                value="<?php echo $edit_data ? $edit_data['nama_lengkap'] : ''; ?>"
-                                class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all duration-200">
-                        </div>
-
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                            <input type="email" id="email" name="email" required
-                                value="<?php echo $edit_data ? $edit_data['email'] : ''; ?>"
-                                class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all duration-200">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
-                            Password
-                            <?php if ($edit_data): ?>
-                                <span class="text-gray-500 font-normal">(Kosongkan jika tidak ingin mengubah password)</span>
-                            <?php endif; ?>
-                        </label>
-                        <input type="password" id="password" name="password"
-                            <?php echo !$edit_data ? 'required' : ''; ?>
-                            placeholder="<?php echo $edit_data ? 'Masukkan password baru (opsional)' : 'Masukkan password'; ?>"
-                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all duration-200">
-                        <p class="text-xs text-gray-500 mt-1">Password minimal 6 karakter</p>
-                    </div>
-
-                    <?php if (!$edit_data): ?>
-                        <div>
-                            <label for="confirm_password" class="block text-sm font-medium text-gray-700 mb-2">Konfirmasi Password</label>
-                            <input type="password" id="confirm_password" name="confirm_password" required
-                                placeholder="Ulangi password"
-                                class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all duration-200">
-                        </div>
-                    <?php endif; ?>
-
-                    <div class="flex gap-4">
-                        <button type="submit" class="bg-accent text-secondary py-3 px-6 rounded-xl font-medium hover:bg-gray-800 transition-colors">
-                            <?php echo $edit_data ? 'Update Admin' : 'Tambah Admin'; ?>
-                        </button>
-
+                    <form method="POST" class="space-y-6">
+                        <input type="hidden" name="action" value="<?php echo $edit_data ? 'edit' : 'add'; ?>">
                         <?php if ($edit_data): ?>
-                            <a href="adminconfig.php" class="bg-gray-500 text-white py-3 px-6 rounded-xl font-medium hover:bg-gray-600 transition-colors">
-                                Batal
-                            </a>
+                            <input type="hidden" name="id" value="<?php echo $edit_data['id']; ?>">
                         <?php endif; ?>
-                    </div>
-                </form>
-            </div>
 
-            <!-- Data Table -->
-            <div class="bg-secondary rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                <div class="p-6 border-b border-gray-200">
-                    <h2 class="text-xl font-bold text-accent">Daftar Administrator</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="nama_lengkap" class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap</label>
+                                <input type="text" id="nama_lengkap" name="nama_lengkap" required
+                                    value="<?php echo $edit_data ? $edit_data['nama_lengkap'] : ''; ?>"
+                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all duration-200">
+                            </div>
+
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                <input type="email" id="email" name="email" required
+                                    value="<?php echo $edit_data ? $edit_data['email'] : ''; ?>"
+                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all duration-200">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+                                Password
+                                <?php if ($edit_data): ?>
+                                    <span class="text-gray-500 font-normal">(Kosongkan jika tidak ingin mengubah password)</span>
+                                <?php endif; ?>
+                            </label>
+                            <input type="password" id="password" name="password"
+                                <?php echo !$edit_data ? 'required' : ''; ?>
+                                placeholder="<?php echo $edit_data ? 'Masukkan password baru (opsional)' : 'Masukkan password'; ?>"
+                                class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all duration-200">
+                            <p class="text-xs text-gray-500 mt-1">Password minimal 6 karakter</p>
+                        </div>
+
+                        <?php if (!$edit_data): ?>
+                            <div>
+                                <label for="confirm_password" class="block text-sm font-medium text-gray-700 mb-2">Konfirmasi Password</label>
+                                <input type="password" id="confirm_password" name="confirm_password" required
+                                    placeholder="Ulangi password"
+                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all duration-200">
+                            </div>
+                        <?php endif; ?>
+
+                        <div class="flex gap-4">
+                            <button type="submit" class="bg-accent cursor-pointer text-secondary py-3 px-6 rounded-xl font-medium hover:bg-gray-800 transition-colors">
+                                <?php echo $edit_data ? 'Update Admin' : 'Tambah Admin'; ?>
+                            </button>
+
+                            <?php if ($edit_data): ?>
+                                <a href="adminconfig.php" class="bg-gray-500 cursor-pointer text-white py-3 px-6 rounded-xl font-medium hover:bg-gray-600 transition-colors">
+                                    Batal
+                                </a>
+                            <?php endif; ?>
+                        </div>
+                    </form>
                 </div>
 
-                <div class="overflow-x-auto">
-                    <table class="w-full">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Lengkap</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            <?php
-                            $no = 1;
-                            while ($user = mysqli_fetch_assoc($users_result)):
-                            ?>
-                                <tr class="<?php echo $user['id'] == $_SESSION['user_id'] ? 'bg-blue-50' : ''; ?>">
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><?php echo $no++; ?></td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="w-10 h-10 bg-accent text-secondary rounded-full flex items-center justify-center font-semibold mr-3">
-                                                <?php echo substr($user['nama_lengkap'], 0, 1); ?>
-                                            </div>
-                                            <div>
-                                                <div class="text-sm font-medium text-gray-900"><?php echo $user['nama_lengkap']; ?></div>
-                                                <?php if ($user['id'] == $_SESSION['user_id']): ?>
-                                                    <div class="text-xs text-blue-600">Akun Anda</div>
-                                                <?php endif; ?>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><?php echo $user['email']; ?></td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <?php if ($user['id'] == $_SESSION['user_id']): ?>
-                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                                Aktif (Anda)
-                                            </span>
-                                        <?php else: ?>
-                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                                                Administrator
-                                            </span>
-                                        <?php endif; ?>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="?edit=<?php echo $user['id']; ?>" class="text-blue-600 hover:text-blue-900 mr-3">Edit</a>
-                                        <?php if ($user['id'] != $_SESSION['user_id']): ?>
-                                            <a href="?delete=<?php echo $user['id']; ?>"
-                                                onclick="return confirm('Yakin ingin menghapus admin ini?')"
-                                                class="text-red-600 hover:text-red-900">Hapus</a>
-                                        <?php else: ?>
-                                            <span class="text-gray-400">Tidak dapat dihapus</span>
-                                        <?php endif; ?>
-                                    </td>
+                <!-- Data Table -->
+                <div class="bg-secondary w-[60%] rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="p-6 border-b border-gray-200">
+                        <h2 class="text-xl font-bold text-accent">Daftar Administrator</h2>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Lengkap</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                                 </tr>
-                            <?php endwhile; ?>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <?php
+                                $no = 1;
+                                while ($user = mysqli_fetch_assoc($users_result)):
+                                ?>
+                                    <tr class="<?php echo $user['id'] == $_SESSION['user_id'] ? 'bg-blue-50' : ''; ?>">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><?php echo $no++; ?></td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="w-10 h-10 bg-accent text-secondary rounded-full flex items-center justify-center font-semibold mr-3">
+                                                    <?php echo substr($user['nama_lengkap'], 0, 1); ?>
+                                                </div>
+                                                <div>
+                                                    <div class="text-sm font-medium text-gray-900"><?php echo $user['nama_lengkap']; ?></div>
+                                                    <?php if ($user['id'] == $_SESSION['user_id']): ?>
+                                                        <div class="text-xs text-blue-600">Akun Anda</div>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><?php echo $user['email']; ?></td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <?php if ($user['id'] == $_SESSION['user_id']): ?>
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                                    Aktif (Anda)
+                                                </span>
+                                            <?php else: ?>
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                                    Administrator
+                                                </span>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <a href="?edit=<?php echo $user['id']; ?>" class="text-blue-600 hover:text-blue-900 mr-3">Edit</a>
+                                            <?php if ($user['id'] != $_SESSION['user_id']): ?>
+                                                <a href="?delete=<?php echo $user['id']; ?>"
+                                                    onclick="return confirm('Yakin ingin menghapus admin ini?')"
+                                                    class="text-red-600 hover:text-red-900">Hapus</a>
+                                            <?php else: ?>
+                                                <span class="text-gray-400 cursor-not-allowed">Hapus</span>
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
+                                <?php endwhile; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 

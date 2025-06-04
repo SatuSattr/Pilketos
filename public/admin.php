@@ -4,8 +4,7 @@ include 'conn.php';
 include 'islogin.php';
 
 $page_title = 'Dashboard';
-
-
+setcookie("last_refresh", time(), time() + 1200, "/");
 
 $query = "SELECT c.*, k.name as nama_kelas, COUNT(v.id) as jumlah_vote 
           FROM calon_ketua c 
@@ -15,19 +14,52 @@ $query = "SELECT c.*, k.name as nama_kelas, COUNT(v.id) as jumlah_vote
           ORDER BY jumlah_vote DESC";
 $result = mysqli_query($conn, $query);
 
+$file = 'config.json';
+$config = json_decode(file_get_contents($file), true);
+$last_refresh = 0;
+if (isset($_COOKIE["last_refresh"])) $last_refresh = time() - (int) $_COOKIE["last_refresh"];
+
+
 $total_vote_query = "SELECT COUNT(*) as total FROM vote";
 $total_vote_result = mysqli_query($conn, $total_vote_query);
 $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
+$total_vote_add = 0;
+if (isset($_COOKIE["total_vote"])) {
+    $total_vote_add =  $total_vote - (int) $_COOKIE["total_vote"];
+}
+setcookie("total_vote", $total_vote, time() + 1200, "/");
 
 $total_calon_query = "SELECT COUNT(*) as total FROM calon_ketua";
 $total_calon_result = mysqli_query($conn, $total_calon_query);
 $total_calon = mysqli_fetch_assoc($total_calon_result)['total'];
+$total_calon_add = 0;
+if (isset($_COOKIE["total_calon"])) {
+    $total_calon_add =  $total_calon - (int) $_COOKIE["total_calon"];
+}
+setcookie("total_calon", $total_calon, time() + 1200, "/");
+
+$partisipasi = $total_vote > 0 ? number_format(($total_vote / $config['haksuara']) * 100, 1) : 0;
+$partisipasi_add = 0;
+if (isset($_COOKIE["partisipasi"])) {
+    $partisipasi_add =  number_format(($partisipasi - (int) $_COOKIE["partisipasi"]), 1);
+}
+setcookie("partisipasi", $partisipasi, time() + 1200, "/");
+
+
+
+
+
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
-<?php include 'header.php'; ?>
+
+<head>
+    <?php include 'header.php'; ?>
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="styles.css" />
+</head>
 
 <body class="flex">
     <?php include 'sidebar.php'; ?>
@@ -59,7 +91,7 @@ $total_calon = mysqli_fetch_assoc($total_calon_result)['total'];
                     <hr class="border-t border-gray-200 my-0">
                     <div class="px-4 py-2">
                         <p class="text-sm text-gray-600 mb-0">
-                            <span class="text-green-600 font-semibold">+3% </span>than last month
+                            <span class="text-green-600 font-semibold">+<?= $total_calon_add ?> </span>than last <?= $last_refresh; ?> seconds
                         </p>
                     </div>
                 </div>
@@ -80,7 +112,7 @@ $total_calon = mysqli_fetch_assoc($total_calon_result)['total'];
                     <hr class="border-t border-gray-200 my-0">
                     <div class="px-4 py-2">
                         <p class="text-sm text-gray-600 mb-0">
-                            <span class="text-green-600 font-semibold">+3% </span>than last month
+                            <span class="text-green-600 font-semibold">+<?= $total_vote_add; ?> </span>than last <?= $last_refresh; ?> seconds
                         </p>
                     </div>
                 </div>
@@ -92,9 +124,7 @@ $total_calon = mysqli_fetch_assoc($total_calon_result)['total'];
                         <div class="flex justify-between items-center">
                             <div>
                                 <p class="text-sm mb-1 capitalize text-gray-600">Tingkat Partisipasi</p>
-                                <h4 class="text-3xl font-semibold text-gray-800"><?php $file = 'config.json';
-                                                                                    $config = json_decode(file_get_contents($file), true);
-                                                                                    echo $total_vote > 0 ? number_format(($total_vote / $config['haksuara']) * 100, 1) : 0; ?>%</h4>
+                                <h4 class="text-3xl font-semibold text-gray-800"><?php echo $partisipasi; ?>%</h4>
                             </div>
                             <div class="size-13 p-3 flex items-center justify-center bg-accent shadow-lg rounded-lg">
                                 <i class="fas text-[1.2rem] fa-chart-simple text-primary"></i>
@@ -104,7 +134,7 @@ $total_calon = mysqli_fetch_assoc($total_calon_result)['total'];
                     <hr class="border-t border-gray-200 my-0">
                     <div class="px-4 py-2">
                         <p class="text-sm text-gray-600 mb-0">
-                            <span class="text-green-600 font-semibold">+3% </span>than last month
+                            <span class="text-green-600 font-semibold">+<?= $partisipasi_add; ?>% </span>than last <?= $last_refresh; ?> seconds
                         </p>
                     </div>
                 </div>
@@ -126,13 +156,13 @@ $total_calon = mysqli_fetch_assoc($total_calon_result)['total'];
                                 const isVisible = panel.classList.contains("-right-[105%]");
 
                                 if (!isVisible) {
-                                    panel_container.classList.remove("w-fit");
+                                    panel_container.classList.remove("min-w-[16rem]");
                                     panel_container.classList.add("w-[31rem]");
                                     panel.classList.add("-right-[105%]");
                                     panel.classList.remove("right-0");
                                 } else {
                                     panel_container.classList.remove("w-[31rem]");
-                                    panel_container.classList.add("w-fit");
+                                    panel_container.classList.add("min-w-[16rem]");
                                     panel.classList.remove("-right-[105%]");
                                     panel.classList.add("right-0");
                                 }

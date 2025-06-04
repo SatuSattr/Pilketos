@@ -7,6 +7,7 @@ include 'islogin.php';
 
 $file = 'config.json';
 $config = json_decode(file_get_contents($file), true);
+setcookie("last_refresh", time(), time() + 1200, "/");
 
 // Query untuk mendapatkan data laporan
 $query = "SELECT c.*, k.name as nama_kelas, COUNT(v.id) as jumlah_vote 
@@ -17,15 +18,38 @@ $query = "SELECT c.*, k.name as nama_kelas, COUNT(v.id) as jumlah_vote
           ORDER BY jumlah_vote DESC";
 $result = mysqli_query($conn, $query);
 
-// Query untuk total vote
+$file = 'config.json';
+$config = json_decode(file_get_contents($file), true);
+$last_refresh = 0;
+if (isset($_COOKIE["last_refresh"])) $last_refresh = time() - (int) $_COOKIE["last_refresh"];
+
+
 $total_vote_query = "SELECT COUNT(*) as total FROM vote";
 $total_vote_result = mysqli_query($conn, $total_vote_query);
 $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
+$total_vote_add = 0;
+if (isset($_COOKIE["total_vote"])) {
+    $total_vote_add =  $total_vote - (int) $_COOKIE["total_vote"];
+}
+setcookie("total_vote", $total_vote, time() + 1200, "/");
 
-// Query untuk total vote
-$calon_query = "SELECT COUNT(*) as total FROM calon_ketua";
-$calon_result = mysqli_query($conn, $calon_query);
-$total_calon = mysqli_fetch_assoc($calon_result)['total'];
+$total_calon_query = "SELECT COUNT(*) as total FROM calon_ketua";
+$total_calon_result = mysqli_query($conn, $total_calon_query);
+$total_calon = mysqli_fetch_assoc($total_calon_result)['total'];
+$total_calon_add = 0;
+if (isset($_COOKIE["total_calon"])) {
+    $total_calon_add =  $total_calon - (int) $_COOKIE["total_calon"];
+}
+setcookie("total_calon", $total_calon, time() + 1200, "/");
+
+$partisipasi = $total_vote > 0 ? number_format(($total_vote / $config['haksuara']) * 100, 1) : 0;
+$partisipasi_add = 0;
+if (isset($_COOKIE["partisipasi"])) {
+    $partisipasi_add =  number_format(($partisipasi - (int) $_COOKIE["partisipasi"]), 1);
+}
+setcookie("partisipasi", $partisipasi, time() + 1200, "/");
+
+
 
 $total_every_query = "SELECT calon_ketua.nama, COUNT(*) AS jumlah_vote FROM vote JOIN calon_ketua ON vote.id_calon = calon_ketua.id GROUP BY calon_ketua.nama;
 ";
@@ -47,7 +71,12 @@ if ($total_every_result->num_rows > 0) {
 
 <!DOCTYPE html>
 <html lang="en">
-<?php include 'header.php'; ?>
+
+<head>
+    <?php include 'header.php'; ?>
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="styles.css" />
+</head>
 
 <body class="flex">
     <?php include 'sidebar.php'; ?>
@@ -62,27 +91,6 @@ if ($total_every_result->num_rows > 0) {
 
             <!-- Summary Cards -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-
-
-                <div class="rounded-xl shadow-md bg-white">
-                    <div class="px-4 py-2">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <p class="text-sm mb-1 capitalize text-gray-600">Total Suara Masuk</p>
-                                <h4 class="text-3xl font-semibold text-gray-800"><?= $total_vote; ?><span class="ml-2 text-gray-600 text-[1rem] font-normal">/ <?= $config['haksuara']; ?></span></h4>
-                            </div>
-                            <div class="size-13 p-3 flex items-center justify-center bg-accent shadow-lg rounded-lg">
-                                <i class="text-[1.3rem] far fa-circle-check text-primary"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <hr class="border-t border-gray-200 my-0">
-                    <div class="px-4 py-2">
-                        <p class="text-sm text-gray-600 mb-0">
-                            <span class="text-green-600 font-semibold">+3% </span>than last month
-                        </p>
-                    </div>
-                </div>
 
                 <div class="rounded-xl shadow-md bg-white">
                     <div class="px-4 py-2">
@@ -99,10 +107,32 @@ if ($total_every_result->num_rows > 0) {
                     <hr class="border-t border-gray-200 my-0">
                     <div class="px-4 py-2">
                         <p class="text-sm text-gray-600 mb-0">
-                            <span class="text-green-600 font-semibold">+3% </span>than last month
+                            <span class="text-green-600 font-semibold">+<?= $total_calon_add ?> </span>than last <?= $last_refresh; ?> seconds
                         </p>
                     </div>
                 </div>
+
+                <div class="rounded-xl shadow-md bg-white">
+                    <div class="px-4 py-2">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-sm mb-1 capitalize text-gray-600">Total Suara Masuk</p>
+                                <h4 class="text-3xl font-semibold text-gray-800"><?= $total_vote; ?><span class="ml-2 text-gray-600 text-[1rem] font-normal">/ <?= $config['haksuara']; ?></span></h4>
+                            </div>
+                            <div class="size-13 p-3 flex items-center justify-center bg-accent shadow-lg rounded-lg">
+                                <i class="text-[1.3rem] far fa-circle-check text-primary"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="border-t border-gray-200 my-0">
+                    <div class="px-4 py-2">
+                        <p class="text-sm text-gray-600 mb-0">
+                            <span class="text-green-600 font-semibold">+<?= $total_vote_add ?> </span>than last <?= $last_refresh; ?> seconds
+                        </p>
+                    </div>
+                </div>
+
+
 
                 <div class="rounded-xl shadow-md bg-white">
                     <div class="px-4 py-2">
@@ -119,7 +149,7 @@ if ($total_every_result->num_rows > 0) {
                     <hr class="border-t border-gray-200 my-0">
                     <div class="px-4 py-2">
                         <p class="text-sm text-gray-600 mb-0">
-                            <span class="text-green-600 font-semibold">+3% </span>than last month
+                            <span class="text-green-600 font-semibold">+<?= $partisipasi_add ?>%</span>than last <?= $last_refresh; ?> seconds
                         </p>
                     </div>
                 </div>
@@ -147,8 +177,9 @@ if ($total_every_result->num_rows > 0) {
                                             <div class="flex items-center">
                                                 <?php if ($ranking == 1): ?>
                                                     <div class="w-12 h-12 bg-yellow-500 text-secondary relative rounded-full flex items-center justify-center font-bold text-lg mr-4">
-                                                        #<?php echo $ranking; ?>
-                                                        <i class="fa-solid fa-crown absolute text-yellow-500 -top-[10px] -left-[2px] -rotate-[27deg]"></i>
+                                                        <!-- #<?php echo $ranking; ?> -->
+                                                        <i class="fa-solid fa-crown text-primary"></i>
+                                                        <!-- <i class="fa-solid fa-crown absolute text-yellow-500 -top-[10px] -left-[2px] -rotate-[27deg]"></i> -->
                                                     </div>
                                                 <?php else: ?>
                                                     <div class="w-12 h-12 bg-accent text-secondary rounded-full flex items-center justify-center font-bold text-lg mr-4">
