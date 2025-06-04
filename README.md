@@ -59,3 +59,41 @@ Proyek ini bertujuan untuk membuat proses pemilihan ketua OSIS jadi lebih modern
    npm run dev
    ```
 7. Buka website dari Laragon atau Xampp
+
+## 📖 Cara Menggunakan (Basic)
+
+Platform ini memiliki 6 halaman utama untuk admin, dan 1 halaman tambahan untuk siswa (voting). Berikut penjelasannya:
+
+### 1. Dashboard
+- Admin dapat melihat daftar **calon ketua OSIS** dalam bentuk **card**.
+- Tersedia statistik seperti:
+  - Jumlah calon ketos
+  - Total suara terkumpul
+  - Persentase partisipasi (%)
+
+### 2. Kelola Calon
+- Admin bisa melakukan **CRUD (Create, Read, Update, Delete)** pada data calon ketua OSIS.
+- Menambahkan calon dilakukan dengan mengisi semua field yang tersedia.
+- ⚠️ **Pastikan foto calon ketos sudah disiapkan dengan background transparan (PNG).**
+
+### 3. Konfigurasi Admin
+- Halaman ini untuk melakukan CRUD terhadap data admin.
+- Admin bisa menambahkan, mengubah, menghapus admin, serta melihat list admin dalam bentuk tabel.
+
+### 4. Kelola Hak Suara
+- Admin dapat mengelola hak suara siswa dengan sistem CRUD.
+- Setiap hak suara menggunakan **NISN siswa** sebagai identifier unik.
+- Jika NISN sudah digunakan untuk voting, maka tidak bisa digunakan kembali.
+
+### 5. Laporan
+- Menampilkan hasil voting dalam bentuk grafik dan tabel.
+- Admin dapat melihat total suara yang masuk dan siapa saja yang memperoleh suara terbanyak.
+
+### 6. Halaman Voting (Akses Terpisah)
+- Halaman ini bisa diakses oleh **siswa tanpa perlu login**.
+- Siswa cukup memasukkan **NISN mereka** untuk memberikan suara.
+- Sistem akan mengecek apakah NISN valid dan belum digunakan untuk voting sebelumnya.
+
+---
+
+
