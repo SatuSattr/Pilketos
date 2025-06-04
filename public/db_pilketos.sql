@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Jun 02, 2025 at 10:37 PM
+-- Host: localhost
+-- Generation Time: Jun 04, 2025 at 06:21 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -42,9 +42,70 @@ CREATE TABLE `calon_ketua` (
 --
 
 INSERT INTO `calon_ketua` (`id`, `nama`, `nomor`, `visi`, `misi`, `id_kelas`, `url_foto`) VALUES
-(1, 'Faqih Abdul Karim', 1, 'Menjadikan OSIS sebagai rumah bersama yang aktif, ramah, dan peduli terhadap kebutuhan seluruh siswa.', 'Misi saya adalah meningkatkan keaktifan kegiatan OSIS yang inklusif, menyuarakan aspirasi siswa secara adil, mengadakan program sosial yang berdampak, memperbaiki fasilitas dan kebersihan sekolah, serta menjaga solidaritas dan kekeluargaan antar siswa.', 3, 'foto_calon/683c0181252a3.png'),
-(2, 'Shabira Syahla Alvaliza', 2, 'Mewujudkan OSIS sebagai organisasi yang inovatif, aktif, dan responsif dalam menciptakan lingkungan sekolah yang inspiratif dan mendukung potensi siswa.', 'Misi saya adalah mengadakan program kreatif yang mendukung bakat siswa, memperkuat komunikasi OSIS lewat media digital, menyediakan wadah aspirasi terbuka, menjalin kerja sama dengan pihak luar, serta menumbuhkan semangat kolaborasi dan kepemimpinan di setiap kegiatan sekolah.', 4, 'foto_calon/68384410be197.png'),
-(3, 'Ibnu Ghali Aulia', 3, 'Mengembangkan OSIS yang modern, digital, dan adaptif terhadap perkembangan zaman, untuk menciptakan sekolah yang keren dan relevan dengan generasi mudaaaa', 'Misi saya adalah mendigitalisasi sistem informasi OSIS, mengadakan lomba dan kegiatan teknologi, aktif di media sosial untuk promosi dan informasi, mendorong penggunaan teknologi dalam belajar dan OSIS, serta membentuk tim kreatif siswa di bidang konten digital.', 6, 'foto_calon/68384453ae5d4.png');
+(1, 'Glenn Marcel', 1, 'Membentuk generasi muda SMK yang cerdas, berakhlak mulia, dan peduli terhadap\r\nlingkungan serta masyarakat.', 'Misi kami adalah mengadakan kegiatan edukatif dan sosial yang menumbuhkan kecerdasan, akhlak mulia, serta kepedulian siswa terhadap lingkungan dan masyarakat.', 5, 'foto_calon/683fb1177ef19.png'),
+(2, 'Faiz Nabil Akram', 2, 'Menjadikan OSIS sebagai wadah aspirasi siswa yang berdaya guna dan membentuk\r\nkarakter pelajar yang unggul serta berwawasan luas.', 'Misi kami adalah menampung aspirasi siswa melalui kegiatan yang membentuk karakter unggul dan memperluas wawasan pelajar secara nyata dan berkelanjutan.', 4, 'foto_calon/683fb0f9c0479.png'),
+(3, 'Muhammad Faisal', 3, 'Mewujudkan OSIS yang aktif, kreatif, dan berintegritas dalam membangun lingkungan\r\nsekolah yang inspiratif dan berprestasi.', 'Misi kami adalah menyelenggarakan program kerja yang mendorong keaktifan, kreativitas, dan integritas siswa untuk menciptakan lingkungan sekolah yang inspiratif dan berprestasi.', 6, 'foto_calon/683fb0d6cf062.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hak_suara`
+--
+
+CREATE TABLE `hak_suara` (
+  `id` int NOT NULL,
+  `nisn` bigint NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `hak_suara`
+--
+
+INSERT INTO `hak_suara` (`id`, `nisn`) VALUES
+(3, 10000001),
+(4, 10000002),
+(5, 10000003),
+(6, 10050004),
+(7, 10000005),
+(8, 10000006),
+(9, 10000007),
+(10, 10000008),
+(11, 10000009),
+(12, 10000010),
+(13, 10000011),
+(14, 10000012),
+(15, 10000013),
+(16, 10000014),
+(17, 10000015),
+(18, 10000016),
+(19, 10000017),
+(20, 10000018),
+(21, 10000019),
+(22, 10000020),
+(23, 10000021),
+(24, 10000022),
+(25, 10000023),
+(26, 10000024),
+(27, 10000025),
+(28, 10000026),
+(29, 10000027),
+(30, 10000028),
+(31, 10000029),
+(32, 10000030),
+(33, 10000031),
+(34, 10000032),
+(35, 10000033),
+(36, 10000034),
+(37, 10000035),
+(38, 10000036),
+(39, 10000037),
+(40, 10000038),
+(41, 10000039),
+(42, 10000040),
+(104, 10000041),
+(105, 10000042),
+(106, 10000044),
+(107, 10000045);
 
 -- --------------------------------------------------------
 
@@ -89,7 +150,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `email`, `psw`, `nama_lengkap`) VALUES
 (1, 'admin@gmail.com', '8da3930b3345f15fa4947486e893a20e6fa45c39e426148e1754777a486622ec', 'Admin ganteng'),
 (3, 'kyaaeyri@gmail.com', 'ab7492c9b11fb3710f436fa276fe6e8a1b71652fa10f2e01034ea98bc82a93f0', 'Sattar'),
-(4, 'aylashabira17@gmail.com', '2c73e5f51f0a10d24e61b4435d2ba61d75c711d152b82d67f5c7845e18b8b734', 'Shabira');
+(4, 'aylashabira17@gmail.com', '2c73e5f51f0a10d24e61b4435d2ba61d75c711d152b82d67f5c7845e18b8b734', 'Shabira'),
+(5, 'faiz@gmail.com', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'Faizx');
 
 -- --------------------------------------------------------
 
@@ -100,106 +162,55 @@ INSERT INTO `users` (`id`, `email`, `psw`, `nama_lengkap`) VALUES
 CREATE TABLE `vote` (
   `id` int NOT NULL,
   `id_calon` int NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `id_nisn` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `vote`
 --
 
-INSERT INTO `vote` (`id`, `id_calon`, `created_at`) VALUES
-(181, 1, '2025-05-30 01:00:00'),
-(182, 2, '2025-05-30 01:00:35'),
-(184, 1, '2025-05-30 01:01:50'),
-(185, 2, '2025-05-30 01:02:25'),
-(189, 3, '2025-05-30 01:04:25'),
-(190, 1, '2025-05-30 01:04:50'),
-(191, 2, '2025-05-30 01:05:15'),
-(192, 3, '2025-05-30 01:05:50'),
-(193, 1, '2025-05-30 01:06:25'),
-(194, 2, '2025-05-30 01:06:55'),
-(195, 3, '2025-05-30 01:07:30'),
-(196, 1, '2025-05-30 01:08:05'),
-(197, 2, '2025-05-30 01:08:35'),
-(198, 3, '2025-05-30 01:09:00'),
-(199, 1, '2025-05-30 01:09:30'),
-(200, 2, '2025-05-30 01:09:55'),
-(201, 3, '2025-05-30 01:10:20'),
-(202, 1, '2025-05-30 01:10:55'),
-(203, 2, '2025-05-30 01:11:20'),
-(208, 1, '2025-05-30 01:13:45'),
-(209, 2, '2025-05-30 01:14:10'),
-(210, 3, '2025-05-30 01:14:40'),
-(211, 1, '2025-05-30 01:15:05'),
-(212, 2, '2025-05-30 01:15:35'),
-(213, 3, '2025-05-30 01:16:05'),
-(214, 1, '2025-05-30 01:16:35'),
-(215, 2, '2025-05-30 01:17:00'),
-(216, 3, '2025-05-30 01:17:30'),
-(217, 1, '2025-05-30 01:18:00'),
-(218, 2, '2025-05-30 01:18:30'),
-(219, 3, '2025-05-30 01:18:55'),
-(220, 1, '2025-05-30 01:19:25'),
-(221, 2, '2025-05-30 01:19:50'),
-(224, 2, '2025-05-30 01:21:10'),
-(225, 3, '2025-05-30 01:21:40'),
-(226, 1, '2025-05-30 01:22:10'),
-(227, 2, '2025-05-30 01:22:40'),
-(228, 3, '2025-05-30 01:23:05'),
-(229, 1, '2025-05-30 01:23:35'),
-(233, 2, '2025-05-30 01:25:30'),
-(234, 3, '2025-05-30 01:26:00'),
-(236, 2, '2025-05-30 01:26:55'),
-(237, 3, '2025-05-30 01:27:25'),
-(238, 1, '2025-05-30 01:27:55'),
-(239, 2, '2025-05-30 01:28:20'),
-(240, 3, '2025-05-30 01:28:50'),
-(241, 1, '2025-05-30 01:29:15'),
-(242, 2, '2025-05-30 01:29:45'),
-(243, 3, '2025-05-30 01:30:10'),
-(244, 1, '2025-05-30 01:30:40'),
-(245, 2, '2025-05-30 01:31:05'),
-(246, 3, '2025-05-30 01:31:30'),
-(247, 1, '2025-05-30 01:32:00'),
-(248, 2, '2025-05-30 01:32:30'),
-(249, 3, '2025-05-30 01:33:00'),
-(250, 1, '2025-05-30 01:33:25'),
-(251, 2, '2025-05-30 01:33:55'),
-(252, 3, '2025-05-30 01:34:25'),
-(253, 1, '2025-05-30 01:34:55'),
-(254, 2, '2025-05-30 01:35:20'),
-(255, 3, '2025-05-30 01:35:50'),
-(256, 1, '2025-05-30 01:36:15'),
-(257, 2, '2025-05-30 01:36:45'),
-(258, 3, '2025-05-30 01:37:10'),
-(263, 2, '2025-05-30 01:39:30'),
-(264, 3, '2025-05-30 01:39:55'),
-(265, 1, '2025-05-30 01:40:25'),
-(267, 3, '2025-05-30 01:41:20'),
-(268, 1, '2025-05-30 01:41:45'),
-(269, 2, '2025-05-30 01:42:15'),
-(271, 1, '2025-05-30 01:43:10'),
-(272, 2, '2025-05-30 01:43:35'),
-(274, 2, '2025-06-01 06:13:30'),
-(275, 3, '2025-06-01 06:13:34'),
-(276, 3, '2025-06-01 06:18:17'),
-(277, 1, '2025-06-01 06:18:24'),
-(278, 1, '2025-06-01 06:19:17'),
-(279, 1, '2025-06-01 06:23:48'),
-(280, 3, '2025-06-01 06:26:08'),
-(281, 3, '2025-06-01 06:32:37'),
-(282, 3, '2025-06-01 06:33:29'),
-(283, 2, '2025-06-01 06:58:35'),
-(284, 1, '2025-06-01 06:58:39'),
-(285, 3, '2025-06-01 06:58:45'),
-(286, 3, '2025-06-01 06:58:57'),
-(287, 3, '2025-06-01 06:59:05'),
-(288, 2, '2025-06-01 06:59:26'),
-(289, 2, '2025-06-01 06:59:39'),
-(290, 2, '2025-06-01 06:59:43'),
-(291, 2, '2025-06-01 06:59:48'),
-(292, 2, '2025-06-01 07:31:21'),
-(293, 2, '2025-06-01 09:00:33');
+INSERT INTO `vote` (`id`, `id_calon`, `created_at`, `id_nisn`) VALUES
+(181, 1, '2025-05-30 01:00:00', 3),
+(182, 2, '2025-05-30 01:00:35', 4),
+(184, 1, '2025-05-30 01:01:50', 5),
+(185, 2, '2025-05-30 01:02:25', 6),
+(189, 3, '2025-05-30 01:04:25', 7),
+(190, 1, '2025-05-30 01:04:50', 8),
+(191, 2, '2025-05-30 01:05:15', 9),
+(192, 3, '2025-05-30 01:05:50', 10),
+(193, 1, '2025-05-30 01:06:25', 11),
+(194, 2, '2025-05-30 01:06:55', 12),
+(195, 3, '2025-05-30 01:07:30', 13),
+(196, 1, '2025-05-30 01:08:05', 14),
+(197, 2, '2025-05-30 01:08:35', 15),
+(198, 3, '2025-05-30 01:09:00', 16),
+(199, 1, '2025-05-30 01:09:30', 17),
+(200, 2, '2025-05-30 01:09:55', 18),
+(201, 3, '2025-05-30 01:10:20', 19),
+(202, 1, '2025-05-30 01:10:55', 20),
+(203, 2, '2025-05-30 01:11:20', 21),
+(208, 1, '2025-05-30 01:13:45', 22),
+(209, 2, '2025-05-30 01:14:10', 23),
+(210, 3, '2025-05-30 01:14:40', 24),
+(211, 1, '2025-05-30 01:15:05', 25),
+(212, 2, '2025-05-30 01:15:35', 26),
+(213, 3, '2025-05-30 01:16:05', 27),
+(214, 1, '2025-05-30 01:16:35', 28),
+(215, 2, '2025-05-30 01:17:00', 29),
+(216, 3, '2025-05-30 01:17:30', 30),
+(313, 3, '2025-06-04 06:14:20', 31),
+(314, 2, '2025-06-04 06:14:32', 32),
+(315, 2, '2025-06-04 06:14:37', 33),
+(316, 1, '2025-06-04 06:15:03', 34),
+(317, 1, '2025-06-04 06:15:08', 35),
+(318, 3, '2025-06-04 06:15:17', 36),
+(319, 2, '2025-06-04 06:15:21', 37),
+(320, 1, '2025-06-04 06:15:25', 38),
+(321, 3, '2025-06-04 06:15:29', 39),
+(322, 2, '2025-06-04 06:15:33', 40),
+(323, 2, '2025-06-04 06:15:36', 41),
+(324, 2, '2025-06-04 06:15:40', 42);
 
 --
 -- Indexes for dumped tables
@@ -209,6 +220,12 @@ INSERT INTO `vote` (`id`, `id_calon`, `created_at`) VALUES
 -- Indexes for table `calon_ketua`
 --
 ALTER TABLE `calon_ketua`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `hak_suara`
+--
+ALTER TABLE `hak_suara`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -237,7 +254,13 @@ ALTER TABLE `vote`
 -- AUTO_INCREMENT for table `calon_ketua`
 --
 ALTER TABLE `calon_ketua`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
+--
+-- AUTO_INCREMENT for table `hak_suara`
+--
+ALTER TABLE `hak_suara`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 
 --
 -- AUTO_INCREMENT for table `kelas`
@@ -249,13 +272,13 @@ ALTER TABLE `kelas`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `vote`
 --
 ALTER TABLE `vote`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=294;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=325;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
