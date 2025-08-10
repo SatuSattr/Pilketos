@@ -67,7 +67,7 @@ setcookie("partisipasi", $partisipasi, time() + 1200, "/");
     </div>
     <!-- Main Content -->
     <div class="flex-1">
-        <div class="p-4">
+        <div class="p-6">
             <!-- Header -->
             <div class="mb-8">
                 <h1 class="text-3xl font-bold text-accent">Dashboard</h1>

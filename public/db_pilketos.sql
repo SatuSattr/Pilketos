@@ -2,10 +2,10 @@
 -- version 5.2.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jun 04, 2025 at 06:21 AM
+-- Host: localhost:3306
+-- Generation Time: Aug 10, 2025 at 10:47 PM
 -- Server version: 8.0.30
--- PHP Version: 8.1.10
+-- PHP Version: 8.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +32,7 @@ CREATE TABLE `calon_ketua` (
   `nama` varchar(256) NOT NULL,
   `nomor` int NOT NULL,
   `visi` varchar(521) NOT NULL,
-  `misi` varchar(521) NOT NULL,
+  `misi` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `id_kelas` int NOT NULL,
   `url_foto` varchar(521) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -42,9 +42,8 @@ CREATE TABLE `calon_ketua` (
 --
 
 INSERT INTO `calon_ketua` (`id`, `nama`, `nomor`, `visi`, `misi`, `id_kelas`, `url_foto`) VALUES
-(1, 'Glenn Marcel', 1, 'Membentuk generasi muda SMK yang cerdas, berakhlak mulia, dan peduli terhadap\r\nlingkungan serta masyarakat.', 'Misi kami adalah mengadakan kegiatan edukatif dan sosial yang menumbuhkan kecerdasan, akhlak mulia, serta kepedulian siswa terhadap lingkungan dan masyarakat.', 5, 'foto_calon/683fb1177ef19.png'),
-(2, 'Faiz Nabil Akram', 2, 'Menjadikan OSIS sebagai wadah aspirasi siswa yang berdaya guna dan membentuk\r\nkarakter pelajar yang unggul serta berwawasan luas.', 'Misi kami adalah menampung aspirasi siswa melalui kegiatan yang membentuk karakter unggul dan memperluas wawasan pelajar secara nyata dan berkelanjutan.', 4, 'foto_calon/683fb0f9c0479.png'),
-(3, 'Muhammad Faisal', 3, 'Mewujudkan OSIS yang aktif, kreatif, dan berintegritas dalam membangun lingkungan\r\nsekolah yang inspiratif dan berprestasi.', 'Misi kami adalah menyelenggarakan program kerja yang mendorong keaktifan, kreativitas, dan integritas siswa untuk menciptakan lingkungan sekolah yang inspiratif dan berprestasi.', 6, 'foto_calon/683fb0d6cf062.png');
+(50, 'Faiz Nabil Akram', 1, 'membuat osis menjadi organisasi yang aktif dan terbuka,sehingga dapat menciptakan siswa yang inspiratif, partisipatif, dan kaya akan kegiatan positif', '1. Menyelenggarakan kegiatan yang kreatif dan edukatif untuk mengembangkan potensi siswa.\r\n2. Mendorong partisipasi aktif seluruh siswa dalam kegiatan sekolah dan organisasi.\r\n3. Membangun komunikasi yang terbuka dan transparan antara OSIS, siswa, dan pihak sekolah.\r\n4. Menjadi wadah aspirasi siswa yang menjunjung nilai-nilai kedisiplinan, tanggung jawab, dan kerja sama.\r\n5. Menggali serta mengembangkan bakat siswa melalui program kerja yang berkelanjutan dan inovatif.', 5, 'foto_calon/6898a5f29345b.png'),
+(51, 'Ibnu Ghali Aulia', 2, 'Menjadikan OSIS sebagai wadah yang aktif, inovatif, dan inklusif, dalam mengembangkan, potensi siswa, serta membangun lingkungan sekolah yang berkarakter, berprestasi, dan peduli sesama', '1. Mendorong partisipasi siswa/i dalam kegiatan OSIS melalui program program yang menarik, bermandaat, dan sesuai minat bakat siswa/i\r\n2. ⁠Mengadakan kegiatan yang bertujuan untuk mempererat kebersamaan antar siswa/i\r\n3. ⁠Menyediakan sarana komunikasi yang efektif agar seluruh siswa dapat menyampaikan aspirasi, saran dan ide demi kemajuan sekolah\r\n4. ⁠membangun lingkungan sekolah yang nyaman untuk berkembang bersama baik akademik, maupun non - akademik\r\n5. Menghadirkan osis yang lebih dekat dan terbuka untuk semua ide, saran, maupun keresahan siswa', 5, 'foto_calon/6898a652ba94e.png');
 
 -- --------------------------------------------------------
 
@@ -54,7 +53,7 @@ INSERT INTO `calon_ketua` (`id`, `nama`, `nomor`, `visi`, `misi`, `id_kelas`, `u
 
 CREATE TABLE `hak_suara` (
   `id` int NOT NULL,
-  `nisn` bigint NOT NULL
+  `nisn` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -62,50 +61,9 @@ CREATE TABLE `hak_suara` (
 --
 
 INSERT INTO `hak_suara` (`id`, `nisn`) VALUES
-(3, 10000001),
-(4, 10000002),
-(5, 10000003),
-(6, 10050004),
-(7, 10000005),
-(8, 10000006),
-(9, 10000007),
-(10, 10000008),
-(11, 10000009),
-(12, 10000010),
-(13, 10000011),
-(14, 10000012),
-(15, 10000013),
-(16, 10000014),
-(17, 10000015),
-(18, 10000016),
-(19, 10000017),
-(20, 10000018),
-(21, 10000019),
-(22, 10000020),
-(23, 10000021),
-(24, 10000022),
-(25, 10000023),
-(26, 10000024),
-(27, 10000025),
-(28, 10000026),
-(29, 10000027),
-(30, 10000028),
-(31, 10000029),
-(32, 10000030),
-(33, 10000031),
-(34, 10000032),
-(35, 10000033),
-(36, 10000034),
-(37, 10000035),
-(38, 10000036),
-(39, 10000037),
-(40, 10000038),
-(41, 10000039),
-(42, 10000040),
-(104, 10000041),
-(105, 10000042),
-(106, 10000044),
-(107, 10000045);
+(111, 'Muhammad Faisal'),
+(112, 'Bimasena Yusuf'),
+(113, 'Rafay Arvino');
 
 -- --------------------------------------------------------
 
@@ -148,10 +106,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `psw`, `nama_lengkap`) VALUES
-(1, 'admin@gmail.com', '8da3930b3345f15fa4947486e893a20e6fa45c39e426148e1754777a486622ec', 'Admin ganteng'),
-(3, 'kyaaeyri@gmail.com', 'ab7492c9b11fb3710f436fa276fe6e8a1b71652fa10f2e01034ea98bc82a93f0', 'Sattar'),
-(4, 'aylashabira17@gmail.com', '2c73e5f51f0a10d24e61b4435d2ba61d75c711d152b82d67f5c7845e18b8b734', 'Shabira'),
-(5, 'faiz@gmail.com', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'Faizx');
+(1, 'admin@gmail.com', '98439e2b9e4d0184a2e41a1a00da603031d645cb915fd321b6a2dc590935e6f1', 'Admin ganteng'),
+(3, 'kyaaeyri@gmail.com', 'ab7492c9b11fb3710f436fa276fe6e8a1b71652fa10f2e01034ea98bc82a93f0', 'Sattar');
 
 -- --------------------------------------------------------
 
@@ -165,52 +121,6 @@ CREATE TABLE `vote` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `id_nisn` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `vote`
---
-
-INSERT INTO `vote` (`id`, `id_calon`, `created_at`, `id_nisn`) VALUES
-(181, 1, '2025-05-30 01:00:00', 3),
-(182, 2, '2025-05-30 01:00:35', 4),
-(184, 1, '2025-05-30 01:01:50', 5),
-(185, 2, '2025-05-30 01:02:25', 6),
-(189, 3, '2025-05-30 01:04:25', 7),
-(190, 1, '2025-05-30 01:04:50', 8),
-(191, 2, '2025-05-30 01:05:15', 9),
-(192, 3, '2025-05-30 01:05:50', 10),
-(193, 1, '2025-05-30 01:06:25', 11),
-(194, 2, '2025-05-30 01:06:55', 12),
-(195, 3, '2025-05-30 01:07:30', 13),
-(196, 1, '2025-05-30 01:08:05', 14),
-(197, 2, '2025-05-30 01:08:35', 15),
-(198, 3, '2025-05-30 01:09:00', 16),
-(199, 1, '2025-05-30 01:09:30', 17),
-(200, 2, '2025-05-30 01:09:55', 18),
-(201, 3, '2025-05-30 01:10:20', 19),
-(202, 1, '2025-05-30 01:10:55', 20),
-(203, 2, '2025-05-30 01:11:20', 21),
-(208, 1, '2025-05-30 01:13:45', 22),
-(209, 2, '2025-05-30 01:14:10', 23),
-(210, 3, '2025-05-30 01:14:40', 24),
-(211, 1, '2025-05-30 01:15:05', 25),
-(212, 2, '2025-05-30 01:15:35', 26),
-(213, 3, '2025-05-30 01:16:05', 27),
-(214, 1, '2025-05-30 01:16:35', 28),
-(215, 2, '2025-05-30 01:17:00', 29),
-(216, 3, '2025-05-30 01:17:30', 30),
-(313, 3, '2025-06-04 06:14:20', 31),
-(314, 2, '2025-06-04 06:14:32', 32),
-(315, 2, '2025-06-04 06:14:37', 33),
-(316, 1, '2025-06-04 06:15:03', 34),
-(317, 1, '2025-06-04 06:15:08', 35),
-(318, 3, '2025-06-04 06:15:17', 36),
-(319, 2, '2025-06-04 06:15:21', 37),
-(320, 1, '2025-06-04 06:15:25', 38),
-(321, 3, '2025-06-04 06:15:29', 39),
-(322, 2, '2025-06-04 06:15:33', 40),
-(323, 2, '2025-06-04 06:15:36', 41),
-(324, 2, '2025-06-04 06:15:40', 42);
 
 --
 -- Indexes for dumped tables
@@ -254,13 +164,13 @@ ALTER TABLE `vote`
 -- AUTO_INCREMENT for table `calon_ketua`
 --
 ALTER TABLE `calon_ketua`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `hak_suara`
 --
 ALTER TABLE `hak_suara`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
 
 --
 -- AUTO_INCREMENT for table `kelas`
@@ -278,7 +188,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `vote`
 --
 ALTER TABLE `vote`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=325;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=331;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

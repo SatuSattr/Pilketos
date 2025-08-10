@@ -236,27 +236,16 @@ $nisns = mysqli_query($conn, $query);
 
                     <div class="bg-secondary rounded-xl shadow-sm border border-gray-100 p-6">
                         <h2 class="text-xl font-bold text-accent mb-4">Import Hak Suara</h2>
-
-                        <!-- Tombol Download Sample -->
-
-
                         <form method="POST" enctype="multipart/form-data">
                             <input type="hidden" name="action" value="import">
                             <input type="file" name="file_excel" accept=".xls,.xlsx" required
                                 class="mb-4 block w-full px-4 py-3 border border-gray-200 file:mr-3 file:text-neutral-800 file:py-[2px] file:px-3 file:cursor-pointer file:bg-neutral-200 file:rounded rounded-xl focus:ring-2 focus:ring-accent">
+                            <button type="submit" class="bg-accent text-secondary py-3 px-6 rounded-xl font-medium hover:bg-gray-800">
+                                Import
+                            </button>
 
-                            <div class="flex gap-2">
-                                <button type="submit" class="bg-accent text-secondary py-3 px-6 rounded-xl font-medium hover:bg-gray-800">
-                                    Import
-                                </button>
-                                <a href="sample_hak_suara.xlsx"
-                                    class="flex items-center text-neutral-600 py-2 px-4 rounded-xl border border-neutral-400 bg-neutral-100 hover:bg-neutral-50 transition-colors">
-                                    Download Spreadsheet Sample
-                                </a>
-                            </div>
                         </form>
                     </div>
-
                 </div>
 
                 <div class="bg-secondary w-[60%] rounded-xl shadow-sm border border-gray-100 overflow-hidden">
