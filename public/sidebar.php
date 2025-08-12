@@ -55,12 +55,21 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 Laporan
             </a>
 
+            <a href="tokens.php" class="flex gap-3 items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors <?php echo $current_page == 'tokens.php' ? 'bg-accent text-secondary' : 'text-accent hover:bg-gray-100'; ?>">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="<?php echo $current_page == 'tokens.php' ? '#fffefe' : '#232322'; ?>" class="size-5" class="size-5" viewBox="0 0 640 640">
+                    <path d="M96 160L96 400L544 400L544 160L96 160zM32 160C32 124.7 60.7 96 96 96L544 96C579.3 96 608 124.7 608 160L608 400C608 435.3 579.3 464 544 464L96 464C60.7 464 32 435.3 32 400L32 160zM192 512L448 512C465.7 512 480 526.3 480 544C480 561.7 465.7 576 448 576L192 576C174.3 576 160 561.7 160 544C160 526.3 174.3 512 192 512z" />
+                </svg>
+                Display Token
+            </a>
+
             <a href="index.php" class="flex gap-3 items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors <?php echo $current_page == 'index.php' ? 'bg-accent text-secondary' : 'text-accent hover:bg-gray-100'; ?>">
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
                     <path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l82.7 0L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3l0 82.7c0 17.7 14.3 32 32 32s32-14.3 32-32l0-160c0-17.7-14.3-32-32-32L320 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z" />
                 </svg>
                 Voting
             </a>
+
+
         </nav>
 
         <!-- User Info -->

@@ -295,7 +295,7 @@ $kelas_result = mysqli_query($conn, $kelas_query);
                 </div>
 
                 <!-- Data Table -->
-                <div class="bg-secondary max-w-[51rem] rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-secondary min-w-[51rem] max-w-[51rem] rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                     <div class="p-6 border-b bg-neutral-100 rounded-t-lg border-gray-200">
                         <h2 class="text-xl font-bold text-accent">Daftar Calon</h2>
                     </div>

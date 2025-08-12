@@ -5,20 +5,20 @@ include 'conn.php';
 $vote_success = false;
 $error_message = '';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_calon'], $_POST['nisn'])) {
-    $id_calon = $_POST['id_calon'];
-    $nisn_voter = $_POST['nisn'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_calon'], $_POST['nisn'], $_POST['display_token'])) {
+    $token = mysqli_real_escape_string($conn, $_POST['display_token']);
+    $token_check = mysqli_query($conn, "SELECT * FROM tokens WHERE token = '$token' LIMIT 1");
 
-    // Validasi format NISN: hanya angka, 8-10 digit
-    if (!preg_match('/^\d{8,10}$/', $nisn_voter)) {
-        $error_message = "Format NISN tidak valid. Harus terdiri dari 8-10 digit angka.";
+    if (mysqli_num_rows($token_check) === 0) {
+        $error_message = "Token tidak valid atau kadaluarsa.";
     } else {
-        // Cek apakah NISN terdaftar di tabel hak_suara
+        $id_calon = $_POST['id_calon'];
+        $nisn_voter = $_POST['nisn'];
         $check_nisn_query = "SELECT id FROM hak_suara WHERE nisn = '$nisn_voter'";
         $check_nisn_result = mysqli_query($conn, $check_nisn_query);
 
         if (mysqli_num_rows($check_nisn_result) === 0) {
-            $error_message = "NISN tidak terdaftar sebagai pemilih sah.";
+            $error_message = "Nama anda tidak terdaftar sebagai pemilih sah.";
         } else {
             $nisn_id = mysqli_fetch_assoc($check_nisn_result)['id'];
             // Cek apakah calon valid
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_calon'], $_POST['ni
                 $check_vote_result = mysqli_query($conn, $check_vote_query);
 
                 if (mysqli_num_rows($check_vote_result) > 0) {
-                    $error_message = "NISN ini sudah pernah melakukan voting. Anda tidak dapat memilih dua kali.";
+                    $error_message = "Anda sudah pernah melakukan voting. Anda tidak dapat memilih dua kali.";
                 } else {
                     // Semua valid, simpan vote
                     $vote_query = "INSERT INTO vote (id_calon, id_nisn) VALUES ('$id_calon', '$nisn_id')";
@@ -47,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_calon'], $_POST['ni
         }
     }
 }
-
 
 
 $file = 'config.json';
@@ -125,6 +124,12 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
             box-shadow: none !important;
         }
 
+        body.swal2-shown.token-popup-open>[aria-hidden="true"] {
+            transition: 0.1s filter;
+            filter: blur(3px);
+        }
+
+
         .swal2-confirm:hover {
             background-color: #374151 !important;
             transform: translateY(-1px) !important;
@@ -161,6 +166,8 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
             color: #F59E0B !important;
         }
 
+
+
         .swal2-icon.swal2-question {
             border-color: #3B82F6 !important;
             color: #3B82F6 !important;
@@ -178,7 +185,7 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
     </style>
 </head>
 
-<body class="bg-primary font-montserrat min-h-screen">
+<body class="bg-primary font-montserrat flex flex-col min-h-screen">
     <!-- Header -->
     <div class="bg-secondary shadow-sm border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -187,112 +194,113 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
                     <img src="img/logo.png" alt="" class="size-7 lg:size-9">
                     <div>
                         <h1 class="text-sm lg:text-xl font-bold text-accent">PILKETOS</h1>
-                        <p class="text-xs text-gray-600">v1.0</p>
+                        <p class="text-xs lg:text-sm text-gray-600">v1.0</p>
                     </div>
                 </div>
                 <div class="text-right">
                     <p class="text-sm font-medium text-accent">Sistem Voting</p>
-                    <p class="text-xs text-gray-600">Pilih calon favorit Anda</p>
+                    <p class="text-xs lg:text-sm text-gray-600">Made with 🍵 by Sattar</p>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Main Content -->
-    <div class="max-w-7xl mx-auto p-6 lg:py-6 lg:px-8">
-        <!-- Title Section -->
-        <div class="text-center px-6 lg:p-0 mb-6 lg:mb-12">
-            <h1 class="text-2xl lg:text-4xl font-bold text-accent mb-2 lg:mb-4">Pemilihan Ketua OSIS</h1>
-            <?php if ($config['haksuara'] - $total_vote > 0): ?>
-                <p class="text-lg lg:text-xl text-gray-600 mb-2">Pilih satu calon ketua OSIS favorit Anda</p>
-            <?php else: ?>
-                <p class="text-xl text-red-600 mb-2">Pemilihan suara ditutup! hak suara sudah mencapai batas</p>
-            <?php endif; ?>
-        </div>
-
-        <!-- Voting Form -->
-        <form id="votingForm" method="POST" class="space-y-8">
-            <!-- Candidates Grid -->
-            <?php if (mysqli_num_rows($result) > 0): ?>
-                <div class="flex flex-wrap gap-2 lg:gap-8 items-center justify-center">
-                    <?php
-                    $no = 1;
-                    while ($calon = mysqli_fetch_assoc($result)):
-                        // Split name into parts
-                        $words = explode(" ", $calon['nama']);
-                        $first = $words[0];
-                        $second = isset($words[1]) ? $words[1] : "";
-                        $third = isset($words[2]) ? $words[2] : "";
-                    ?>
-                        <div id="caketos-container-<?php echo $no; ?>" class=" transition-all duration-150 ease-in">
-                            <div class="flex w-[10rem] lg:w-[22rem] group items-center relative">
-                                <div class="bg-white z-10 card w-full border-2 border-gray-200 rounded-xl shadow-lg hover:shadow-xl <?php if ($config['haksuara'] - $total_vote > 0) echo "hover:border-birupesat"; ?> transition-all duration-300 overflow-hidden max-w-sm group relative">
-                                    <!-- Selection Indicator -->
-                                    <i class="selection-indicator opacity-0 text-birupesat absolute top-2.5 right-2.5 text-lg lg:text-2xl  fa-solid fa-circle-check z-20 transition-opacity duration-150 ease-in-out"></i>
+    <main class="flex-grow">
+        <div class="max-w-7xl mx-auto p-6 lg:py-6 lg:px-8">
+            <!-- Title Section -->
+            <div class="text-center px-6 lg:p-0 mb-6 lg:mb-12">
+                <h1 class="text-2xl lg:text-4xl font-bold text-accent mb-2 lg:mb-2">Pemilihan Ketua OSIS</h1>
+                <?php if ($config['haksuara'] - $total_vote > 0): ?>
+                    <p class="text-lg lg:text-xl text-gray-600 mb-2">Pilih satu calon ketua OSIS favorit Anda</p>
+                <?php else: ?>
+                    <p class="text-xl text-red-600 mb-2">Pemilihan suara ditutup! hak suara sudah mencapai batas</p>
+                <?php endif; ?>
+            </div>
 
 
-                                    <!-- Radio Input (Hidden) -->
-                                    <input type="radio" name="id_calon" <?php if ($config['haksuara'] - $total_vote <= 0) echo "disabled"; ?> value="<?php echo $calon['id']; ?>" id="calon_<?php echo $calon['id']; ?>" class="hidden candidate-radio">
+            <!-- Voting Form -->
+            <form id="votingForm" method="POST" class="space-y-8">
+                <?php if (mysqli_num_rows($result) > 0): ?>
+                    <div class="flex flex-wrap gap-2 lg:gap-8 items-center justify-center">
+                        <?php
+                        $no = 1;
+                        while ($calon = mysqli_fetch_assoc($result)):
+                            // Split name into parts
+                            $words = explode(" ", $calon['nama']);
+                            $first = $words[0];
+                            $second = isset($words[1]) ? $words[1] : "";
+                            $third = isset($words[2]) ? $words[2] : "";
+                        ?>
+                            <div id="caketos-container-<?php echo $no; ?>" class="transition-all duration-150 ease-in">
+                                <div class="cursor-pointer flex w-[10rem] lg:w-[22rem] group items-center relative">
+                                    <div class="bg-white z-10 card w-full border-2 border-gray-200 rounded-xl shadow-lg hover:shadow-xl <?php if ($config['haksuara'] - $total_vote > 0) echo "hover:border-birupesat"; ?> transition-all duration-300 overflow-hidden max-w-sm group relative">
+                                        <!-- Selection Indicator -->
+                                        <i class="selection-indicator opacity-0 text-birupesat absolute top-2.5 right-2.5 text-lg lg:text-2xl  fa-solid fa-circle-check z-20 transition-opacity duration-150 ease-in-out"></i>
 
-                                    <!-- Card Content -->
-                                    <label for="calon_<?php echo $calon['id']; ?>" class="<?php if ($config['haksuara'] - $total_vote <= 0) echo "saturate-0 cursor-not-allowed"; ?> block">
-                                        <div class="flex gap-3 p-3 lg:p-6 border-b border-gray-100">
-                                            <h3 class="font-bold text-lg lg:text-2xl leading-5 lg:leading-6">
-                                                <?php echo $first; ?><br />
-                                                <span class="text-gray-500 text-sm lg:text-xl font-medium"><?php echo $second . " " . $third; ?></span>
-                                            </h3>
-                                        </div>
-                                        <div class="h-[10rem] lg:h-[22rem] bg-gradient-to-br from-gray-50 to-gray-200 flex items-center justify-center overflow-hidden relative">
-                                            <h1 class="absolute duration-200 ease-in-out top-3 m-0 left-4 font-bold opacity-20 text-6xl lg:text-9xl">
-                                                <?php echo "0" . $calon['nomor']; ?>
-                                            </h1>
-                                            <?php if (!empty($calon['url_foto'])): ?>
-                                                <img class="size-[140%] object-cover absolute -top-3 -right-9" src="<?php echo $calon['url_foto']; ?>" alt="<?php echo $calon['nama']; ?>" />
-                                            <?php else: ?>
-                                                <svg class="absolute bottom-0 right-0 w-32 h-32 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                                </svg>
-                                            <?php endif; ?>
-                                        </div>
-                                        <div class="p-3 lg:p-6 space-y-3">
-                                            <div class="flex justify-between text-sm lg:text-xl">
-                                                <span class="text-gray-500 font-medium">KELAS</span>
-                                                <span class="text-accent font-semibold"><?php echo $calon['nama_kelas']; ?></span>
+
+                                        <!-- Radio Input (Hidden) -->
+                                        <input type="radio" name="id_calon" <?php if ($config['haksuara'] - $total_vote <= 0) echo "disabled"; ?> value="<?php echo $calon['id']; ?>" id="calon_<?php echo $calon['id']; ?>" class="hidden candidate-radio">
+
+                                        <!-- Card Content -->
+                                        <label for="calon_<?php echo $calon['id']; ?>" class="<?php if ($config['haksuara'] - $total_vote <= 0) echo "saturate-0 cursor-not-allowed"; ?> block">
+                                            <div class="flex gap-3 p-3 lg:p-6 border-b border-gray-100">
+                                                <h3 class="font-bold text-lg lg:text-2xl leading-5 lg:leading-6">
+                                                    <?php echo $first; ?><br />
+                                                    <span class="text-gray-500 text-sm lg:text-xl font-medium"><?php echo $second . " " . $third; ?></span>
+                                                </h3>
                                             </div>
+                                            <div class="h-[10rem] lg:h-[22rem] bg-gradient-to-br from-gray-50 to-gray-200 flex items-center justify-center overflow-hidden relative">
+                                                <h1 class="absolute duration-200 ease-in-out top-3 m-0 left-4 font-bold opacity-20 text-6xl lg:text-9xl">
+                                                    <?php echo "0" . $calon['nomor']; ?>
+                                                </h1>
+                                                <?php if (!empty($calon['url_foto'])): ?>
+                                                    <img class="size-[140%] object-cover absolute -top-3 -right-9" src="<?php echo $calon['url_foto']; ?>" alt="<?php echo $calon['nama']; ?>" />
+                                                <?php else: ?>
+                                                    <svg class="absolute bottom-0 right-0 w-32 h-32 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                                    </svg>
+                                                <?php endif; ?>
+                                            </div>
+                                            <div class="p-3 lg:p-6 space-y-3">
+                                                <div class="flex justify-between text-sm lg:text-xl">
+                                                    <span class="text-gray-500 font-medium">KELAS</span>
+                                                    <span class="text-accent font-semibold"><?php echo $calon['nama_kelas']; ?></span>
+                                                </div>
 
-                                        </div>
-                                    </label>
+                                            </div>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    <?php
-                        $no++;
-                    endwhile;
-                    ?>
-                </div>
+                        <?php
+                            $no++;
+                        endwhile;
+                        ?>
+                    </div>
 
-                <!-- Vote Button -->
-                <div class="text-center mt-12">
-                    <button type="submit" id="voteButton" disabled class="bg-gray-400 text-white py-4 px-12 rounded-2xl font-bold text-lg transition-all duration-300 cursor-not-allowed">
-                        Pilih Calon Favorit
-                    </button>
-                    <p class="text-sm text-gray-500 mt-3">Silakan pilih salah satu calon terlebih dahulu</p>
-                </div>
-
-            <?php else: ?>
-                <div class="text-center py-16">
-                    <svg class="w-24 h-24 text-gray-400 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
-                    </svg>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Belum Ada Calon</h3>
-                    <p class="text-gray-600">Saat ini belum ada calon ketua OSIS yang terdaftar.</p>
-                </div>
-            <?php endif; ?>
-        </form>
-    </div>
+                    <!-- Vote Button -->
+                    <div class="text-center mt-12">
+                        <button type="submit" id="voteButton" disabled class="bg-gray-400 text-white py-4 px-12 rounded-2xl font-bold text-lg transition-all duration-300 cursor-not-allowed">
+                            Pilih Calon Favorit
+                        </button>
+                        <p class="text-sm text-gray-500 mt-3">Silakan pilih salah satu calon terlebih dahulu</p>
+                    </div>
+                <?php else: ?>
+                    <div class="text-center py-16">
+                        <svg class="w-24 h-24 text-gray-400 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                        </svg>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Belum Ada Calon</h3>
+                        <p class="text-gray-600">Saat ini belum ada calon ketua OSIS yang terdaftar.</p>
+                    </div>
+                <?php endif; ?>
+            </form>
+        </div>
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-secondary border-t border-gray-200 mt-16">
+    <footer class="bg-secondary border-t border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div class="text-center">
                 <p class="text-sm text-gray-600">© 2025 Pilketos v1.0 - Sistem Pemilihan Ketua OSIS</p>
@@ -357,6 +365,25 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
         document.getElementById('votingForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
+            let token = getCookie('display_token');
+            if (!token) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Token Hilang',
+                    text: 'Silakan masukkan token terlebih dahulu.'
+                }).then(() => {
+                    showTokenPopup();
+                });
+                return;
+            }
+
+            // inject token ke form
+            const tokenInput = document.createElement('input');
+            tokenInput.type = 'hidden';
+            tokenInput.name = 'display_token';
+            tokenInput.value = token;
+            this.appendChild(tokenInput);
+
             const selectedCandidate = document.querySelector('input[name="id_calon"]:checked');
             if (!selectedCandidate) {
                 Swal.fire({
@@ -376,12 +403,12 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
             Swal.fire({
                 icon: 'question',
                 title: 'Konfirmasi Pilihan',
-                html: `Apakah Anda yakin ingin memilih <strong>${candidateName}</strong> sebagai calon ketua OSIS?<br><br><small class="text-gray-500">Masukkan NISN Anda untuk konfirmasi. Pilihan tidak dapat diubah setelah dikonfirmasi.</small>`,
+                html: `Apakah Anda yakin ingin memilih <strong>${candidateName}</strong> sebagai calon ketua OSIS?<br><br><small class="text-gray-500">Masukkan Nama Anda untuk konfirmasi.<br> Pilihan tidak dapat diubah setelah dikonfirmasi.</small>`,
                 input: 'text',
-                inputLabel: 'Masukkan NISN',
-                inputPlaceholder: 'Contoh: 1234567890',
+                inputLabel: 'Masukkan Nama Anda',
+                inputPlaceholder: 'Contoh: Shabira Syahla',
                 inputAttributes: {
-                    maxlength: 10,
+                    maxlength: 255,
                     autocapitalize: 'off',
                     autocorrect: 'off'
                 },
@@ -391,11 +418,7 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
                 reverseButtons: true,
                 preConfirm: (nisn) => {
                     if (!nisn) {
-                        Swal.showValidationMessage('NISN tidak boleh kosong!');
-                    } else if (!/^\d+$/.test(nisn)) {
-                        Swal.showValidationMessage('NISN harus berupa angka!');
-                    } else if (nisn.length < 8 || nisn.length > 10) {
-                        Swal.showValidationMessage('NISN tidak valid!');
+                        Swal.showValidationMessage('Nama tidak boleh kosong!');
                     }
                     return nisn;
                 }
@@ -423,7 +446,11 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
                         }
                     });
 
-                    form.submit();
+                    // Delay 1 detik sebelum submit
+                    setTimeout(() => {
+                        form.submit();
+                    }, 1000);
+
                 }
             });
 
@@ -437,7 +464,7 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
                     title: 'Vote Berhasil!',
                     html: 'Terima kasih telah berpartisipasi dalam pemilihan ketua OSIS.',
                     confirmButtonText: 'Close',
-                    timer: 1500,
+                    timer: 3000,
                     timerProgressBar: true
                 }).then(() => {
                     resetForm();
@@ -478,6 +505,90 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
                 p.style.right = '';
             });
         }
+
+        // ======= GET COOKIE FUNCTION =======
+        function getCookie(name) {
+            let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+            return match ? decodeURIComponent(match[2]) : null;
+        }
+
+        // ======= DELETE COOKIE FUNCTION =======
+        function deleteCookie(name) {
+            document.cookie = name + '=; Max-Age=0; path=/';
+        }
+
+        // ======= POPUP TOKEN =======
+        function showTokenPopup() {
+            Swal.fire({
+                title: 'Masukkan Display Token',
+                input: 'text',
+                inputPlaceholder: 'Masukkan token di sini...',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                customClass: {
+                    popup: 'popup-token' // class custom buat popup token
+                },
+                backdrop: true, // tetap backdrop biasa
+                preConfirm: (token) => {
+                    if (!token) {
+                        Swal.showValidationMessage('Token tidak boleh kosong');
+                        return false;
+                    }
+                    return fetch('check_token.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            },
+                            body: 'token=' + encodeURIComponent(token)
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (!data.success) {
+                                Swal.showValidationMessage(data.message || 'Token tidak valid');
+                                return false;
+                            }
+                            document.cookie = "display_token=" + encodeURIComponent(token) + "; max-age=" + (24 * 60 * 60) + "; path=/";
+                            return true;
+                        })
+                        .catch(() => {
+                            Swal.showValidationMessage('Terjadi kesalahan koneksi');
+                            return false;
+                        });
+                }
+            });
+        }
+
+
+        // ======= VALIDASI TOKEN SETIAP PAGE LOAD =======
+        window.addEventListener('DOMContentLoaded', () => {
+            let token = getCookie('display_token');
+
+            if (!token) {
+                showTokenPopup();
+            } else {
+                fetch('check_token.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: 'token=' + encodeURIComponent(token)
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (!data.success) {
+                            deleteCookie('display_token');
+                            showTokenPopup();
+                        }
+                    })
+                    .catch(() => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Koneksi Error',
+                            text: 'Tidak bisa memvalidasi token.'
+                        });
+                    });
+            }
+        });
     </script>
 </body>
 
