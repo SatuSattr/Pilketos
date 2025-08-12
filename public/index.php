@@ -25,12 +25,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_calon'], $_POST['ni
             $check_calon_query = "SELECT id FROM calon_ketua WHERE id = '$id_calon'";
             $check_calon_result = mysqli_query($conn, $check_calon_query);
 
-            if (mysqli_num_rows($check_calon_result) === 0) {
-                $error_message = "Calon yang dipilih tidak valid.";
-            } else {
-                // Cek apakah NISN sudah pernah voting
-                $check_vote_query = "SELECT v.id FROM vote v LEFT JOIN hak_suara c ON v.id_nisn = c.id WHERE c.nisn = '$nisn_voter';";
-                $check_vote_result = mysqli_query($conn, $check_vote_query);
+        if (mysqli_num_rows($check_calon_result) === 0) {
+            $error_message = "Calon yang dipilih tidak valid.";
+        } else {
+            // Cek apakah NISN sudah pernah voting
+            $check_vote_query = "SELECT v.id FROM vote v LEFT JOIN hak_suara c ON v.id_nisn = c.id WHERE c.nisn = '$nisn_voter';";
+            $check_vote_result = mysqli_query($conn, $check_vote_query);
 
                 if (mysqli_num_rows($check_vote_result) > 0) {
                     $error_message = "Anda sudah pernah melakukan voting. Anda tidak dapat memilih dua kali.";
@@ -186,6 +186,7 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
 </head>
 
 <body class="bg-primary font-montserrat flex flex-col min-h-screen">
+<body class="bg-primary font-montserrat flex flex-col min-h-screen">
     <!-- Header -->
     <div class="bg-secondary shadow-sm border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -195,10 +196,12 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
                     <div>
                         <h1 class="text-sm lg:text-xl font-bold text-accent">PILKETOS</h1>
                         <p class="text-xs lg:text-sm text-gray-600">v1.0</p>
+                        <p class="text-xs lg:text-sm text-gray-600">v1.0</p>
                     </div>
                 </div>
                 <div class="text-right">
                     <p class="text-sm font-medium text-accent">Sistem Voting</p>
+                    <p class="text-xs lg:text-sm text-gray-600">Made with 🍵 by Sattar</p>
                     <p class="text-xs lg:text-sm text-gray-600">Made with 🍵 by Sattar</p>
                 </div>
             </div>
@@ -218,7 +221,37 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
                 <?php endif; ?>
             </div>
 
+    <main class="flex-grow">
+        <div class="max-w-7xl mx-auto p-6 lg:py-6 lg:px-8">
+            <!-- Title Section -->
+            <div class="text-center px-6 lg:p-0 mb-6 lg:mb-12">
+                <h1 class="text-2xl lg:text-4xl font-bold text-accent mb-2 lg:mb-2">Pemilihan Ketua OSIS</h1>
+                <?php if ($config['haksuara'] - $total_vote > 0): ?>
+                    <p class="text-lg lg:text-xl text-gray-600 mb-2">Pilih satu calon ketua OSIS favorit Anda</p>
+                <?php else: ?>
+                    <p class="text-xl text-red-600 mb-2">Pemilihan suara ditutup! hak suara sudah mencapai batas</p>
+                <?php endif; ?>
+            </div>
 
+
+            <!-- Voting Form -->
+            <form id="votingForm" method="POST" class="space-y-8">
+                <?php if (mysqli_num_rows($result) > 0): ?>
+                    <div class="flex flex-wrap gap-2 lg:gap-8 items-center justify-center">
+                        <?php
+                        $no = 1;
+                        while ($calon = mysqli_fetch_assoc($result)):
+                            // Split name into parts
+                            $words = explode(" ", $calon['nama']);
+                            $first = $words[0];
+                            $second = isset($words[1]) ? $words[1] : "";
+                            $third = isset($words[2]) ? $words[2] : "";
+                        ?>
+                            <div id="caketos-container-<?php echo $no; ?>" class="transition-all duration-150 ease-in">
+                                <div class="cursor-pointer flex w-[10rem] lg:w-[22rem] group items-center relative">
+                                    <div class="bg-white z-10 card w-full border-2 border-gray-200 rounded-xl shadow-lg hover:shadow-xl <?php if ($config['haksuara'] - $total_vote > 0) echo "hover:border-birupesat"; ?> transition-all duration-300 overflow-hidden max-w-sm group relative">
+                                        <!-- Selection Indicator -->
+                                        <i class="selection-indicator opacity-0 text-birupesat absolute top-2.5 right-2.5 text-lg lg:text-2xl  fa-solid fa-circle-check z-20 transition-opacity duration-150 ease-in-out"></i>
             <!-- Voting Form -->
             <form id="votingForm" method="POST" class="space-y-8">
                 <?php if (mysqli_num_rows($result) > 0): ?>
@@ -267,7 +300,42 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
                                                     <span class="text-gray-500 font-medium">KELAS</span>
                                                     <span class="text-accent font-semibold"><?php echo $calon['nama_kelas']; ?></span>
                                                 </div>
+                                        <!-- Card Content -->
+                                        <label for="calon_<?php echo $calon['id']; ?>" class="<?php if ($config['haksuara'] - $total_vote <= 0) echo "saturate-0 cursor-not-allowed"; ?> block">
+                                            <div class="flex gap-3 p-3 lg:p-6 border-b border-gray-100">
+                                                <h3 class="font-bold text-lg lg:text-2xl leading-5 lg:leading-6">
+                                                    <?php echo $first; ?><br />
+                                                    <span class="text-gray-500 text-sm lg:text-xl font-medium"><?php echo $second . " " . $third; ?></span>
+                                                </h3>
+                                            </div>
+                                            <div class="h-[10rem] lg:h-[22rem] bg-gradient-to-br from-gray-50 to-gray-200 flex items-center justify-center overflow-hidden relative">
+                                                <h1 class="absolute duration-200 ease-in-out top-3 m-0 left-4 font-bold opacity-20 text-6xl lg:text-9xl">
+                                                    <?php echo "0" . $calon['nomor']; ?>
+                                                </h1>
+                                                <?php if (!empty($calon['url_foto'])): ?>
+                                                    <img class="size-[140%] object-cover absolute -top-3 -right-9" src="<?php echo $calon['url_foto']; ?>" alt="<?php echo $calon['nama']; ?>" />
+                                                <?php else: ?>
+                                                    <svg class="absolute bottom-0 right-0 w-32 h-32 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                                    </svg>
+                                                <?php endif; ?>
+                                            </div>
+                                            <div class="p-3 lg:p-6 space-y-3">
+                                                <div class="flex justify-between text-sm lg:text-xl">
+                                                    <span class="text-gray-500 font-medium">KELAS</span>
+                                                    <span class="text-accent font-semibold"><?php echo $calon['nama_kelas']; ?></span>
+                                                </div>
 
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                            $no++;
+                        endwhile;
+                        ?>
+                    </div>
                                             </div>
                                         </label>
                                     </div>
@@ -298,8 +366,28 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
             </form>
         </div>
     </main>
+                    <!-- Vote Button -->
+                    <div class="text-center mt-12">
+                        <button type="submit" id="voteButton" disabled class="bg-gray-400 text-white py-4 px-12 rounded-2xl font-bold text-lg transition-all duration-300 cursor-not-allowed">
+                            Pilih Calon Favorit
+                        </button>
+                        <p class="text-sm text-gray-500 mt-3">Silakan pilih salah satu calon terlebih dahulu</p>
+                    </div>
+                <?php else: ?>
+                    <div class="text-center py-16">
+                        <svg class="w-24 h-24 text-gray-400 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                        </svg>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Belum Ada Calon</h3>
+                        <p class="text-gray-600">Saat ini belum ada calon ketua OSIS yang terdaftar.</p>
+                    </div>
+                <?php endif; ?>
+            </form>
+        </div>
+    </main>
 
     <!-- Footer -->
+    <footer class="bg-secondary border-t border-gray-200">
     <footer class="bg-secondary border-t border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div class="text-center">
@@ -407,7 +495,10 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
                 input: 'text',
                 inputLabel: 'Masukkan Nama Anda',
                 inputPlaceholder: 'Contoh: Shabira Syahla',
+                inputLabel: 'Masukkan Nama Anda',
+                inputPlaceholder: 'Contoh: Shabira Syahla',
                 inputAttributes: {
+                    maxlength: 255,
                     maxlength: 255,
                     autocapitalize: 'off',
                     autocorrect: 'off'
@@ -418,6 +509,7 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
                 reverseButtons: true,
                 preConfirm: (nisn) => {
                     if (!nisn) {
+                        Swal.showValidationMessage('Nama tidak boleh kosong!');
                         Swal.showValidationMessage('Nama tidak boleh kosong!');
                     }
                     return nisn;
@@ -451,6 +543,11 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
                         form.submit();
                     }, 1000);
 
+                    // Delay 1 detik sebelum submit
+                    setTimeout(() => {
+                        form.submit();
+                    }, 1000);
+
                 }
             });
 
@@ -464,6 +561,7 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
                     title: 'Vote Berhasil!',
                     html: 'Terima kasih telah berpartisipasi dalam pemilihan ketua OSIS.',
                     confirmButtonText: 'Close',
+                    timer: 3000,
                     timer: 3000,
                     timerProgressBar: true
                 }).then(() => {
