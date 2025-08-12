@@ -1,0 +1,15 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@theme {
+  --color-primary: #fbfafb;
+  --color-secondary: #fffefe;
+  --color-accent: #232322;
+  --color-birupesat: #2f2575;
+  --font-montserrat: "Montserrat", sans-serif; 
+}
+
+.text-stroke {
+  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #101010;
+}
