@@ -591,18 +591,10 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-<<<<<<< HEAD
-    "stability-flags": [],
-    "prefer-stable": false,
-    "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
-=======
     "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {},
     "platform-dev": {},
->>>>>>> 5c824bf9b5eb06ee4d078dc4777a6f29fc0e51be
     "plugin-api-version": "2.6.0"
 }

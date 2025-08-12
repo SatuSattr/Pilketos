@@ -9,14 +9,15 @@ $vote_success = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_calon'], $_POST['nisn'], $_POST['display_token'])) {
 
-    $token       = trim($_POST['display_token'] ?? '');
-    $id_calon    = trim($_POST['id_calon'] ?? '');
-    $nisn_voter  = trim($_POST['nisn'] ?? '');
+    $token      = trim($_POST['display_token'] ?? '');
+    $id_calon   = trim($_POST['id_calon'] ?? '');
+    $nisn_voter = trim($_POST['nisn'] ?? '');
 
     if ($token === '') {
         $error_message = "Token tidak boleh kosong";
     } else {
 
+        // Validasi token
         $stmt = $conn->prepare("SELECT id FROM tokens WHERE token = ? AND active = 1 LIMIT 1");
         $stmt->bind_param("s", $token);
         $stmt->execute();
@@ -24,18 +25,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_calon'], $_POST['n
 
         if ($stmt->num_rows === 0) {
             $error_message = "Token tidak valid";
+            $stmt->close();
         } else {
+            $stmt->close();
 
-            $stmt2 = $conn->prepare("SELECT id FROM hak_suara WHERE nisn = ? LIMIT 1");
-            $stmt2->bind_param("s", $nisn_voter);
+            $like_nisn = '%' . $nisn_voter . '%';
+            $stmt2 = $conn->prepare("SELECT id, nisn FROM hak_suara WHERE nisn LIKE ?");
+            $stmt2->bind_param("s", $like_nisn);
             $stmt2->execute();
             $result_nisn = $stmt2->get_result();
 
-            if ($result_nisn->num_rows === 0) {
-                $error_message = "Nama anda tidak terdaftar sebagai pemilih sah.";
-            } else {
-                $nisn_id = $result_nisn->fetch_assoc()['id'];
+            $count_nama_mirip = $result_nisn->num_rows;
 
+            if ($count_nama_mirip === 0) {
+                $error_message = "Nama anda tidak terdaftar sebagai pemilih sah.";
+                $stmt2->close();
+            } elseif ($count_nama_mirip > 1) {
+                $error_message = "Ada $count_nama_mirip orang yang punya nama yang mirip. Mohon tulis nama lengkap anda dengan benar.";
+                $stmt2->close();
+            } else {
+                // cuma 1 data ditemukan, ambil data asli dari DB
+                $row = $result_nisn->fetch_assoc();
+                $nisn_id = $row['id'];
+                $nisn_voter = $row['nisn'];
+                $stmt2->close();
+
+                // Validasi calon ketua
                 $stmt3 = $conn->prepare("SELECT id FROM calon_ketua WHERE id = ? LIMIT 1");
                 $stmt3->bind_param("i", $id_calon);
                 $stmt3->execute();
@@ -43,8 +58,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_calon'], $_POST['n
 
                 if ($result_calon->num_rows === 0) {
                     $error_message = "Calon yang dipilih tidak valid.";
+                    $stmt3->close();
                 } else {
+                    $stmt3->close();
 
+                    // Cek apakah sudah voting
                     $stmt4 = $conn->prepare("
                         SELECT v.id 
                         FROM vote v 
@@ -58,10 +76,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_calon'], $_POST['n
 
                     if ($result_vote->num_rows > 0) {
                         $error_message = "Anda sudah pernah melakukan voting. Anda tidak dapat memilih dua kali.";
+                        $stmt4->close();
                     } else {
+                        $stmt4->close();
 
+                        // Insert vote
                         $stmt5 = $conn->prepare("INSERT INTO vote (id_calon, id_nisn) VALUES (?, ?)");
                         $stmt5->bind_param("ii", $id_calon, $nisn_id);
+
                         if ($stmt5->execute()) {
                             $vote_success = true;
                         } else {
@@ -69,15 +91,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_calon'], $_POST['n
                         }
                         $stmt5->close();
                     }
-                    $stmt4->close();
                 }
-                $stmt3->close();
             }
-            $stmt2->close();
         }
-        $stmt->close();
     }
 }
+
+
+
+
+
 $hak_suara_query = "SELECT COUNT(*) as total FROM hak_suara";
 $hak_suara_result = mysqli_query($conn, $hak_suara_query);
 $hak_suara = mysqli_fetch_assoc($hak_suara_result)['total'];
@@ -219,9 +242,14 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
                         <p class="text-xs lg:text-sm text-gray-600">v1.0</p>
                     </div>
                 </div>
-                <div class="text-right">
+                <div class="text-right translate-y-1">
                     <p class="text-sm font-medium text-accent">Sistem Voting</p>
-                    <p class="text-xs lg:text-sm text-gray-600">Made with 🍵 by Sattar</p>
+                    <div class="flex">
+                        <p class="text-xs lg:text-sm text-gray-600 flex ">Made with</p>
+                        <img src="img/coffee.gif" alt="Cfe" class="object-cover h-[24px] lg:h-[28px] translate-y-[-7px] mx-1">
+                        <p class="text-xs lg:text-sm text-gray-600 flex ">by Sattar</p>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -271,11 +299,11 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
                                                 </h3>
                                             </div>
                                             <div class="h-[10rem] lg:h-[22rem] bg-gradient-to-br from-gray-50 to-gray-200 flex items-center justify-center overflow-hidden relative">
-                                                <h1 class="absolute duration-200 ease-in-out top-3 m-0 left-4 font-bold opacity-20 text-6xl lg:text-9xl">
+                                                <h1 class="absolute duration-200 ease-in-out top-3 m-0 left-4 font-bold opacity-20 text-7xl lg:text-9xl">
                                                     <?php echo "0" . $calon['nomor']; ?>
                                                 </h1>
                                                 <?php if (!empty($calon['url_foto'])): ?>
-                                                    <img class="size-[140%] object-cover absolute -top-3 -right-9" src="<?php echo $calon['url_foto']; ?>" alt="<?php echo $calon['nama']; ?>" />
+                                                    <img class="size-[140%] object-cover absolute -top-1 -right-5 lg:-top-3 lg:-right-9" src="<?php echo $calon['url_foto']; ?>" alt="<?php echo $calon['nama']; ?>" />
                                                 <?php else: ?>
                                                     <svg class="absolute bottom-0 right-0 w-32 h-32 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
@@ -412,7 +440,7 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
                 Swal.fire({
                     icon: 'question',
                     title: 'Konfirmasi Pilihan',
-                    html: `Apakah Anda yakin ingin memilih <strong>${candidateName}</strong> sebagai calon ketua OSIS?<br><br><small class="text-gray-500">Masukkan Nama Anda untuk konfirmasi.<br> Pilihan tidak dapat diubah setelah dikonfirmasi.</small>`,
+                    html: `Apakah Anda yakin ingin memilih<br/> <strong>${candidateName}</strong> sebagai calon ketua OSIS?<br><small class="text-red-500">*Pilihan tidak dapat diubah setelah dikonfirmasi.</small>`,
                     input: 'text',
                     inputLabel: 'Masukkan Nama Anda',
                     inputPlaceholder: 'Contoh: Shabira Syahla',
@@ -492,9 +520,10 @@ $total_vote = mysqli_fetch_assoc($total_vote_result)['total'];
 
             function showTokenPopup() {
                 Swal.fire({
-                    title: 'Masukkan Display Token',
+                    title: 'Display Token',
+                    html: `Masukan display token untuk dapat memulai sesi voting`,
                     input: 'text',
-                    inputPlaceholder: 'Masukkan token di sini...',
+                    inputPlaceholder: 'Contoh: SKDJ82',
                     allowOutsideClick: false,
                     allowEscapeKey: false,
                     backdrop: `
