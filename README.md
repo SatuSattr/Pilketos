@@ -17,8 +17,6 @@ Proyek ini bertujuan untuk membuat proses pemilihan ketua OSIS jadi lebih modern
   <img src="https://ux.appcloud.id/imaging/images/TauK3TTrYd.png" alt="Halaman Admin" width="48%">
 </div>
 
-> 🖼️ *Kiri-Atas: Halaman Voting — Kanan-Atas: Panel Dashboard | Kiri-Bawah: Panel Laporan — Kanan-Bawah: Panel Calon*
-
 ---
 
 ## ✨ Fitur Utama
