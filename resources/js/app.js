@@ -50,6 +50,9 @@ import {
     UserCircle,
     Clock,
     Activity,
+                Copy,
+                CopyCheck,
+
 } from 'lucide';
 
 // Register only the Chart.js components we need
@@ -105,6 +108,8 @@ document.addEventListener('alpine:initialized', () => {
                 UserCircle,
                 Clock,
                 Activity,
+                Copy,
+                CopyCheck,
             },
         });
 
@@ -395,9 +400,6 @@ document.addEventListener('alpine:initialized', () => {
             scrollEl.classList.toggle('scrollbar-left', slideLeft);
         }
 
-        detailPanel.querySelector('.detail-nama').textContent = card.dataset.nama;
-        detailPanel.querySelector('.detail-kelas').textContent =
-            'Kelas ' + card.dataset.kelas;
         detailPanel.querySelector('.detail-visi').textContent = card.dataset.visi;
         detailPanel.querySelector('.detail-misi').textContent = card.dataset.misi;
 
@@ -481,9 +483,36 @@ document.addEventListener('alpine:initialized', () => {
         currentlyExpanded = null;
     }
 
+    // In dual-candidate mode, both panels are always open and non-interactive.
+    const isDualMode = allItems.length === 2;
+
+    if (isDualMode) {
+        // Mark the flex container so CSS can suppress selected outlines.
+        const flexContainer = document.querySelector('[x-data="voting"]');
+        if (flexContainer) {
+            flexContainer.classList.add('dual-mode');
+        }
+
+        // Auto-expand both panels immediately after a short delay so that
+        // Alpine has finished rendering and card dimensions are available.
+        setTimeout(() => {
+            allItems.forEach((container) => {
+                const card = container.querySelector('.card');
+                if (card) {
+                    expandPanel(card, container);
+                }
+            });
+        }, 50);
+    }
+
     candidateCards.forEach((card) => {
         card.addEventListener('click', function (e) {
             if (e.target.tagName === 'LABEL' || e.target.closest('label')) {
+                return;
+            }
+
+            // In dual mode panels are always open — block all expand/collapse.
+            if (isDualMode) {
                 return;
             }
 
@@ -738,6 +767,18 @@ document.addEventListener('alpine:initialized', () => {
             }
         });
         currentlyExpanded = null;
+
+        // In dual mode, immediately re-expand both panels after reset.
+        if (isDualMode) {
+            setTimeout(() => {
+                allItems.forEach((container) => {
+                    const card = container.querySelector('.card');
+                    if (card) {
+                        expandPanel(card, container);
+                    }
+                });
+            }, 50);
+        }
     }
 
     const savedKey = sessionStorage.getItem('display_token');
