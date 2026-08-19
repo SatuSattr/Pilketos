@@ -1,0 +1,180 @@
+- generic [ref=f28e2]:
+  - generic [ref=f28e4]:
+    - generic [ref=f28e5]: Internal Server Error
+    - button "Copy as Markdown" [ref=f28e11] [cursor=pointer]
+  - generic [ref=f28e18]:
+    - generic [ref=f28e19]:
+      - heading "ParseError" [level=1] [ref=f28e20]
+      - generic [ref=f28e21]: resources\views\admin\dashboard.blade.php:51
+      - paragraph [ref=f28e23]: Unclosed '[' does not match ')'
+    - generic [ref=f28e24]:
+      - generic [ref=f28e25]:
+        - generic [ref=f28e26]:
+          - generic [ref=f28e27]: LARAVEL
+          - generic [ref=f28e28]: 13.26.1
+        - generic [ref=f28e29]:
+          - generic [ref=f28e30]: PHP
+          - generic [ref=f28e31]: 8.4.10
+      - generic [ref=f28e32]: UNHANDLED
+      - generic [ref=f28e36]: CODE 0
+    - generic [ref=f28e38]:
+      - generic [ref=f28e39]: "500"
+      - generic [ref=f28e43]: GET
+      - generic [ref=f28e47]: http://localhost:8000/admin/dashboard
+      - button [ref=f28e48] [cursor=pointer]
+  - generic [ref=f28e53]:
+    - generic [ref=f28e54]:
+      - heading "Exception trace" [level=3] [ref=f28e60]
+      - generic [ref=f28e61]:
+        - generic [ref=f28e62]:
+          - generic [ref=f28e63] [cursor=pointer]:
+            - generic [ref=f28e66]:
+              - code [ref=f28e70]:
+                - generic [ref=f28e71]: "Illuminate\\Filesystem\\Filesystem::{closure:Illuminate\\Filesystem\\Filesystem::getRequire():120}()"
+              - generic [ref=f28e72]: resources\views\admin\dashboard.blade.php:51
+            - button [ref=f28e75]
+          - code [ref=f28e84]:
+            - generic [ref=f28e85]: 46 <div class="relative h-64 lg:h-80">
+            - generic [ref=f28e86]: 47 <canvas id="voteChart"></canvas>
+            - generic [ref=f28e87]: 48 </div>
+            - generic [ref=f28e88]: "49 {{-- Data for Chart.js via JSON script tag --}}"
+            - generic [ref=f28e89]: 50 <script type="application/json" id="vote-chart-data">
+            - generic [ref=f28e90]: 51 @json([
+            - generic [ref=f28e91]: 52 'labels' => $calons->map(fn($c) => $c->nama)->values(),
+            - generic [ref=f28e92]: 53 'votes' => $calons->map(fn($c) => $c->votes_count)->values(),
+            - generic [ref=f28e93]: 54 'colors' => ['#2f2575', '#10b981', '#f59e0b', '#ef4444', '#3b82f6'],
+            - generic [ref=f28e94]: 55 ])
+            - generic [ref=f28e95]: 56 </script>
+            - generic [ref=f28e96]: 57 @endif
+            - generic [ref=f28e97]: 58 </div>
+            - generic [ref=f28e98]: "59"
+            - generic [ref=f28e99]: "60 {{-- Perolehan Suara (30%) --}}"
+            - generic [ref=f28e100]: 61 <div class="w-full lg:w-[30%] bg-white rounded-xl border-2 border-gray-200 shadow-lg p-6">
+            - generic [ref=f28e101]: 62 <h2 class="text-base font-bold text-accent flex items-center gap-2 mb-4">
+            - generic [ref=f28e102]: "63"
+        - generic [ref=f28e104] [cursor=pointer]:
+          - generic [ref=f28e109]: 58 vendor frames
+          - button [ref=f28e110]
+        - generic [ref=f28e116] [cursor=pointer]:
+          - generic [ref=f28e119]:
+            - code [ref=f28e123]:
+              - generic [ref=f28e124]: Illuminate\Foundation\Application->handleRequest(object(Illuminate\Http\Request))
+            - generic [ref=f28e125]: public\index.php:20
+          - button [ref=f28e128]
+        - generic [ref=f28e134] [cursor=pointer]:
+          - generic [ref=f28e139]: 1 vendor frame
+          - button [ref=f28e140]
+    - generic [ref=f28e145]:
+      - generic [ref=f28e146]:
+        - heading "Queries" [level=3] [ref=f28e151]
+        - generic [ref=f28e152]: 1-6 of 6
+      - generic [ref=f28e154]:
+        - generic [ref=f28e155]:
+          - generic [ref=f28e156]:
+            - generic [ref=f28e157]: sqlite
+            - code [ref=f28e164]:
+              - generic [ref=f28e165]: select * from "sessions" where "id" = '4mTiHCfILyeyDhRDtYjNsNnY7vAmwxAaeOKo3cEY' limit 1
+          - generic [ref=f28e166]: 0.93ms
+        - generic [ref=f28e167]:
+          - generic [ref=f28e168]:
+            - generic [ref=f28e169]: sqlite
+            - code [ref=f28e176]:
+              - generic [ref=f28e177]: select * from "users" where "id" = 1 limit 1
+          - generic [ref=f28e178]: 0.12ms
+        - generic [ref=f28e179]:
+          - generic [ref=f28e180]:
+            - generic [ref=f28e181]: sqlite
+            - code [ref=f28e188]:
+              - generic [ref=f28e189]: select count(*) as "aggregate" from "voters"
+          - generic [ref=f28e190]: 0.07ms
+        - generic [ref=f28e191]:
+          - generic [ref=f28e192]:
+            - generic [ref=f28e193]: sqlite
+            - code [ref=f28e200]:
+              - generic [ref=f28e201]: select count(*) as "aggregate" from "voters" where "has_voted" = 1
+          - generic [ref=f28e202]: 0.06ms
+        - generic [ref=f28e203]:
+          - generic [ref=f28e204]:
+            - generic [ref=f28e205]: sqlite
+            - code [ref=f28e212]:
+              - generic [ref=f28e213]: select "calons".*, (select count(*) from "votes" where "calons"."id" = "votes"."calon_id") as "votes_count" from "calons" order by "nomor" asc
+          - generic [ref=f28e214]: 0.08ms
+        - generic [ref=f28e215]:
+          - generic [ref=f28e216]:
+            - generic [ref=f28e217]: sqlite
+            - code [ref=f28e224]:
+              - generic [ref=f28e225]: select count(*) as "aggregate" from "display_keys" where "is_active" = 1
+          - generic [ref=f28e226]: 0.06ms
+  - generic [ref=f28e228]:
+    - generic [ref=f28e229]:
+      - heading "Headers" [level=2] [ref=f28e230]
+      - generic [ref=f28e231]:
+        - generic [ref=f28e232]:
+          - generic [ref=f28e233]: host
+          - generic [ref=f28e235]: localhost:8000
+        - generic [ref=f28e236]:
+          - generic [ref=f28e237]: connection
+          - generic [ref=f28e239]: keep-alive
+        - generic [ref=f28e240]:
+          - generic [ref=f28e241]: cache-control
+          - generic [ref=f28e243]: max-age=0
+        - generic [ref=f28e244]:
+          - generic [ref=f28e245]: upgrade-insecure-requests
+          - generic [ref=f28e247]: "1"
+        - generic [ref=f28e248]:
+          - generic [ref=f28e249]: user-agent
+          - generic [ref=f28e251]: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36
+        - generic [ref=f28e252]:
+          - generic [ref=f28e253]: accept
+          - generic [ref=f28e255]: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+        - generic [ref=f28e256]:
+          - generic [ref=f28e257]: sec-fetch-site
+          - generic [ref=f28e259]: same-origin
+        - generic [ref=f28e260]:
+          - generic [ref=f28e261]: sec-fetch-mode
+          - generic [ref=f28e263]: navigate
+        - generic [ref=f28e264]:
+          - generic [ref=f28e265]: sec-fetch-user
+          - generic [ref=f28e267]: "?1"
+        - generic [ref=f28e268]:
+          - generic [ref=f28e269]: sec-fetch-dest
+          - generic [ref=f28e271]: document
+        - generic [ref=f28e272]:
+          - generic [ref=f28e273]: sec-ch-ua
+          - generic [ref=f28e275]: "\"Not=A?Brand\";v=\"99\", \"Google Chrome\";v=\"151\", \"Chromium\";v=\"151\""
+        - generic [ref=f28e276]:
+          - generic [ref=f28e277]: sec-ch-ua-mobile
+          - generic [ref=f28e279]: "?0"
+        - generic [ref=f28e280]:
+          - generic [ref=f28e281]: sec-ch-ua-platform
+          - generic [ref=f28e283]: "\"Windows\""
+        - generic [ref=f28e284]:
+          - generic [ref=f28e285]: referer
+          - generic [ref=f28e287]: http://localhost:8000/admin/login
+        - generic [ref=f28e288]:
+          - generic [ref=f28e289]: accept-encoding
+          - generic [ref=f28e291]: gzip, deflate, br, zstd
+        - generic [ref=f28e292]:
+          - generic [ref=f28e293]: accept-language
+          - generic [ref=f28e295]: en-US,en;q=0.9
+        - generic [ref=f28e296]:
+          - generic [ref=f28e297]: cookie
+          - generic [ref=f28e299]: XSRF-TOKEN=eyJpdiI6IlFRYjN6eTFaQjZmVSsyMVlqR29GRGc9PSIsInZhbHVlIjoicEtMTEp2dER2Tk15ZWE4bncyMlRoMXhsVHlCaFpwRzVtNDRZM3FpY0o0SUhqSTg1bnJya3RKa1hlTzRsQW01cEhLbDlwSXNSQjF4dEptVkg1dFdjVGdFTldiSzNPbTdkTENpajhZTWRqTC9Cbi9NUFRsN29WZWwwNW1YRHFMMkMiLCJtYWMiOiI5OTZmZTgyYWY1YzNhMWQ3MDk5OGQ2OTE0ZmYyZWI1MzIzZTg5YjY2M2JjYjQ2ZDQxYmQ2MjhlNGE0NGZkZGEzIiwidGFnIjoiIn0%3D; laravel-session=eyJpdiI6InE3TGNmcHZjcU1MMmFmVjhkNC9jc1E9PSIsInZhbHVlIjoieCtJdWFLZzBJMzllYjhwSXlrVEdBZFpWMEFEOHpuWVkrYjZsa2dmdG93Z2lLbG1mQjI4b290Qit0YmxHRGRCbElReGZ0L2s2eVNzWmdJeWFMbkd5S05XTnVTZGRSOW9TSFFpeG9lYWhLd2k5NWR5VmpsMVhYT0pzTU1jeWtmblQiLCJtYWMiOiI2MTg1OTJjODUyNDdmMzkzMGI2NmIzNmZjZWUyZTc0NGM2YzVhOGY5ZjA3OTU1MWU0NjVjNzcxMDIyMjBkNGNjIiwidGFnIjoiIn0%3D
+    - generic [ref=f28e300]:
+      - heading "Body" [level=2] [ref=f28e301]
+      - generic [ref=f28e302]: // No request body
+    - generic [ref=f28e303]:
+      - heading "Routing" [level=2] [ref=f28e304]
+      - generic [ref=f28e305]:
+        - generic [ref=f28e306]:
+          - generic [ref=f28e307]: controller
+          - generic [ref=f28e309]: App\Http\Controllers\Admin\DashboardController@index
+        - generic [ref=f28e310]:
+          - generic [ref=f28e311]: route name
+          - generic [ref=f28e313]: admin.dashboard
+        - generic [ref=f28e314]:
+          - generic [ref=f28e315]: middleware
+          - generic [ref=f28e317]: web, auth
+    - generic [ref=f28e318]:
+      - heading "Routing parameters" [level=2] [ref=f28e319]
+      - generic [ref=f28e320]: // No routing parameters

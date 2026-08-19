@@ -1,0 +1,186 @@
+- generic [ref=f30e2]:
+  - generic [ref=f30e4]:
+    - generic [ref=f30e5]: Internal Server Error
+    - button "Copy as Markdown" [ref=f30e11] [cursor=pointer]
+  - generic [ref=f30e18]:
+    - generic [ref=f30e19]:
+      - heading "Symfony\\Component\\Routing\\Exception\\RouteNotFoundException" [level=1] [ref=f30e20]
+      - generic [ref=f30e21]: vendor\laravel\framework\src\Illuminate\Routing\UrlGenerator.php:542
+      - paragraph [ref=f30e23]: Route [admin.hasil] not defined.
+    - generic [ref=f30e24]:
+      - generic [ref=f30e25]:
+        - generic [ref=f30e26]:
+          - generic [ref=f30e27]: LARAVEL
+          - generic [ref=f30e28]: 13.26.1
+        - generic [ref=f30e29]:
+          - generic [ref=f30e30]: PHP
+          - generic [ref=f30e31]: 8.4.10
+      - generic [ref=f30e32]: UNHANDLED
+      - generic [ref=f30e36]: CODE 0
+    - generic [ref=f30e38]:
+      - generic [ref=f30e39]: "500"
+      - generic [ref=f30e43]: GET
+      - generic [ref=f30e47]: http://localhost:8000/admin/dashboard
+      - button [ref=f30e48] [cursor=pointer]
+  - generic [ref=f30e53]:
+    - generic [ref=f30e54]:
+      - heading "Exception trace" [level=3] [ref=f30e60]
+      - generic [ref=f30e61]:
+        - generic [ref=f30e63] [cursor=pointer]:
+          - generic [ref=f30e68]: 2 vendor frames
+          - button [ref=f30e69]
+        - generic [ref=f30e74]:
+          - generic [ref=f30e75] [cursor=pointer]:
+            - generic [ref=f30e78]:
+              - code [ref=f30e82]:
+                - generic [ref=f30e83]: route(string)
+              - generic [ref=f30e84]: resources\views\components\layouts\admin.blade.php:83
+            - button [ref=f30e87]
+          - code [ref=f30e96]:
+            - generic [ref=f30e97]: 78 Daftar Pemilih
+            - generic [ref=f30e98]: 79 </x-sidebar-link>
+            - generic [ref=f30e99]: 80 <x-sidebar-link :href="route('admin.display-key.index')" :active="request()->routeIs('admin.display-key.*')" icon="key-round">
+            - generic [ref=f30e100]: 81 Display Keys
+            - generic [ref=f30e101]: 82 </x-sidebar-link>
+            - generic [ref=f30e102]: 83 <x-sidebar-link :href="route('admin.hasil')" :active="request()->routeIs('admin.hasil')" icon="bar-chart-2">
+            - generic [ref=f30e103]: 84 Hasil Voting
+            - generic [ref=f30e104]: 85 </x-sidebar-link>
+            - generic [ref=f30e105]: 86 </nav>
+            - generic [ref=f30e106]: 87 <div class="px-4 py-4 border-t border-gray-200">
+            - generic [ref=f30e107]: "88 <form method=\"POST\" action=\"{{ route('admin.logout') }}\">"
+            - generic [ref=f30e108]: 89 @csrf
+            - generic [ref=f30e109]: 90 <button type="submit"
+            - generic [ref=f30e110]: 91 class="flex items-center gap-2 w-full px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 hover:text-danger transition-colors duration-200">
+            - generic [ref=f30e111]: 92 <i data-lucide="log-out" class="w-4 h-4"></i>
+            - generic [ref=f30e112]: 93 Keluar
+            - generic [ref=f30e113]: 94 </button>
+            - generic [ref=f30e114]: "95"
+        - generic [ref=f30e116] [cursor=pointer]:
+          - generic [ref=f30e121]: 8 vendor frames
+          - button [ref=f30e122]
+        - generic [ref=f30e128] [cursor=pointer]:
+          - generic [ref=f30e131]:
+            - code [ref=f30e135]:
+              - generic [ref=f30e136]: Illuminate\View\Factory->renderComponent()
+            - generic [ref=f30e137]: resources\views\admin\dashboard.blade.php:126
+          - button [ref=f30e140]
+        - generic [ref=f30e146] [cursor=pointer]:
+          - generic [ref=f30e151]: 59 vendor frames
+          - button [ref=f30e152]
+        - generic [ref=f30e158] [cursor=pointer]:
+          - generic [ref=f30e161]:
+            - code [ref=f30e165]:
+              - generic [ref=f30e166]: Illuminate\Foundation\Application->handleRequest(object(Illuminate\Http\Request))
+            - generic [ref=f30e167]: public\index.php:20
+          - button [ref=f30e170]
+        - generic [ref=f30e176] [cursor=pointer]:
+          - generic [ref=f30e181]: 1 vendor frame
+          - button [ref=f30e182]
+    - generic [ref=f30e187]:
+      - generic [ref=f30e188]:
+        - heading "Queries" [level=3] [ref=f30e193]
+        - generic [ref=f30e194]: 1-6 of 6
+      - generic [ref=f30e196]:
+        - generic [ref=f30e197]:
+          - generic [ref=f30e198]:
+            - generic [ref=f30e199]: sqlite
+            - code [ref=f30e206]:
+              - generic [ref=f30e207]: select * from "sessions" where "id" = '4mTiHCfILyeyDhRDtYjNsNnY7vAmwxAaeOKo3cEY' limit 1
+          - generic [ref=f30e208]: 0.89ms
+        - generic [ref=f30e209]:
+          - generic [ref=f30e210]:
+            - generic [ref=f30e211]: sqlite
+            - code [ref=f30e218]:
+              - generic [ref=f30e219]: select * from "users" where "id" = 1 limit 1
+          - generic [ref=f30e220]: 0.07ms
+        - generic [ref=f30e221]:
+          - generic [ref=f30e222]:
+            - generic [ref=f30e223]: sqlite
+            - code [ref=f30e230]:
+              - generic [ref=f30e231]: select count(*) as "aggregate" from "voters"
+          - generic [ref=f30e232]: 0.07ms
+        - generic [ref=f30e233]:
+          - generic [ref=f30e234]:
+            - generic [ref=f30e235]: sqlite
+            - code [ref=f30e242]:
+              - generic [ref=f30e243]: select count(*) as "aggregate" from "voters" where "has_voted" = 1
+          - generic [ref=f30e244]: 0.06ms
+        - generic [ref=f30e245]:
+          - generic [ref=f30e246]:
+            - generic [ref=f30e247]: sqlite
+            - code [ref=f30e254]:
+              - generic [ref=f30e255]: select "calons".*, (select count(*) from "votes" where "calons"."id" = "votes"."calon_id") as "votes_count" from "calons" order by "nomor" asc
+          - generic [ref=f30e256]: 0.09ms
+        - generic [ref=f30e257]:
+          - generic [ref=f30e258]:
+            - generic [ref=f30e259]: sqlite
+            - code [ref=f30e266]:
+              - generic [ref=f30e267]: select count(*) as "aggregate" from "display_keys" where "is_active" = 1
+          - generic [ref=f30e268]: 0.06ms
+  - generic [ref=f30e270]:
+    - generic [ref=f30e271]:
+      - heading "Headers" [level=2] [ref=f30e272]
+      - generic [ref=f30e273]:
+        - generic [ref=f30e274]:
+          - generic [ref=f30e275]: host
+          - generic [ref=f30e277]: localhost:8000
+        - generic [ref=f30e278]:
+          - generic [ref=f30e279]: connection
+          - generic [ref=f30e281]: keep-alive
+        - generic [ref=f30e282]:
+          - generic [ref=f30e283]: sec-ch-ua
+          - generic [ref=f30e285]: "\"Not=A?Brand\";v=\"99\", \"Google Chrome\";v=\"151\", \"Chromium\";v=\"151\""
+        - generic [ref=f30e286]:
+          - generic [ref=f30e287]: sec-ch-ua-mobile
+          - generic [ref=f30e289]: "?0"
+        - generic [ref=f30e290]:
+          - generic [ref=f30e291]: sec-ch-ua-platform
+          - generic [ref=f30e293]: "\"Windows\""
+        - generic [ref=f30e294]:
+          - generic [ref=f30e295]: upgrade-insecure-requests
+          - generic [ref=f30e297]: "1"
+        - generic [ref=f30e298]:
+          - generic [ref=f30e299]: user-agent
+          - generic [ref=f30e301]: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36
+        - generic [ref=f30e302]:
+          - generic [ref=f30e303]: accept
+          - generic [ref=f30e305]: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+        - generic [ref=f30e306]:
+          - generic [ref=f30e307]: sec-fetch-site
+          - generic [ref=f30e309]: none
+        - generic [ref=f30e310]:
+          - generic [ref=f30e311]: sec-fetch-mode
+          - generic [ref=f30e313]: navigate
+        - generic [ref=f30e314]:
+          - generic [ref=f30e315]: sec-fetch-user
+          - generic [ref=f30e317]: "?1"
+        - generic [ref=f30e318]:
+          - generic [ref=f30e319]: sec-fetch-dest
+          - generic [ref=f30e321]: document
+        - generic [ref=f30e322]:
+          - generic [ref=f30e323]: accept-encoding
+          - generic [ref=f30e325]: gzip, deflate, br, zstd
+        - generic [ref=f30e326]:
+          - generic [ref=f30e327]: accept-language
+          - generic [ref=f30e329]: en-US,en;q=0.9
+        - generic [ref=f30e330]:
+          - generic [ref=f30e331]: cookie
+          - generic [ref=f30e333]: XSRF-TOKEN=eyJpdiI6IlpQZHdVS25qcHdrODBDV1BWaXloV1E9PSIsInZhbHVlIjoiNk9hYXRLVGF0THg1N2Y0VVJpaldRNFd3QkJMK05xb2xGMmxZazgrNFRnMFR4cXI1bmQyNVRCUGw1Zm1UaTU4a0Y2ZXl0WEVPNFJ2bnc4eVg3YVhUS1pkMDVsTjhrT0FFYVZscjZsU2hVTTNMRW50R1IrVzAxWTZsWUcwNVF1SlgiLCJtYWMiOiI0YjI2MGUxNzk4ZjQyM2ZlOGU3ZjcxYWNmZWQ5YjZlZjgxN2RjNGZiODZiMTNiMjIxMThhNDc5MGM2NjE2MTdmIiwidGFnIjoiIn0%3D; laravel-session=eyJpdiI6IjZ1UldpS0RaTm1va1lIaVpGMXNzdWc9PSIsInZhbHVlIjoiYWxpVkNtcEVmeUxqK1hQcmJua3M0cGVveVgzNlZKMWtkYk80dDdjd1ZIbmp3ejI5OWl4eGZwZ0dXSGVHUzBxb0NjMitlMnFxU25TWEk0a0xDM1RKZjJrUTBYMzVzanBhdGlGQlBaYTJudVpnNkFyOEU2NktUR29ac3J2ZHM3dmoiLCJtYWMiOiI4Yzk5MzM3YWFjNmVmYjkzOTAwZGJlMjQyODIxM2I4ZDI5NTc0NmUxMzJiNWM4ZDBjNjE5OTY2ZGVkMDFmMGY0IiwidGFnIjoiIn0%3D
+    - generic [ref=f30e334]:
+      - heading "Body" [level=2] [ref=f30e335]
+      - generic [ref=f30e336]: // No request body
+    - generic [ref=f30e337]:
+      - heading "Routing" [level=2] [ref=f30e338]
+      - generic [ref=f30e339]:
+        - generic [ref=f30e340]:
+          - generic [ref=f30e341]: controller
+          - generic [ref=f30e343]: App\Http\Controllers\Admin\DashboardController@index
+        - generic [ref=f30e344]:
+          - generic [ref=f30e345]: route name
+          - generic [ref=f30e347]: admin.dashboard
+        - generic [ref=f30e348]:
+          - generic [ref=f30e349]: middleware
+          - generic [ref=f30e351]: web, auth
+    - generic [ref=f30e352]:
+      - heading "Routing parameters" [level=2] [ref=f30e353]
+      - generic [ref=f30e354]: // No routing parameters

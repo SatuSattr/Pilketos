@@ -1,0 +1,70 @@
+- generic [ref=f34e2]:
+  - complementary [ref=f34e3]:
+    - generic [ref=f34e4]: Pilketos
+    - navigation [ref=f34e10]:
+      - link "Dashboard" [ref=f34e11] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/dashboard
+      - link "Calon" [ref=f34e17] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/calon
+      - link "Daftar Pemilih" [ref=f34e23] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/voter
+      - link "Display Keys" [ref=f34e27] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/display-key
+    - button "Keluar" [ref=f34e33]
+  - generic [ref=f34e37]:
+    - banner [ref=f34e38]:
+      - heading "Dashboard" [level=2] [ref=f34e40]
+      - generic [ref=f34e41]: Administrator
+    - main [ref=f34e48]:
+      - generic [ref=f34e49]:
+        - heading "Dashboard" [level=1] [ref=f34e52]
+        - paragraph [ref=f34e53]: Ringkasan status pemilihan saat ini
+      - generic [ref=f34e54]:
+        - generic [ref=f34e57]:
+          - paragraph [ref=f34e58]: Total Pemilih
+          - paragraph [ref=f34e59]: "0"
+        - generic [ref=f34e68]:
+          - paragraph [ref=f34e69]: Sudah Memilih
+          - paragraph [ref=f34e70]: "0"
+          - paragraph [ref=f34e71]: 0% partisipasi
+        - generic [ref=f34e78]:
+          - paragraph [ref=f34e79]: Belum Memilih
+          - paragraph [ref=f34e80]: "0"
+        - generic [ref=f34e87]:
+          - paragraph [ref=f34e88]: Key Aktif
+          - paragraph [ref=f34e89]: "0"
+      - generic [ref=f34e94]:
+        - heading "Grafik Perolehan Suara" [level=2] [ref=f34e96]
+        - generic [ref=f34e100]:
+          - heading "Perolehan Suara" [level=2] [ref=f34e101]
+          - generic [ref=f34e108]:
+            - generic [ref=f34e110]:
+              - generic [ref=f34e111]:
+                - generic [ref=f34e112]: "01"
+                - generic [ref=f34e113]: Shabira Syahla Alvaliza
+              - generic [ref=f34e114]: 0 (0%)
+            - generic [ref=f34e117]:
+              - generic [ref=f34e118]:
+                - generic [ref=f34e119]: "02"
+                - generic [ref=f34e120]: Faiz Nabil Akram
+              - generic [ref=f34e121]: 0 (0%)
+          - generic [ref=f34e123]:
+            - generic [ref=f34e124]: Total suara masuk
+            - generic [ref=f34e125]: "0"
+      - generic [ref=f34e126]:
+        - link [ref=f34e127] [cursor=pointer]:
+          - /url: http://localhost:8000/admin/calon/create
+          - generic [ref=f34e132]:
+            - paragraph [ref=f34e133]: Tambah Calon
+            - paragraph [ref=f34e134]: Daftarkan calon baru
+        - link [ref=f34e135] [cursor=pointer]:
+          - /url: http://localhost:8000/admin/voter/create
+          - generic [ref=f34e138]:
+            - paragraph [ref=f34e139]: Tambah Pemilih
+            - paragraph [ref=f34e140]: Kelola daftar hak suara
+        - link [ref=f34e141] [cursor=pointer]:
+          - /url: http://localhost:8000/admin/display-key/create
+          - generic [ref=f34e146]:
+            - paragraph [ref=f34e147]: Buat Display Key
+            - paragraph [ref=f34e148]: Buat key untuk bilik voting
+    - contentinfo [ref=f34e149]: Pilketos v2.0 — Admin Panel

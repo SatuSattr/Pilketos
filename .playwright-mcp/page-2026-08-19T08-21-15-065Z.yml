@@ -1,0 +1,43 @@
+- generic [ref=f11e2]:
+  - complementary [ref=f11e3]:
+    - generic [ref=f11e4]: Pilketos
+    - navigation [ref=f11e10]:
+      - link "Dashboard" [ref=f11e11] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/dashboard
+      - link "Calon" [ref=f11e17] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/calon
+      - link "Daftar Pemilih" [ref=f11e23] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/voter
+      - link "Display Keys" [ref=f11e27] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/display-key
+      - link "Hasil Voting" [ref=f11e31] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/hasil
+    - button "Keluar" [ref=f11e35]
+  - generic [ref=f11e39]:
+    - banner [ref=f11e40]:
+      - heading "Buat Display Key" [level=2] [ref=f11e42]
+      - generic [ref=f11e43]: Administrator
+    - main [ref=f11e50]:
+      - generic [ref=f11e51]:
+        - link "Kembali" [ref=f11e52] [cursor=pointer]:
+          - /url: http://localhost:8000/admin/display-key
+        - heading "Buat Display Key" [level=1] [ref=f11e58]
+      - generic [ref=f11e60]:
+        - paragraph [ref=f11e61]: Key ini digunakan untuk mengakses halaman voting di bilik pemilihan. Setiap bilik sebaiknya menggunakan key yang berbeda.
+        - generic [ref=f11e62]:
+          - generic [ref=f11e63]:
+            - generic [ref=f11e64]: Nama / Label *
+            - textbox "Nama / Label *" [ref=f11e65]:
+              - /placeholder: Bilik 1
+            - paragraph [ref=f11e66]: "Contoh: Bilik 1, Ruang A, Laptop Panitia"
+          - generic [ref=f11e67]:
+            - generic [ref=f11e68]: Key *
+            - generic [ref=f11e69]:
+              - textbox [ref=f11e70]: UJVSPW4O
+              - button "Generate" [ref=f11e71]
+            - paragraph [ref=f11e77]: Huruf dan angka saja. Akan otomatis diubah ke huruf kapital.
+          - generic [ref=f11e78]:
+            - button "Buat Key" [ref=f11e79]
+            - link "Batal" [ref=f11e83] [cursor=pointer]:
+              - /url: http://localhost:8000/admin/display-key
+    - contentinfo [ref=f11e84]: Pilketos v2.0 — Admin Panel

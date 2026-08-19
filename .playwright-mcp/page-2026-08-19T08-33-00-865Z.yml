@@ -1,0 +1,18 @@
+- generic [ref=f27e2]:
+  - generic [ref=f27e3]:
+    - heading "Pilketos Admin" [level=1] [ref=f27e8]
+    - paragraph [ref=f27e9]: Masuk ke panel administrasi
+  - generic [ref=f27e11]:
+    - generic [ref=f27e12]:
+      - generic [ref=f27e13]: Email *
+      - textbox "Email *" [ref=f27e14]:
+        - /placeholder: admin@pilketos.local
+    - generic [ref=f27e15]:
+      - generic [ref=f27e16]: Password *
+      - textbox "Password *" [ref=f27e17]:
+        - /placeholder: ••••••••
+    - generic [ref=f27e18]:
+      - checkbox "Ingat saya" [ref=f27e19]
+      - generic [ref=f27e20]: Ingat saya
+    - button "Masuk" [ref=f27e21]
+  - paragraph [ref=f27e25]: Pilketos v2.0 — Sistem Pemilihan Ketua OSIS

@@ -1,0 +1,126 @@
+- generic [ref=f13e2]:
+  - generic [ref=f13e4]:
+    - generic [ref=f13e5]: Internal Server Error
+    - button "Copy as Markdown" [ref=f13e11] [cursor=pointer]
+  - generic [ref=f13e18]:
+    - generic [ref=f13e19]:
+      - heading "Symfony\\Component\\Routing\\Exception\\RouteNotFoundException" [level=1] [ref=f13e20]
+      - generic [ref=f13e21]: vendor\laravel\framework\src\Illuminate\Routing\UrlGenerator.php:542
+      - paragraph [ref=f13e23]: Route [login] not defined.
+    - generic [ref=f13e24]:
+      - generic [ref=f13e25]:
+        - generic [ref=f13e26]:
+          - generic [ref=f13e27]: LARAVEL
+          - generic [ref=f13e28]: 13.26.1
+        - generic [ref=f13e29]:
+          - generic [ref=f13e30]: PHP
+          - generic [ref=f13e31]: 8.4.10
+      - generic [ref=f13e32]: UNHANDLED
+      - generic [ref=f13e36]: CODE 0
+    - generic [ref=f13e38]:
+      - generic [ref=f13e39]: "500"
+      - generic [ref=f13e43]: GET
+      - generic [ref=f13e47]: http://localhost:8000/admin/dashboard
+      - button [ref=f13e48] [cursor=pointer]
+  - generic [ref=f13e53]:
+    - generic [ref=f13e54]:
+      - heading "Exception trace" [level=3] [ref=f13e60]
+      - generic [ref=f13e61]:
+        - generic [ref=f13e63] [cursor=pointer]:
+          - generic [ref=f13e68]: 48 vendor frames
+          - button [ref=f13e69]
+        - generic [ref=f13e74]:
+          - generic [ref=f13e75] [cursor=pointer]:
+            - generic [ref=f13e78]:
+              - code [ref=f13e82]:
+                - generic [ref=f13e83]: Illuminate\Foundation\Application->handleRequest(object(Illuminate\Http\Request))
+              - generic [ref=f13e84]: public\index.php:20
+            - button [ref=f13e87]
+          - code [ref=f13e96]:
+            - generic [ref=f13e97]: "15"
+            - generic [ref=f13e98]: 16// Bootstrap Laravel and handle the request...
+            - generic [ref=f13e99]: 17/** @var Application $app */
+            - generic [ref=f13e100]: 18$app = require_once __DIR__.'/../bootstrap/app.php';
+            - generic [ref=f13e101]: "19"
+            - generic [ref=f13e102]: 20$app->handleRequest(Request::capture());
+            - generic [ref=f13e103]: "21"
+        - generic [ref=f13e105] [cursor=pointer]:
+          - generic [ref=f13e110]: 1 vendor frame
+          - button [ref=f13e111]
+    - generic [ref=f13e116]:
+      - generic [ref=f13e117]:
+        - heading "Queries" [level=3] [ref=f13e122]
+        - generic [ref=f13e123]: 1-1 of 1
+      - generic [ref=f13e126]:
+        - generic [ref=f13e127]:
+          - generic [ref=f13e128]: sqlite
+          - code [ref=f13e135]:
+            - generic [ref=f13e136]: select * from "sessions" where "id" = '7keggoVeYF2JcIJNAXEcBsVM2Pkt8pQP1t370NgQ' limit 1
+        - generic [ref=f13e137]: 1.23ms
+  - generic [ref=f13e139]:
+    - generic [ref=f13e140]:
+      - heading "Headers" [level=2] [ref=f13e141]
+      - generic [ref=f13e142]:
+        - generic [ref=f13e143]:
+          - generic [ref=f13e144]: host
+          - generic [ref=f13e146]: localhost:8000
+        - generic [ref=f13e147]:
+          - generic [ref=f13e148]: connection
+          - generic [ref=f13e150]: keep-alive
+        - generic [ref=f13e151]:
+          - generic [ref=f13e152]: sec-ch-ua
+          - generic [ref=f13e154]: "\"Not=A?Brand\";v=\"99\", \"Google Chrome\";v=\"151\", \"Chromium\";v=\"151\""
+        - generic [ref=f13e155]:
+          - generic [ref=f13e156]: sec-ch-ua-mobile
+          - generic [ref=f13e158]: "?0"
+        - generic [ref=f13e159]:
+          - generic [ref=f13e160]: sec-ch-ua-platform
+          - generic [ref=f13e162]: "\"Windows\""
+        - generic [ref=f13e163]:
+          - generic [ref=f13e164]: upgrade-insecure-requests
+          - generic [ref=f13e166]: "1"
+        - generic [ref=f13e167]:
+          - generic [ref=f13e168]: user-agent
+          - generic [ref=f13e170]: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36
+        - generic [ref=f13e171]:
+          - generic [ref=f13e172]: accept
+          - generic [ref=f13e174]: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+        - generic [ref=f13e175]:
+          - generic [ref=f13e176]: sec-fetch-site
+          - generic [ref=f13e178]: none
+        - generic [ref=f13e179]:
+          - generic [ref=f13e180]: sec-fetch-mode
+          - generic [ref=f13e182]: navigate
+        - generic [ref=f13e183]:
+          - generic [ref=f13e184]: sec-fetch-user
+          - generic [ref=f13e186]: "?1"
+        - generic [ref=f13e187]:
+          - generic [ref=f13e188]: sec-fetch-dest
+          - generic [ref=f13e190]: document
+        - generic [ref=f13e191]:
+          - generic [ref=f13e192]: accept-encoding
+          - generic [ref=f13e194]: gzip, deflate, br, zstd
+        - generic [ref=f13e195]:
+          - generic [ref=f13e196]: accept-language
+          - generic [ref=f13e198]: en-US,en;q=0.9
+        - generic [ref=f13e199]:
+          - generic [ref=f13e200]: cookie
+          - generic [ref=f13e202]: XSRF-TOKEN=eyJpdiI6ImtZUm8rMWt5WW9WWGk4UzFSUlRhQnc9PSIsInZhbHVlIjoiU08zaS84SG5uMkZ6Z2FaSFQxNXcwZi91ekJndTdPSnA4MkMzOHJlTlY4THhtU0NHTVM2cjI5U1BnNWNQZDNLZDJiQmt0QnlFYzRrWXRPN3J0MjBvZVJlNGJ5cFhMazluT0d0ZkVVRjBubkFGejNIRkF1dHlRek1KS2pGY2hJZm8iLCJtYWMiOiI0NmU0ZTQ4OTliOWEwNDI1YzMxNTRiOTIyMWEzZTkzMzM4ZTFhMjg5YmI3YTA4ODVjZjY1NTAxYjMxYTVjZjM1IiwidGFnIjoiIn0%3D; laravel-session=eyJpdiI6InFJOUdkRk5RQjlwWndkNThLU1d0MEE9PSIsInZhbHVlIjoiSXpCeDExRWRpZlZMbjFaSFg2TWNydnQyYjRpR3lUY2NGOXdsQ0l5MjRGVkpRTkw2M2JpS1JSYXFmd3NXUVl4ZzNrMmRUMjBwaS8weGxWOGEvZGhtT3JNT05MbDhORC9ScTIrdFBKcFZPcERJZ2JleHI3ZHRQMkFPOUFoWGx5VFEiLCJtYWMiOiJjNzlhNThkNjM0NGU2YTM3NTUxYWQyZWNiYzVlNmQ3MjVhMmQwNGNkZjFmMTFmMTUwMmY1YThkMmJhOGEyOTM0IiwidGFnIjoiIn0%3D
+    - generic [ref=f13e203]:
+      - heading "Body" [level=2] [ref=f13e204]
+      - generic [ref=f13e205]: // No request body
+    - generic [ref=f13e206]:
+      - heading "Routing" [level=2] [ref=f13e207]
+      - generic [ref=f13e208]:
+        - generic [ref=f13e209]:
+          - generic [ref=f13e210]: controller
+          - generic [ref=f13e212]: App\Http\Controllers\Admin\DashboardController@index
+        - generic [ref=f13e213]:
+          - generic [ref=f13e214]: route name
+          - generic [ref=f13e216]: admin.dashboard
+        - generic [ref=f13e217]:
+          - generic [ref=f13e218]: middleware
+          - generic [ref=f13e220]: web, auth
+    - generic [ref=f13e221]:
+      - heading "Routing parameters" [level=2] [ref=f13e222]
+      - generic [ref=f13e223]: // No routing parameters

@@ -1,0 +1,31 @@
+- generic [ref=f10e2]:
+  - complementary [ref=f10e3]:
+    - generic [ref=f10e4]: Pilketos
+    - navigation [ref=f10e10]:
+      - link "Dashboard" [ref=f10e11] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/dashboard
+      - link "Calon" [ref=f10e17] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/calon
+      - link "Daftar Pemilih" [ref=f10e23] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/voter
+      - link "Display Keys" [ref=f10e27] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/display-key
+      - link "Hasil Voting" [ref=f10e31] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/hasil
+    - button "Keluar" [ref=f10e35]
+  - generic [ref=f10e39]:
+    - banner [ref=f10e40]:
+      - heading "Display Keys" [level=2] [ref=f10e42]
+      - generic [ref=f10e43]: Administrator
+    - main [ref=f10e50]:
+      - generic [ref=f10e51]:
+        - generic [ref=f10e52]:
+          - heading "Display Keys" [level=1] [ref=f10e55]
+          - paragraph [ref=f10e56]: Kelola key untuk akses halaman voting di setiap bilik
+        - link "Buat Key Baru" [ref=f10e57] [cursor=pointer]:
+          - /url: http://localhost:8000/admin/display-key/create
+      - generic [ref=f10e59]:
+        - paragraph [ref=f10e63]: Belum ada display key.
+        - link "Buat Key Pertama" [ref=f10e64] [cursor=pointer]:
+          - /url: http://localhost:8000/admin/display-key/create
+    - contentinfo [ref=f10e66]: Pilketos v2.0 — Admin Panel

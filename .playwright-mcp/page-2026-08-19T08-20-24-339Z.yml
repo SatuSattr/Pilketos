@@ -1,0 +1,54 @@
+- generic [ref=f6e2]:
+  - complementary [ref=f6e3]:
+    - generic [ref=f6e4]: Pilketos
+    - navigation [ref=f6e10]:
+      - link "Dashboard" [ref=f6e11] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/dashboard
+      - link "Calon" [ref=f6e17] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/calon
+      - link "Daftar Pemilih" [ref=f6e23] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/voter
+      - link "Display Keys" [ref=f6e27] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/display-key
+      - link "Hasil Voting" [ref=f6e31] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/hasil
+    - button "Keluar" [ref=f6e35]
+  - generic [ref=f6e39]:
+    - banner [ref=f6e40]:
+      - heading "Calon" [level=2] [ref=f6e42]
+      - generic [ref=f6e43]: Administrator
+    - main [ref=f6e50]:
+      - generic [ref=f6e51]:
+        - generic [ref=f6e52]:
+          - heading "Daftar Calon" [level=1] [ref=f6e55]
+          - paragraph [ref=f6e56]: Kelola data calon ketua OSIS
+        - link "Tambah Calon" [ref=f6e57] [cursor=pointer]:
+          - /url: http://localhost:8000/admin/calon/create
+      - generic [ref=f6e61]:
+        - generic [ref=f6e62]:
+          - generic [ref=f6e63]:
+            - generic [ref=f6e64]:
+              - img "Foto Shabira Syahla Alvaliza" [ref=f6e65]
+              - generic [ref=f6e66]: "01"
+            - generic [ref=f6e67]:
+              - paragraph [ref=f6e68]: Shabira Syahla Alvaliza
+              - generic [ref=f6e69]: XI-1
+              - paragraph [ref=f6e70]: 0 suara
+          - generic [ref=f6e74]:
+            - link "Edit" [ref=f6e75] [cursor=pointer]:
+              - /url: http://localhost:8000/admin/calon/1/edit
+            - button "Hapus" [ref=f6e80]
+        - generic [ref=f6e84]:
+          - generic [ref=f6e85]:
+            - generic [ref=f6e86]:
+              - img "Foto Faiz Nabil Akram" [ref=f6e87]
+              - generic [ref=f6e88]: "02"
+            - generic [ref=f6e89]:
+              - paragraph [ref=f6e90]: Faiz Nabil Akram
+              - generic [ref=f6e91]: XII-1
+              - paragraph [ref=f6e92]: 0 suara
+          - generic [ref=f6e96]:
+            - link "Edit" [ref=f6e97] [cursor=pointer]:
+              - /url: http://localhost:8000/admin/calon/2/edit
+            - button "Hapus" [ref=f6e102]
+    - contentinfo [ref=f6e106]: Pilketos v2.0 — Admin Panel

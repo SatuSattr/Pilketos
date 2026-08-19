@@ -1,0 +1,35 @@
+- generic [ref=f9e2]:
+  - complementary [ref=f9e3]:
+    - generic [ref=f9e4]: Pilketos
+    - navigation [ref=f9e10]:
+      - link "Dashboard" [ref=f9e11] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/dashboard
+      - link "Calon" [ref=f9e17] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/calon
+      - link "Daftar Pemilih" [ref=f9e23] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/voter
+      - link "Display Keys" [ref=f9e27] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/display-key
+      - link "Hasil Voting" [ref=f9e31] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/hasil
+    - button "Keluar" [ref=f9e35]
+  - generic [ref=f9e39]:
+    - banner [ref=f9e40]:
+      - heading "Tambah Pemilih" [level=2] [ref=f9e42]
+      - generic [ref=f9e43]: Administrator
+    - main [ref=f9e50]:
+      - generic [ref=f9e51]:
+        - link "Kembali" [ref=f9e52] [cursor=pointer]:
+          - /url: http://localhost:8000/admin/voter
+        - heading "Tambah Pemilih" [level=1] [ref=f9e58]
+      - generic [ref=f9e61]:
+        - generic [ref=f9e62]:
+          - generic [ref=f9e63]: Nama Lengkap *
+          - textbox "Nama Lengkap *" [ref=f9e64]:
+            - /placeholder: Ahmad Sattar Fathulloh
+          - paragraph [ref=f9e65]: Nama ini yang akan dicocokkan saat pemilih mengisi form voting.
+        - generic [ref=f9e66]:
+          - button "Simpan" [ref=f9e67]
+          - link "Batal" [ref=f9e72] [cursor=pointer]:
+            - /url: http://localhost:8000/admin/voter
+    - contentinfo [ref=f9e73]: Pilketos v2.0 — Admin Panel

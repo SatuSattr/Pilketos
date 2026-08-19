@@ -1,0 +1,29 @@
+{
+    "$schema": "https://www.schemastore.org/package.json",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "vite build",
+        "dev": "vite"
+    },
+    "devDependencies": {
+        "@tailwindcss/vite": "^4.0.0",
+        "concurrently": "^10.0.3",
+        "laravel-vite-plugin": "^3.1",
+        "tailwindcss": "^4.0.0",
+        "vite": "^8.0.0"
+    },
+    "optionalDependencies": {
+        "@laravel/multiplex": "^0.4.1"
+    },
+    "dependencies": {
+        "alpinejs": "^3.16.2",
+        "chart.js": "4.5.1",
+        "chartjs-adapter-date-fns": "3.0.0",
+        "chartjs-plugin-zoom": "2.2.0",
+        "date-fns": "4.4.0",
+        "hammerjs": "2.0.8",
+        "lucide": "^1.32.0",
+        "sweetalert2": "^11.26.25"
+    }
+}

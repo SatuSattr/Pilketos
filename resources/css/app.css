@@ -1,0 +1,170 @@
+@import 'tailwindcss';
+
+[x-cloak] { display: none !important; }
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-primary: #fbfafb;
+    --color-secondary: #fffefe;
+    --color-accent: #232322;
+    --color-birupesat: #2f2575;
+    --color-birupesat-hover: #221a56;
+    --color-ink: #1a1a1b;
+
+    --color-danger: #dc2626;
+    --color-info-hover: #1d4ed8;
+    --color-success: #10b981;
+    --color-error: #ef4444;
+    --color-warning: #f59e0b;
+    --color-question: #3b82f6;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--color-primary);
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+body.swal2-shown {
+    padding-right: 0 !important;
+}
+
+.swal2-popup {
+    font-family: 'Montserrat', sans-serif !important;
+    border-radius: 1.5rem !important;
+    padding: 2rem !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+}
+
+.swal2-title {
+    color: var(--color-ink) !important;
+    font-weight: 700 !important;
+    font-size: 1.875rem !important;
+    margin-bottom: 1rem !important;
+}
+
+.swal2-html-container {
+    color: var(--color-gray-500) !important;
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.swal2-confirm {
+    background-color: var(--color-ink) !important;
+    color: var(--color-white) !important;
+    border: none !important;
+    border-radius: 0.75rem !important;
+    padding: 0.75rem 2rem !important;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+    transition: all 0.3s ease !important;
+    box-shadow: none !important;
+}
+
+.swal2-confirm:hover {
+    background-color: var(--color-gray-700) !important;
+    transform: translateY(-1px) !important;
+}
+
+.swal2-cancel {
+    background-color: var(--color-gray-500) !important;
+    color: var(--color-white) !important;
+    border: none !important;
+    border-radius: 0.75rem !important;
+    padding: 0.75rem 2rem !important;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+    margin-right: 1rem !important;
+    box-shadow: none !important;
+}
+
+.swal2-cancel:hover {
+    background-color: var(--color-gray-600) !important;
+}
+
+.swal2-icon.swal2-success {
+    border-color: var(--color-success) !important;
+    color: var(--color-success) !important;
+}
+
+.swal2-icon.swal2-error {
+    border-color: var(--color-error) !important;
+    color: var(--color-error) !important;
+}
+
+.swal2-icon.swal2-warning {
+    border-color: var(--color-warning) !important;
+    color: var(--color-warning) !important;
+}
+
+.swal2-icon.swal2-question {
+    border-color: var(--color-question) !important;
+    color: var(--color-question) !important;
+}
+
+.card:not(.selected):hover {
+    border-color: var(--color-birupesat) !important;
+    box-shadow: 0 10px 25px -5px rgba(47, 37, 117, 0.3) !important;
+    cursor: pointer;
+}
+
+.card.selected {
+    border-color: var(--color-birupesat) !important;
+    box-shadow: 0 10px 25px -5px rgba(47, 37, 117, 0.5) !important;
+    cursor: pointer;
+}
+
+.card.selected .selection-indicator {
+    opacity: 100;
+}
+
+.selection-indicator {
+    width: 1em;
+    height: 1em;
+}
+
+/* ── Detail panel: custom thin scrollbar ─────────────────────────────────── */
+
+/* Webkit (Chrome, Edge, Safari) */
+.detail-panel-scroll::-webkit-scrollbar {
+    width: 4px;
+}
+
+.detail-panel-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.detail-panel-scroll::-webkit-scrollbar-thumb {
+    background-color: var(--color-birupesat);
+    border-radius: 999px;
+    opacity: 0.5;
+}
+
+.detail-panel-scroll::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-birupesat-hover);
+}
+
+/* Firefox */
+.detail-panel-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-birupesat) transparent;
+}
+
+/* Inverted panel (slides left): move scrollbar to the left side */
+.detail-panel-scroll.scrollbar-left {
+    direction: rtl;
+}
+
+/* Flip content back to ltr so text/layout is unaffected */
+.detail-panel-scroll.scrollbar-left > * {
+    direction: ltr;
+}

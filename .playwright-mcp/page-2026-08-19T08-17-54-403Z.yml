@@ -1,0 +1,55 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - main [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - heading [level=1] [ref=e6]: Pemilihan Ketua OSIS
+          - paragraph [ref=e7]: Pilih satu calon ketua OSIS favorit Anda
+        - generic [ref=e8]:
+          - generic [ref=e9]:
+            - generic [ref=e11] [cursor=pointer]:
+              - generic [ref=e16]:
+                - heading [level=3] [ref=e18]: Shabira Syahla Alvaliza
+                - heading [level=1] [ref=e20]: "01"
+                - generic [ref=e23]:
+                  - generic [ref=e24]: KELAS
+                  - generic [ref=e25]: XI-1
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading [level=4]: Visi
+                    - paragraph
+                  - generic:
+                    - generic:
+                      - heading [level=4]: Misi
+                    - paragraph
+            - generic [ref=e27] [cursor=pointer]:
+              - generic [ref=e32]:
+                - heading [level=3] [ref=e34]: Faiz Nabil Akram
+                - heading [level=1] [ref=e36]: "02"
+                - generic [ref=e39]:
+                  - generic [ref=e40]: KELAS
+                  - generic [ref=e41]: XII-1
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading [level=4]: Visi
+                    - paragraph
+                  - generic:
+                    - generic:
+                      - heading [level=4]: Misi
+                    - paragraph
+          - generic [ref=e42]:
+            - button [disabled] [ref=e43]: Pilih Calon Favorit
+            - paragraph [ref=e44]: Silakan pilih salah satu calon terlebih dahulu
+    - contentinfo [ref=e45]:
+      - generic [ref=e47]:
+        - paragraph [ref=e48]: Pilketos v2.0 FOSS - Sistem Pemilihan Ketua OSIS
+        - paragraph [ref=e49]: Made with $20 Claude subscription by Sattar
+  - dialog [ref=e51]:
+    - heading "Masukkan Display Key" [level=2] [ref=e52]
+    - 'textbox "Contoh: ABCD1234" [active] [ref=e53]'
+    - text: "!"
+    - button "OK" [ref=e55] [cursor=pointer]

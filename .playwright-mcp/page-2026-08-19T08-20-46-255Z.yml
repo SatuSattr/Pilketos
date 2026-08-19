@@ -1,0 +1,55 @@
+- generic [ref=f7e2]:
+  - complementary [ref=f7e3]:
+    - generic [ref=f7e4]: Pilketos
+    - navigation [ref=f7e10]:
+      - link "Dashboard" [ref=f7e11] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/dashboard
+      - link "Calon" [ref=f7e17] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/calon
+      - link "Daftar Pemilih" [ref=f7e23] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/voter
+      - link "Display Keys" [ref=f7e27] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/display-key
+      - link "Hasil Voting" [ref=f7e31] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/hasil
+    - button "Keluar" [ref=f7e35]
+  - generic [ref=f7e39]:
+    - banner [ref=f7e40]:
+      - heading "Tambah Calon" [level=2] [ref=f7e42]
+      - generic [ref=f7e43]: Administrator
+    - main [ref=f7e50]:
+      - generic [ref=f7e51]:
+        - link "Kembali" [ref=f7e52] [cursor=pointer]:
+          - /url: http://localhost:8000/admin/calon
+        - heading "Tambah Calon" [level=1] [ref=f7e58]
+      - generic [ref=f7e61]:
+        - generic [ref=f7e62]:
+          - generic [ref=f7e63]:
+            - generic [ref=f7e64]: Nomor Urut *
+            - textbox "Nomor Urut *" [ref=f7e65]:
+              - /placeholder: "1"
+          - generic [ref=f7e66]:
+            - generic [ref=f7e67]: Kelas *
+            - textbox "Kelas *" [ref=f7e68]:
+              - /placeholder: XII IPA 1
+        - generic [ref=f7e69]:
+          - generic [ref=f7e70]: Nama Lengkap *
+          - textbox "Nama Lengkap *" [ref=f7e71]:
+            - /placeholder: Ahmad Sattar Fathulloh
+        - generic [ref=f7e72]:
+          - generic [ref=f7e73]: Visi *
+          - textbox "Visi *" [ref=f7e74]:
+            - /placeholder: Visi calon...
+        - generic [ref=f7e75]:
+          - generic [ref=f7e76]: Misi *
+          - textbox "Misi *" [ref=f7e77]:
+            - /placeholder: Misi calon...
+        - generic [ref=f7e78]:
+          - generic [ref=f7e79]: Foto *
+          - button "Choose File" [ref=f7e80]
+          - paragraph [ref=f7e81]: JPG, PNG, WEBP. Maks 2MB.
+        - generic [ref=f7e82]:
+          - button "Simpan Calon" [ref=f7e83]
+          - link "Batal" [ref=f7e88] [cursor=pointer]:
+            - /url: http://localhost:8000/admin/calon
+    - contentinfo [ref=f7e89]: Pilketos v2.0 — Admin Panel

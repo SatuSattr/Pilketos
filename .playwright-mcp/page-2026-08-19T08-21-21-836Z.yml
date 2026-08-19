@@ -1,0 +1,47 @@
+- generic [ref=f12e2]:
+  - complementary [ref=f12e3]:
+    - generic [ref=f12e4]: Pilketos
+    - navigation [ref=f12e10]:
+      - link "Dashboard" [ref=f12e11] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/dashboard
+      - link "Calon" [ref=f12e17] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/calon
+      - link "Daftar Pemilih" [ref=f12e23] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/voter
+      - link "Display Keys" [ref=f12e27] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/display-key
+      - link "Hasil Voting" [ref=f12e31] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/hasil
+    - button "Keluar" [ref=f12e35]
+  - generic [ref=f12e39]:
+    - banner [ref=f12e40]:
+      - heading "Hasil Voting" [level=2] [ref=f12e42]
+      - generic [ref=f12e43]: Administrator
+    - main [ref=f12e50]:
+      - generic [ref=f12e51]:
+        - heading "Hasil Voting" [level=1] [ref=f12e54]
+        - paragraph [ref=f12e55]: Perolehan suara secara lengkap
+      - generic [ref=f12e56]:
+        - paragraph [ref=f12e58]: "Total suara masuk: 0"
+        - generic [ref=f12e59]:
+          - generic [ref=f12e60]:
+            - generic [ref=f12e61]:
+              - generic [ref=f12e62]: "01"
+              - generic [ref=f12e64]:
+                - paragraph [ref=f12e65]: Shabira Syahla Alvaliza
+                - paragraph [ref=f12e66]: XI-1
+              - generic [ref=f12e67]:
+                - paragraph [ref=f12e68]: "0"
+                - paragraph [ref=f12e69]: suara
+            - generic [ref=f12e70]: 0%
+          - generic [ref=f12e73]:
+            - generic [ref=f12e74]:
+              - generic [ref=f12e75]: "02"
+              - generic [ref=f12e77]:
+                - paragraph [ref=f12e78]: Faiz Nabil Akram
+                - paragraph [ref=f12e79]: XII-1
+              - generic [ref=f12e80]:
+                - paragraph [ref=f12e81]: "0"
+                - paragraph [ref=f12e82]: suara
+            - generic [ref=f12e83]: 0%
+    - contentinfo [ref=f12e86]: Pilketos v2.0 — Admin Panel

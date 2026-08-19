@@ -1,0 +1,34 @@
+- generic [ref=f8e2]:
+  - complementary [ref=f8e3]:
+    - generic [ref=f8e4]: Pilketos
+    - navigation [ref=f8e10]:
+      - link "Dashboard" [ref=f8e11] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/dashboard
+      - link "Calon" [ref=f8e17] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/calon
+      - link "Daftar Pemilih" [ref=f8e23] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/voter
+      - link "Display Keys" [ref=f8e27] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/display-key
+      - link "Hasil Voting" [ref=f8e31] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/hasil
+    - button "Keluar" [ref=f8e35]
+  - generic [ref=f8e39]:
+    - banner [ref=f8e40]:
+      - heading "Daftar Pemilih" [level=2] [ref=f8e42]
+      - generic [ref=f8e43]: Administrator
+    - main [ref=f8e50]:
+      - generic [ref=f8e51]:
+        - generic [ref=f8e52]:
+          - heading "Daftar Pemilih" [level=1] [ref=f8e55]
+          - paragraph [ref=f8e56]: Kelola daftar hak suara
+        - generic [ref=f8e57]:
+          - link "Tambah" [ref=f8e58] [cursor=pointer]:
+            - /url: http://localhost:8000/admin/voter/create
+          - button "Import" [ref=f8e62]
+      - textbox "Cari nama pemilih..." [ref=f8e71]
+      - generic [ref=f8e72]:
+        - generic [ref=f8e73]: "Total: 0"
+        - generic [ref=f8e74]: "Sudah memilih: 0 (halaman ini)"
+      - paragraph [ref=f8e82]: Belum ada pemilih terdaftar.
+    - contentinfo [ref=f8e83]: Pilketos v2.0 — Admin Panel
