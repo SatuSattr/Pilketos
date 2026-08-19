@@ -113,7 +113,7 @@
 
     {{-- Quick actions --}}
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <a href="{{ route('admin.calon.create') }}"
+        <a href="{{ route('admin.calon.index') }}"
             class="bg-white rounded-xl border-2 border-gray-200 shadow-lg p-5 flex items-center gap-4 hover:border-birupesat transition-colors duration-200 group">
             <div class="w-10 h-10 rounded-xl bg-birupesat/10 flex items-center justify-center group-hover:bg-birupesat transition-colors duration-200">
                 <i data-lucide="user-plus" class="w-5 h-5 text-birupesat group-hover:text-white transition-colors duration-200"></i>
@@ -123,7 +123,7 @@
                 <p class="text-xs text-gray-500">Daftarkan calon baru</p>
             </div>
         </a>
-        <a href="{{ route('admin.voter.create') }}"
+        <a href="{{ route('admin.voter.index') }}"
             class="bg-white rounded-xl border-2 border-gray-200 shadow-lg p-5 flex items-center gap-4 hover:border-birupesat transition-colors duration-200 group">
             <div class="w-10 h-10 rounded-xl bg-success/10 flex items-center justify-center group-hover:bg-success transition-colors duration-200">
                 <i data-lucide="list-plus" class="w-5 h-5 text-success group-hover:text-white transition-colors duration-200"></i>
@@ -133,7 +133,7 @@
                 <p class="text-xs text-gray-500">Kelola daftar hak suara</p>
             </div>
         </a>
-        <a href="{{ route('admin.display-key.create') }}"
+        <a href="{{ route('admin.display-key.index') }}"
             class="bg-white rounded-xl border-2 border-gray-200 shadow-lg p-5 flex items-center gap-4 hover:border-birupesat transition-colors duration-200 group">
             <div class="w-10 h-10 rounded-xl bg-warning/10 flex items-center justify-center group-hover:bg-warning transition-colors duration-200">
                 <i data-lucide="key-round" class="w-5 h-5 text-yellow-600 group-hover:text-white transition-colors duration-200"></i>
