@@ -190,13 +190,13 @@
 
             {{-- IMPORT form --}}
             <div x-show="panel === 'import'" class="flex-1 overflow-y-auto p-6" x-cloak>
-                <p class="text-sm text-gray-500 mb-4">Tulis satu nama per baris. Nama duplikat akan diabaikan.</p>
+                <p class="text-sm text-gray-500 mb-4">Pisahkan nama dengan simbol <code class="font-mono bg-gray-100 px-1 rounded">|</code>. Nama duplikat akan diabaikan dan ditampilkan.</p>
                 <form method="POST" action="{{ route('admin.voter.import') }}" class="space-y-4">
                     @csrf
                     <x-form.textarea
                         name="daftar_nama"
                         label="Daftar Nama"
-                        placeholder="Ahmad Sattar Fathulloh&#10;Ahmad Azzam Mozaris&#10;Ahmad Yusuf Ar-Rafi"
+                        placeholder="Ahmad Sattar Fathulloh|Ahmad Azzam Mozaris|Ahmad Yusuf Ar-Rafi, S.Pd|Budi Santoso"
                         rows="10"
                         :required="true"
                     />

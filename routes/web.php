@@ -30,6 +30,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('dashboard/chart-data', [DashboardController::class, 'chartData'])->name('dashboard.chart-data');
+        Route::get('dashboard/stats', [DashboardController::class, 'stats'])->name('dashboard.stats');
 
         // Calon CRUD
         Route::resource('calon', CalonController::class)->except(['create', 'edit']);

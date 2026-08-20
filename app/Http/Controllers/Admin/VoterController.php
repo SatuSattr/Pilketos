@@ -71,19 +71,34 @@ class VoterController extends Controller
             'daftar_nama' => ['required', 'string'],
         ]);
 
-        $namaLines = array_filter(
-            array_map('trim', explode("\n", $request->string('daftar_nama')->toString())),
+        $namaList = array_filter(
+            array_map('trim', explode('|', $request->string('daftar_nama')->toString())),
             fn (string $line): bool => $line !== ''
         );
 
         $inserted = 0;
-        foreach ($namaLines as $nama) {
-            Voter::firstOrCreate(['nama' => $nama]);
-            $inserted++;
+        $skipped = [];
+
+        foreach ($namaList as $nama) {
+            $result = Voter::firstOrCreate(['nama' => $nama]);
+
+            if ($result->wasRecentlyCreated) {
+                $inserted++;
+            } else {
+                $skipped[] = $nama;
+            }
+        }
+
+        $message = "{$inserted} pemilih berhasil diimport.";
+
+        if (! empty($skipped)) {
+            $skippedNames = implode(', ', $skipped);
+            $message .= ' '.count($skipped)." dilewati (sudah ada): {$skippedNames}.";
         }
 
         return redirect()->route('admin.voter.index')
-            ->with('success', "{$inserted} pemilih berhasil diimport.");
+            ->with('toast_type', 'success')
+            ->with('toast_msg', $message);
     }
 
     public function resetVote(Voter $voter): RedirectResponse

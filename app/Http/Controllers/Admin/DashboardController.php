@@ -37,6 +37,37 @@ class DashboardController extends Controller
     }
 
     /**
+     * Return live stats for realtime dashboard polling.
+     */
+    public function stats(): JsonResponse
+    {
+        $totalVoters = Voter::count();
+        $totalHasVoted = Voter::where('has_voted', true)->count();
+        $totalNotVoted = $totalVoters - $totalHasVoted;
+        $participationRate = $totalVoters > 0
+            ? round(($totalHasVoted / $totalVoters) * 100, 1)
+            : 0;
+
+        $calons = Calon::withCount('votes')->orderBy('nomor')->get();
+        $totalVotes = $calons->sum('votes_count');
+        $activeKeys = DisplayKey::where('is_active', true)->count();
+
+        return response()->json([
+            'totalVoters' => $totalVoters,
+            'totalHasVoted' => $totalHasVoted,
+            'totalNotVoted' => $totalNotVoted,
+            'participationRate' => $participationRate,
+            'activeKeys' => $activeKeys,
+            'totalVotes' => $totalVotes,
+            'calons' => $calons->map(fn (Calon $c) => [
+                'id' => $c->id,
+                'votes_count' => $c->votes_count,
+                'pct' => $totalVotes > 0 ? round(($c->votes_count / $totalVotes) * 100, 1) : 0,
+            ]),
+        ]);
+    }
+
+    /**
      * Return cumulative vote time series data per calon.
      * Each data point = { t: ISO timestamp, y: cumulative votes at that moment }
      */

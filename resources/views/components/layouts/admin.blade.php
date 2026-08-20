@@ -4,6 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{{ $title ?? 'Dashboard' }} — Pilketos Admin</title>
+        <link rel="preload" as="image" href="{{ asset('storage/assets/logo.png') }}">
         @fonts
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>

@@ -3,31 +3,10 @@
 
     {{-- Stats grid --}}
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <x-stats-card
-            title="Total Pemilih"
-            :value="$totalVoters"
-            icon="users"
-            color="blue"
-        />
-        <x-stats-card
-            title="Sudah Memilih"
-            :value="$totalHasVoted"
-            icon="circle-check"
-            color="green"
-            :sub="$participationRate . '% partisipasi'"
-        />
-        <x-stats-card
-            title="Belum Memilih"
-            :value="$totalNotVoted"
-            icon="clock"
-            color="yellow"
-        />
-        <x-stats-card
-            title="Key Aktif"
-            :value="$activeKeys"
-            icon="key-round"
-            color="blue"
-        />
+        <x-stats-card title="Total Pemilih"  icon="users"         color="blue"   id="stat-total-voters"    :value="$totalVoters" />
+        <x-stats-card title="Sudah Memilih"  icon="circle-check"  color="green"  id="stat-has-voted"       :value="$totalHasVoted" :sub="$participationRate . '% partisipasi'" />
+        <x-stats-card title="Belum Memilih"  icon="clock"         color="yellow" id="stat-not-voted"       :value="$totalNotVoted" />
+        <x-stats-card title="Key Aktif"      icon="key-round"     color="blue"   id="stat-active-keys"     :value="$activeKeys" />
     </div>
 
     {{-- Chart + Perolehan Suara --}}
@@ -65,6 +44,7 @@
 
             {{-- URL untuk fetch data --}}
             <span id="vote-chart-url" class="hidden" data-url="{{ route('admin.dashboard.chart-data') }}"></span>
+            <span id="dashboard-stats-url" class="hidden" data-url="{{ route('admin.dashboard.stats') }}"></span>
         </div>
 
         {{-- Perolehan Suara (30%) --}}
@@ -77,12 +57,12 @@
             @if ($calons->isEmpty())
                 <p class="text-sm text-gray-500 text-center py-6">Belum ada data calon.</p>
             @else
-                <div class="space-y-4">
+                <div class="space-y-4" id="perolehan-list">
                     @foreach ($calons as $calon)
                         @php
                             $pct = $totalVotes > 0 ? round(($calon->votes_count / $totalVotes) * 100, 1) : 0;
                         @endphp
-                        <div>
+                        <div data-calon-id="{{ $calon->id }}">
                             <div class="flex items-center justify-between mb-1.5">
                                 <div class="flex items-center gap-2">
                                     <span class="text-xs font-bold text-birupesat bg-birupesat/10 rounded-full w-6 h-6 flex items-center justify-center shrink-0">
@@ -91,13 +71,13 @@
                                     <span class="text-sm font-semibold text-accent truncate max-w-[110px]">{{ $calon->nama }}</span>
                                 </div>
                                 <div class="text-right shrink-0">
-                                    <span class="text-sm font-bold text-accent">{{ $calon->votes_count }}</span>
-                                    <span class="text-xs text-gray-500 ml-1">({{ $pct }}%)</span>
+                                    <span class="text-sm font-bold text-accent" data-votes>{{ $calon->votes_count }}</span>
+                                    <span class="text-xs text-gray-500 ml-1" data-pct>({{ $pct }}%)</span>
                                 </div>
                             </div>
                             <div class="w-full bg-gray-100 rounded-full h-2">
-                                <div class="bg-birupesat h-2 rounded-full transition-all duration-500"
-                                    style="width: {{ $pct }}%"></div>
+                                <div class="bg-birupesat h-2 rounded-full transition-[width] duration-700 ease-in-out"
+                                    style="width: {{ $pct }}%" data-bar></div>
                             </div>
                         </div>
                     @endforeach
@@ -105,7 +85,7 @@
 
                 <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
                     <span>Total suara masuk</span>
-                    <span class="font-bold text-accent">{{ $totalVotes }}</span>
+                    <span class="font-bold text-accent" id="stat-total-votes">{{ $totalVotes }}</span>
                 </div>
             @endif
         </div>

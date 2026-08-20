@@ -20,9 +20,9 @@ $c = $colorMap[$color] ?? $colorMap['blue'];
     <div class="flex items-start justify-between">
         <div>
             <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">{{ $title }}</p>
-            <p class="text-2xl lg:text-3xl font-bold text-accent">{{ $value }}</p>
+            <p class="text-2xl lg:text-3xl font-bold text-accent" data-stat-value>{{ $value }}</p>
             @if ($sub)
-                <p class="text-xs text-gray-500 mt-1">{{ $sub }}</p>
+                <p class="text-xs text-gray-500 mt-1" data-stat-sub>{{ $sub }}</p>
             @endif
         </div>
         <div class="w-10 h-10 rounded-xl {{ $c['icon_bg'] }} flex items-center justify-center shrink-0">

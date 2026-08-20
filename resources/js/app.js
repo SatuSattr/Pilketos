@@ -1,3 +1,4 @@
+import '@hotwired/turbo';
 import Alpine from 'alpinejs';
 import Swal from 'sweetalert2';
 import {
@@ -58,6 +59,66 @@ import {
 // Register only the Chart.js components we need
 Chart.register(LineController, LineElement, PointElement, CategoryScale, LinearScale, TimeScale, Tooltip, Legend, Filler, zoomPlugin);
 
+// --- Admin helpers (defined once at module scope, survive Turbo navigations) ---
+
+const AdminToast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3500,
+    timerProgressBar: true,
+    customClass: {
+        popup: 'rounded-[1.5rem] font-sans shadow-xl',
+    },
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
+    },
+});
+
+/**
+ * Show a toast notification.
+ * @param {'success'|'error'|'warning'|'info'} type
+ * @param {string} message
+ */
+window.adminToast = function (type, message) {
+    AdminToast.fire({ icon: type, title: message });
+};
+
+/**
+ * Show a SweetAlert2 confirm dialog, then submit a form if confirmed.
+ * @param {Event} e
+ * @param {string} title
+ * @param {string} text
+ * @param {string} confirmLabel
+ * @param {'danger'|'warning'} variant  'danger' = red button, 'warning' = yellow
+ */
+window.adminConfirm = function (e, title, text, confirmLabel = 'Ya, lanjutkan', variant = 'danger') {
+    e.preventDefault();
+    const form = e.target.closest('form') ?? e.target;
+    const confirmColor = variant === 'danger' ? '#dc2626' : '#f59e0b';
+    Swal.fire({
+        title,
+        text,
+        icon: variant === 'danger' ? 'warning' : 'question',
+        showCancelButton: true,
+        confirmButtonText: confirmLabel,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: confirmColor,
+        cancelButtonColor: '#6b7280',
+        borderRadius: '1.5rem',
+        customClass: {
+            popup: 'rounded-[1.5rem] font-sans',
+            confirmButton: 'rounded-xl py-3 px-8 font-semibold',
+            cancelButton: 'rounded-xl py-3 px-8 font-semibold',
+        },
+    }).then((result) => {
+        if (result.isConfirmed) {
+            form.submit();
+        }
+    });
+};
+
 document.addEventListener('alpine:init', () => {
     // Only register voting data if the voting page element exists
     if (document.getElementById('calons-data')) {
@@ -69,96 +130,179 @@ document.addEventListener('alpine:init', () => {
     }
 });
 
-document.addEventListener('alpine:initialized', () => {
-    // Only run voting logic if we're on the voting page
-    if (!document.getElementById('votingForm')) {
-        createIcons({
-            icons: {
-                CircleCheck,
-                LayoutDashboard,
-                Users,
-                ListChecks,
-                KeyRound,
-                LineChart,
-                LogOut,
-                LogIn,
-                UserPlus,
-                ListPlus,
-                Pencil,
-                Trash2,
-                Save,
-                ArrowLeft,
-                ArrowRight,
-                Plus,
-                Upload,
-                RotateCcw,
-                AlertCircle,
-                CircleX,
-                ZoomIn,
-                ZoomOut,
-                Play,
-                Pause,
-                RefreshCw,
-                Search,
-                Menu,
-                X,
-                Trophy,
-                Check,
-                Vote,
-                UserCircle,
-                Clock,
-                Activity,
-                Copy,
-                CopyCheck,
-            },
-        });
+// Re-runs on every Turbo navigation (and on initial page load) for admin pages.
+// The voting page opts out of Turbo entirely via data-turbo="false" on its layout.
+document.addEventListener('turbo:load', () => {
+    // Skip if on the voting page (fallback safety guard)
+    if (document.getElementById('votingForm')) {
+        return;
+    }
 
-        // Init vote chart on dashboard if canvas exists
-        const chartCanvas = document.getElementById('voteChart');
-        const chartUrlEl = document.getElementById('vote-chart-url');
-        if (chartCanvas && chartUrlEl) {
-            const chartUrl = chartUrlEl.dataset.url;
-            const style = getComputedStyle(document.documentElement);
-            const colorAccent = style.getPropertyValue('--color-accent').trim() || '#232322';
+    createIcons({
+        icons: {
+            CircleCheck,
+            LayoutDashboard,
+            Users,
+            ListChecks,
+            KeyRound,
+            LineChart,
+            LogOut,
+            LogIn,
+            UserPlus,
+            ListPlus,
+            Pencil,
+            Trash2,
+            Save,
+            ArrowLeft,
+            ArrowRight,
+            Plus,
+            Upload,
+            RotateCcw,
+            AlertCircle,
+            CircleX,
+            ZoomIn,
+            ZoomOut,
+            Play,
+            Pause,
+            RefreshCw,
+            Search,
+            Menu,
+            X,
+            Trophy,
+            Check,
+            Vote,
+            UserCircle,
+            Clock,
+            Activity,
+            Copy,
+            CopyCheck,
+        },
+    });
 
-            // Warna per calon (index-based)
-            const SERIES_COLORS = ['#2f2575', '#10b981', '#f59e0b', '#ef4444', '#3b82f6'];
+    // Fire flash toast from session (data attr on body) — re-reads on every navigation
+    const flashType = document.body.dataset.flashType;
+    const flashMsg  = document.body.dataset.flashMsg;
+    if (flashType && flashMsg) {
+        AdminToast.fire({ icon: flashType, title: flashMsg });
+    }
 
-            let voteChart = null;
+    // ── Dashboard realtime polling ───────────────────────────────────────────
+    const chartCanvas = document.getElementById('voteChart');
+    const chartUrlEl  = document.getElementById('vote-chart-url');
+    const statsUrlEl  = document.getElementById('dashboard-stats-url');
 
-            function buildDatasets(series) {
-                return series.map((calon, i) => ({
-                    label: `No. ${calon.nomor} – ${calon.nama}`,
-                    data: calon.points.map((p) => ({ x: p.t, y: p.y })),
-                    borderColor: SERIES_COLORS[i % SERIES_COLORS.length],
-                    backgroundColor: SERIES_COLORS[i % SERIES_COLORS.length] + '18',
-                    borderWidth: 3,
-                    pointBackgroundColor: SERIES_COLORS[i % SERIES_COLORS.length],
-                    pointBorderColor: '#fff',
-                    pointBorderWidth: 2,
-                    pointRadius: 5,
-                    pointHoverRadius: 8,
-                    tension: 0.4,
-                    fill: true,
-                    stepped: false,
-                }));
+    if (chartCanvas && chartUrlEl && statsUrlEl) {
+        const chartUrl = chartUrlEl.dataset.url;
+        const statsUrl = statsUrlEl.dataset.url;
+        const style    = getComputedStyle(document.documentElement);
+        const colorAccent = style.getPropertyValue('--color-accent').trim() || '#232322';
+
+        const SERIES_COLORS = ['#2f2575', '#10b981', '#f59e0b', '#ef4444', '#3b82f6'];
+
+        let voteChart = null;
+
+        // Smooth integer counter animation (easeOutCubic)
+        const runningAnimations = new Map();
+        function animateCounter(el, toValue, duration = 600) {
+            const fromValue = parseInt(el.textContent.replace(/\D/g, ''), 10) || 0;
+            if (fromValue === toValue) { return; }
+
+            if (runningAnimations.has(el)) {
+                cancelAnimationFrame(runningAnimations.get(el));
             }
 
-            function buildLegend(series) {
-                const el = document.getElementById('chartLegend');
-                if (!el) { return; }
-                el.innerHTML = series.map((calon, i) => `
-                    <span class="flex items-center gap-1.5 text-xs font-semibold" style="color:${SERIES_COLORS[i % SERIES_COLORS.length]}">
-                        <span class="inline-block w-3 h-3 rounded-full" style="background:${SERIES_COLORS[i % SERIES_COLORS.length]}"></span>
-                        No. ${calon.nomor} – ${calon.nama}
-                    </span>
-                `).join('');
+            const start = performance.now();
+            function step(now) {
+                const t = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
+                const current = Math.round(fromValue + (toValue - fromValue) * eased);
+                el.textContent = current;
+                if (t < 1) {
+                    runningAnimations.set(el, requestAnimationFrame(step));
+                } else {
+                    runningAnimations.delete(el);
+                }
             }
+            runningAnimations.set(el, requestAnimationFrame(step));
+        }
 
-            async function fetchAndRender() {
-                const res = await fetch(chartUrl, {
-                    headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+        // ── Stats card updater ───────────────────────────────────────────────
+        async function fetchStats() {
+            try {
+                const res  = await fetch(statsUrl, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
+                const data = await res.json();
+
+                // Stats cards — target by id, update [data-stat-value] inside
+                const cards = {
+                    'stat-total-voters': data.totalVoters,
+                    'stat-has-voted':    data.totalHasVoted,
+                    'stat-not-voted':    data.totalNotVoted,
+                    'stat-active-keys':  data.activeKeys,
+                };
+                for (const [id, value] of Object.entries(cards)) {
+                    const el = document.querySelector(`#${id} [data-stat-value]`);
+                    if (el) { animateCounter(el, value); }
+                }
+
+                // "Sudah Memilih" sub text (participation rate)
+                const subEl = document.querySelector('#stat-has-voted [data-stat-sub]');
+                if (subEl) { subEl.textContent = `${data.participationRate}% partisipasi`; }
+
+                // Total votes footer
+                const totalVotesEl = document.getElementById('stat-total-votes');
+                if (totalVotesEl) { animateCounter(totalVotesEl, data.totalVotes); }
+
+                // Perolehan suara rows
+                data.calons.forEach((calon) => {
+                    const row = document.querySelector(`[data-calon-id="${calon.id}"]`);
+                    if (!row) { return; }
+
+                    const votesEl = row.querySelector('[data-votes]');
+                    const pctEl   = row.querySelector('[data-pct]');
+                    const barEl   = row.querySelector('[data-bar]');
+
+                    if (votesEl) { animateCounter(votesEl, calon.votes_count); }
+                    if (pctEl)   { pctEl.textContent = `(${calon.pct}%)`; }
+                    if (barEl)   { barEl.style.width = `${calon.pct}%`; }
                 });
+            } catch (e) {
+                // Silently ignore network errors between polls
+            }
+        }
+
+        // ── Chart updater ────────────────────────────────────────────────────
+        function buildDatasets(series) {
+            return series.map((calon, i) => ({
+                label: `No. ${calon.nomor} – ${calon.nama}`,
+                data: calon.points.map((p) => ({ x: p.t, y: p.y })),
+                borderColor: SERIES_COLORS[i % SERIES_COLORS.length],
+                backgroundColor: SERIES_COLORS[i % SERIES_COLORS.length] + '18',
+                borderWidth: 3,
+                pointBackgroundColor: SERIES_COLORS[i % SERIES_COLORS.length],
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+                pointRadius: 5,
+                pointHoverRadius: 8,
+                tension: 0.4,
+                fill: true,
+                stepped: false,
+            }));
+        }
+
+        function buildLegend(series) {
+            const el = document.getElementById('chartLegend');
+            if (!el) { return; }
+            el.innerHTML = series.map((calon, i) => `
+                <span class="flex items-center gap-1.5 text-xs font-semibold" style="color:${SERIES_COLORS[i % SERIES_COLORS.length]}">
+                    <span class="inline-block w-3 h-3 rounded-full" style="background:${SERIES_COLORS[i % SERIES_COLORS.length]}"></span>
+                    No. ${calon.nomor} – ${calon.nama}
+                </span>
+            `).join('');
+        }
+
+        async function fetchChart() {
+            try {
+                const res    = await fetch(chartUrl, { headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' } });
                 const series = await res.json();
 
                 if (!voteChart) {
@@ -168,6 +312,10 @@ document.addEventListener('alpine:initialized', () => {
                         options: {
                             responsive: true,
                             maintainAspectRatio: false,
+                            // Disable ALL Chart.js animations — updates are instant & seamless
+                            animation: false,
+                            animations: false,
+                            transitions: { active: { animation: { duration: 0 } } },
                             interaction: { mode: 'index', intersect: false },
                             plugins: {
                                 legend: { display: false },
@@ -177,15 +325,8 @@ document.addEventListener('alpine:initialized', () => {
                                     },
                                 },
                                 zoom: {
-                                    pan: {
-                                        enabled: true,
-                                        mode: 'x',
-                                    },
-                                    zoom: {
-                                        wheel: { enabled: true },
-                                        pinch: { enabled: true },
-                                        mode: 'x',
-                                    },
+                                    pan:  { enabled: true, mode: 'x' },
+                                    zoom: { wheel: { enabled: true }, pinch: { enabled: true }, mode: 'x' },
                                 },
                             },
                             scales: {
@@ -193,124 +334,47 @@ document.addEventListener('alpine:initialized', () => {
                                     type: 'time',
                                     time: {
                                         tooltipFormat: 'HH:mm:ss',
-                                        displayFormats: {
-                                            second: 'HH:mm:ss',
-                                            minute: 'HH:mm',
-                                            hour: 'HH:mm',
-                                        },
+                                        displayFormats: { second: 'HH:mm:ss', minute: 'HH:mm', hour: 'HH:mm' },
                                     },
                                     grid: { display: false },
-                                    ticks: {
-                                        color: colorAccent,
-                                        font: { family: 'Montserrat', size: 11 },
-                                        maxTicksLimit: 8,
-                                        maxRotation: 0,
-                                    },
+                                    ticks: { color: colorAccent, font: { family: 'Montserrat', size: 11 }, maxTicksLimit: 8, maxRotation: 0 },
                                 },
                                 y: {
                                     beginAtZero: true,
-                                    ticks: {
-                                        stepSize: 1,
-                                        color: colorAccent,
-                                        font: { family: 'Montserrat', size: 11 },
-                                    },
+                                    ticks: { stepSize: 1, color: colorAccent, font: { family: 'Montserrat', size: 11 } },
                                     grid: { color: 'rgba(0,0,0,0.05)' },
                                 },
                             },
                         },
                     });
                 } else {
+                    // Replace datasets and update with no animation — x-axis shifts naturally
+                    // as the time range of the data grows (trading terminal effect)
                     voteChart.data.datasets = buildDatasets(series);
                     voteChart.update('none');
                 }
 
                 buildLegend(series);
+            } catch (e) {
+                // Silently ignore
             }
-
-            // Zoom control buttons
-            document.getElementById('chartZoomIn')?.addEventListener('click', () => {
-                voteChart?.zoom(1.3);
-            });
-            document.getElementById('chartZoomOut')?.addEventListener('click', () => {
-                voteChart?.zoom(0.7);
-            });
-            document.getElementById('chartZoomReset')?.addEventListener('click', () => {
-                voteChart?.resetZoom();
-            });
-
-            // Initial render + auto-refresh every 30 seconds
-            fetchAndRender();
-            setInterval(fetchAndRender, 30000);
         }
 
-        // --- Admin helpers ---
+        // Zoom control buttons
+        document.getElementById('chartZoomIn')?.addEventListener('click', () => { voteChart?.zoom(1.3); });
+        document.getElementById('chartZoomOut')?.addEventListener('click', () => { voteChart?.zoom(0.7); });
+        document.getElementById('chartZoomReset')?.addEventListener('click', () => { voteChart?.resetZoom(); });
 
-        // SweetAlert2 Toast mixin
-        const AdminToast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3500,
-            timerProgressBar: true,
-            customClass: {
-                popup: 'rounded-[1.5rem] font-sans shadow-xl',
-            },
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer);
-                toast.addEventListener('mouseleave', Swal.resumeTimer);
-            },
-        });
+        // Initial load — fetch both immediately then poll every 5s
+        fetchStats();
+        fetchChart();
+        setInterval(() => { fetchStats(); fetchChart(); }, 5000);
+    }
+});
 
-        /**
-         * Show a toast notification.
-         * @param {'success'|'error'|'warning'|'info'} type
-         * @param {string} message
-         */
-        window.adminToast = function (type, message) {
-            AdminToast.fire({ icon: type, title: message });
-        };
-
-        /**
-         * Show a SweetAlert2 confirm dialog, then submit a form if confirmed.
-         * @param {Event} e
-         * @param {string} title
-         * @param {string} text
-         * @param {string} confirmLabel
-         * @param {'danger'|'warning'} variant  'danger' = red button, 'warning' = yellow
-         */
-        window.adminConfirm = function (e, title, text, confirmLabel = 'Ya, lanjutkan', variant = 'danger') {
-            e.preventDefault();
-            const form = e.target.closest('form') ?? e.target;
-            const confirmColor = variant === 'danger' ? '#dc2626' : '#f59e0b';
-            Swal.fire({
-                title,
-                text,
-                icon: variant === 'danger' ? 'warning' : 'question',
-                showCancelButton: true,
-                confirmButtonText: confirmLabel,
-                cancelButtonText: 'Batal',
-                confirmButtonColor: confirmColor,
-                cancelButtonColor: '#6b7280',
-                borderRadius: '1.5rem',
-                customClass: {
-                    popup: 'rounded-[1.5rem] font-sans',
-                    confirmButton: 'rounded-xl py-3 px-8 font-semibold',
-                    cancelButton: 'rounded-xl py-3 px-8 font-semibold',
-                },
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit();
-                }
-            });
-        };
-
-        // Fire flash toast from session (data attr on body)
-        const flashType = document.body.dataset.flashType;
-        const flashMsg  = document.body.dataset.flashMsg;
-        if (flashType && flashMsg) {
-            AdminToast.fire({ icon: flashType, title: flashMsg });
-        }
-
+// Voting page init — runs once on initial load (voting page is Turbo-disabled)
+document.addEventListener('alpine:initialized', () => {
+    if (!document.getElementById('votingForm')) {
         return;
     }
 
