@@ -25,7 +25,7 @@ FROM php:8.4-fpm-alpine
 RUN apk add --no-cache \
     nginx \
     supervisor \
-    sqlite \
+    sqlite-dev \
     libpng-dev \
     libjpeg-turbo-dev \
     freetype-dev \
