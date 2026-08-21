@@ -25,6 +25,7 @@
         "date-fns": "4.4.0",
         "hammerjs": "2.0.8",
         "lucide": "^1.32.0",
+        "notyf": "3.10.0",
         "sweetalert2": "^11.26.25"
     }
 }

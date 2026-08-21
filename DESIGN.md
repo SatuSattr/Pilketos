@@ -12,6 +12,7 @@
 | Font delivery | Bunny Fonts via `@fonts` directive (self-hosted at build time, no CDN) |
 | JS framework | Alpine.js (reactive state, no CDN) |
 | Icons | Lucide (`lucide` npm, `createIcons()` — no CDN) |
+| Toast notifications | Notyf (no CDN) |
 | Modals / alerts | SweetAlert2 (no CDN) |
 | Build | Vite 8 + `@tailwindcss/vite` |
 

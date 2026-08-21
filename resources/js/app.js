@@ -1,6 +1,8 @@
 import '@hotwired/turbo';
 import Alpine from 'alpinejs';
 import Swal from 'sweetalert2';
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
 import {
     Chart,
     LineController,
@@ -61,20 +63,56 @@ Chart.register(LineController, LineElement, PointElement, CategoryScale, LinearS
 
 // --- Admin helpers (defined once at module scope, survive Turbo navigations) ---
 
-const AdminToast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 3500,
-    timerProgressBar: true,
-    customClass: {
-        popup: 'rounded-[1.5rem] font-sans shadow-xl',
-    },
-    didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer);
-        toast.addEventListener('mouseleave', Swal.resumeTimer);
-    },
-});
+/**
+ * Resolve a CSS custom property to its computed hex/rgb value.
+ * Notyf injects `background` as an inline style, so `var(--x)` doesn't work there.
+ * @param {string} token  e.g. '--color-success'
+ * @param {string} fallback  hex fallback if token is not found
+ */
+function cssVar(token, fallback) {
+    const val = getComputedStyle(document.documentElement).getPropertyValue(token).trim();
+    return val || fallback;
+}
+
+function makeNotyf() {
+    return new Notyf({
+        duration: 3500,
+        position: { x: 'right', y: 'top' },
+        dismissible: true,
+        ripple: false,
+        types: [
+            {
+                type: 'success',
+                background: '#ffffff',
+                icon: false,
+            },
+            {
+                type: 'error',
+                background: '#ffffff',
+                icon: false,
+            },
+            {
+                type: 'warning',
+                background: '#ffffff',
+                className: 'notyf-warning',
+                icon: false,
+            },
+            {
+                type: 'info',
+                background: '#ffffff',
+                className: 'notyf-info',
+                icon: false,
+            },
+        ],
+    });
+}
+
+// Created lazily on first use so the DOM (and CSS) is ready when we read the tokens.
+let _notyf = null;
+function getNotyf() {
+    if (!_notyf) { _notyf = makeNotyf(); }
+    return _notyf;
+}
 
 /**
  * Show a toast notification.
@@ -82,7 +120,12 @@ const AdminToast = Swal.mixin({
  * @param {string} message
  */
 window.adminToast = function (type, message) {
-    AdminToast.fire({ icon: type, title: message });
+    const n = getNotyf();
+    if (type === 'warning' || type === 'info') {
+        n.open({ type, message });
+    } else {
+        n[type === 'error' ? 'error' : 'success'](message);
+    }
 };
 
 /**
@@ -130,9 +173,21 @@ document.addEventListener('alpine:init', () => {
     }
 });
 
-// Re-runs on every Turbo navigation (and on initial page load) for admin pages.
-// The voting page opts out of Turbo entirely via data-turbo="false" on its layout.
-document.addEventListener('turbo:load', () => {
+/**
+ * Runs on every page (re)load — Turbo soft-navigations AND hard full-page loads.
+ * `turbo:load` covers Turbo soft-navigations; `DOMContentLoaded` covers the initial
+ * hard navigation (e.g. redirect after login) where Turbo hasn't intercepted anything.
+ * We guard with a flag so the handler never runs twice on the same page.
+ */
+let _pageInitDone = false;
+function onPageReady() {
+    // Avoid running twice on the same page (turbo:load + DOMContentLoaded can both fire).
+    if (_pageInitDone) { return; }
+    _pageInitDone = true;
+
+    // Reset flag on the next Turbo navigation so it runs again for the next page.
+    document.addEventListener('turbo:before-visit', () => { _pageInitDone = false; }, { once: true });
+
     // Skip if on the voting page (fallback safety guard)
     if (document.getElementById('votingForm')) {
         return;
@@ -183,7 +238,7 @@ document.addEventListener('turbo:load', () => {
     const flashType = document.body.dataset.flashType;
     const flashMsg  = document.body.dataset.flashMsg;
     if (flashType && flashMsg) {
-        AdminToast.fire({ icon: flashType, title: flashMsg });
+        window.adminToast(flashType, flashMsg);
     }
 
     // ── Dashboard realtime polling ───────────────────────────────────────────
@@ -370,7 +425,7 @@ document.addEventListener('turbo:load', () => {
         fetchChart();
         setInterval(() => { fetchStats(); fetchChart(); }, 5000);
     }
-});
+}
 
 // Voting page init — runs once on initial load (voting page is Turbo-disabled)
 document.addEventListener('alpine:initialized', () => {
@@ -860,6 +915,12 @@ document.addEventListener('alpine:initialized', () => {
 
     createIcons({ icons: { CircleCheck } });
 });
+
+// Wire onPageReady to both events:
+// - turbo:load  → Turbo soft-navigations between admin pages
+// - DOMContentLoaded → hard full-page loads (e.g. redirect after login)
+document.addEventListener('turbo:load', onPageReady);
+document.addEventListener('DOMContentLoaded', onPageReady);
 
 window.Alpine = Alpine;
 Alpine.start();
