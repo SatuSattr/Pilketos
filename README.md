@@ -27,16 +27,28 @@ A web-based school student council election system (Pemilihan Ketua OSIS). It ha
 
 ### First deploy
 
+> **Important:** The `.env` file must exist before running `docker compose up` — the container reads it at startup. Create it first, then build.
+
 ```bash
+# 1. Clone the repo
 git clone <your-repo> pilketos
 cd pilketos
 
-# SQLite file must exist before mounting as a volume
+# 2. Create the SQLite database file (required before Docker mounts it)
 touch database/database.sqlite
 
-# Create your .env from the production template
+# 3. Create your .env from the production template
 cp .env.production .env
+
+# 4. Edit .env — fill in at minimum:
+#    APP_KEY, APP_URL, APP_NAME
 nano .env
+
+# 5. Generate APP_KEY (paste the output into .env as APP_KEY=...)
+docker run --rm php:8.4-fpm-alpine php -r "echo 'base64:'.base64_encode(random_bytes(32)).PHP_EOL;"
+
+# 6. Now build and start
+docker compose up -d --build
 ```
 
 Minimum required values in `.env`:
@@ -46,20 +58,8 @@ APP_NAME=Pilketos
 APP_ENV=production
 APP_DEBUG=false
 APP_URL=https://your-subdomain.yourdomain.com
-APP_KEY=             # generate with the command below
+APP_KEY=base64:...        # paste the generated key here
 DB_DATABASE=/var/www/html/database/database.sqlite
-```
-
-Generate `APP_KEY`:
-
-```bash
-docker run --rm php:8.4-fpm-alpine php -r "echo 'base64:'.base64_encode(random_bytes(32)).PHP_EOL;"
-```
-
-Start the container:
-
-```bash
-docker compose up -d --build
 ```
 
 The app will be available at `http://VPS-IP:8085`. Point your reverse proxy (nginx/caddy on the host) to `localhost:8085` for the subdomain.
