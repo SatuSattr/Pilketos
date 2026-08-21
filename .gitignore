@@ -3,6 +3,10 @@
 .env
 .env.backup
 .env.production
+
+# SQLite database (persisted via Docker volume on VPS)
+/database/database.sqlite
+
 .phpactor.json
 .phpunit.result.cache
 /.codex

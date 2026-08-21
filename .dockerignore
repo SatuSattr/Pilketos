@@ -1,0 +1,86 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# CI/CD
+.github
+
+# IDE
+.idea
+.vscode
+.vs
+.phpstorm.meta.php
+_ide_helper.php
+.phpactor.json
+
+# Development tools
+.editorconfig
+.php-cs-fixer.php
+phpunit.xml
+phpstan.neon
+.phpunit.cache
+
+# Environment
+.env
+.env.example
+.env.backup
+.env.production
+
+# Dependencies (will be installed in container)
+vendor/
+node_modules/
+
+# Build artifacts
+public/hot
+public/build
+public/fonts-manifest.dev.json
+storage/pail
+
+# Logs
+*.log
+storage/logs/*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp and cache
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+bootstrap/cache/*
+
+# Testing
+.phpunit.result.cache
+tests/
+
+# Documentation
+*.md
+!README.md
+
+# Docker (don't copy docker files into build context recursively)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Misc
+auth.json
+Homestead.json
+Homestead.yaml
+.vagrant
+npm-debug.log
+yarn-error.log
+
+# AI tools
+.ai/
+.agents/
+.codex/
+.cursor/
+.nova/
+.zed/
+/.playwright-mcp
+opencode.json
+boost.json
+AGENTS.md
+DESIGN.md
