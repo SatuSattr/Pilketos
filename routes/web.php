@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CalonController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -44,5 +45,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('display-key', DisplayKeyController::class)->except(['show', 'create', 'edit', 'update']);
         Route::post('display-key/{displayKey}/toggle', [DisplayKeyController::class, 'toggle'])->name('display-key.toggle');
         Route::post('display-key/{displayKey}/reset-stats', [DisplayKeyController::class, 'resetStats'])->name('display-key.reset-stats');
+
+        // Admin user accounts
+        Route::resource('user', AdminUserController::class)->except(['show', 'create', 'edit']);
     });
 });

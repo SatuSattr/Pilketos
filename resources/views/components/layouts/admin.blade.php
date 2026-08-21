@@ -34,6 +34,7 @@
                                 ['route' => 'admin.calon.index',       'match' => 'admin.calon.*',        'label' => 'Calon'],
                                 ['route' => 'admin.voter.index',       'match' => 'admin.voter.*',        'label' => 'Daftar Pemilih'],
                                 ['route' => 'admin.display-key.index', 'match' => 'admin.display-key.*', 'label' => 'Display Keys'],
+                                ['route' => 'admin.user.index',        'match' => 'admin.user.*',         'label' => 'Akun Admin'],
                             ];
                         @endphp
                         <nav class="hidden md:flex items-stretch h-full gap-0.5">
