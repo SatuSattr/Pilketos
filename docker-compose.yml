@@ -14,6 +14,8 @@ services:
       - ./storage/foto_calon:/var/www/html/storage/foto_calon
       # Persist logs
       - ./storage/logs:/var/www/html/storage/logs
+      # Mount .env for artisan commands inside the container
+      - ./.env:/var/www/html/.env
     # All secrets and config live in .env on the VPS (never committed to git)
     env_file:
       - .env

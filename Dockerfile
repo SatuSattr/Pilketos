@@ -66,12 +66,14 @@ RUN mkdir -p storage/framework/{sessions,views,cache} \
     database \
     bootstrap/cache \
     public/storage/foto_calon \
+    /var/log/supervisor \
     && chown -R www-data:www-data storage bootstrap/cache database public/storage \
     && chmod -R 775 storage bootstrap/cache database
 
 # Copy configuration files
 COPY docker/nginx/default.conf /etc/nginx/http.d/default.conf
 COPY docker/php/php.ini /usr/local/etc/php/conf.d/custom.ini
+COPY docker/php/www.conf /usr/local/etc/php-fpm.d/www.conf
 COPY docker/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 
