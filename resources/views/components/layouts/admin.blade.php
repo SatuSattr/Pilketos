@@ -53,7 +53,7 @@
                         {{-- Account + Logout --}}
                         <div class="hidden md:flex items-center gap-4">
                             <span class="text-sm text-gray-500">{{ auth()->user()->name }}</span>
-                            <form method="POST" action="{{ route('admin.logout') }}">
+                            <form method="POST" action="{{ route('admin.logout') }}" data-turbo="false">
                                 @csrf
                                 <button type="submit"
                                     class="text-sm text-gray-500 hover:text-danger transition-colors duration-150">
@@ -93,7 +93,7 @@
                         @endforeach
                         <div class="border-t border-gray-200 mt-2 pt-2 flex items-center justify-between">
                             <span class="text-sm text-gray-500">{{ auth()->user()->name }}</span>
-                            <form method="POST" action="{{ route('admin.logout') }}">
+                            <form method="POST" action="{{ route('admin.logout') }}" data-turbo="false">
                                 @csrf
                                 <button type="submit"
                                     class="text-sm text-gray-500 hover:text-danger transition-colors duration-150">

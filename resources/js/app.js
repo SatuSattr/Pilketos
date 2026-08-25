@@ -180,6 +180,18 @@ document.addEventListener('alpine:init', () => {
  * We guard with a flag so the handler never runs twice on the same page.
  */
 let _pageInitDone = false;
+
+// ── Dashboard poll lifecycle ──────────────────────────────────────────
+// Stored at module scope so it survives Turbo soft-navigations.
+// Must be cleared on every navigation and on 401/419 to avoid spam.
+let dashboardPollTimer = null;
+function stopDashboardPolling() {
+    if (dashboardPollTimer !== null) {
+        clearInterval(dashboardPollTimer);
+        dashboardPollTimer = null;
+    }
+}
+
 function onPageReady() {
     // Avoid running twice on the same page (turbo:load + DOMContentLoaded can both fire).
     if (_pageInitDone) { return; }
@@ -285,6 +297,11 @@ function onPageReady() {
         async function fetchStats() {
             try {
                 const res  = await fetch(statsUrl, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
+                if (res.status === 401 || res.status === 419 || res.status === 403) {
+                    stopDashboardPolling();
+                    return;
+                }
+                if (!res.ok) { return; }
                 const data = await res.json();
 
                 // Stats cards — target by id, update [data-stat-value] inside
@@ -358,6 +375,11 @@ function onPageReady() {
         async function fetchChart() {
             try {
                 const res    = await fetch(chartUrl, { headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' } });
+                if (res.status === 401 || res.status === 419 || res.status === 403) {
+                    stopDashboardPolling();
+                    return;
+                }
+                if (!res.ok) { return; }
                 const series = await res.json();
 
                 if (!voteChart) {
@@ -421,9 +443,15 @@ function onPageReady() {
         document.getElementById('chartZoomReset')?.addEventListener('click', () => { voteChart?.resetZoom(); });
 
         // Initial load — fetch both immediately then poll every 5s
+        // Clear any leftover timer from a previous soft-navigation before starting a new one.
+        stopDashboardPolling();
         fetchStats();
         fetchChart();
-        setInterval(() => { fetchStats(); fetchChart(); }, 5000);
+        dashboardPollTimer = setInterval(() => { fetchStats(); fetchChart(); }, 5000);
+    } else {
+        // Not on dashboard — ensure any previous dashboard timer is stopped
+        // (covers the case where turbo:before-visit didn't fire, e.g. initial hard load of non-dashboard page).
+        stopDashboardPolling();
     }
 }
 
@@ -914,6 +942,17 @@ document.addEventListener('alpine:initialized', () => {
     }
 
     createIcons({ icons: { CircleCheck } });
+});
+
+// Stop polling on any Turbo navigation — the interval lives at module scope
+// and would otherwise survive soft-navigations (e.g. logout -> login).
+document.addEventListener('turbo:before-visit', stopDashboardPolling);
+document.addEventListener('turbo:before-cache', stopDashboardPolling);
+// Also stop when the logout form is submitted directly (hard submit fallback).
+document.addEventListener('submit', (e) => {
+    if (e.target instanceof HTMLFormElement && e.target.action.includes('/logout')) {
+        stopDashboardPolling();
+    }
 });
 
 // Wire onPageReady to both events:
