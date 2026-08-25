@@ -1,6 +1,5 @@
 *
 !.gitignore
-!foto_calon/
-!foto_calon/**
 !assets/
 !assets/**
+# foto_calon berisi upload user — jangan di-commit, di-seed via database/seeders/assets/foto_calon

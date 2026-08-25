@@ -21,9 +21,7 @@
 /public/build
 /public/fonts-manifest.dev.json
 /public/hot
-/public/storage/*
-!/public/storage/assets
-!/public/storage/foto_calon
+/public/storage
 /storage/*.key
 /storage/pail
 /vendor

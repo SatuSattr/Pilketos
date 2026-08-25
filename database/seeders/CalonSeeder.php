@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Calon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class CalonSeeder extends Seeder
 {
@@ -12,6 +13,9 @@ class CalonSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->ensureSeedFotoExists('shabira-syahla-alvaliza.png');
+        $this->ensureSeedFotoExists('faiz-nabil-akram.png');
+
         Calon::updateOrCreate(['nomor' => '01'], [
             'nama' => 'Shabira Syahla Alvaliza',
             'kelas' => 'XI-1',
@@ -39,5 +43,21 @@ class CalonSeeder extends Seeder
                 5. Mendorong siswa berprestasi melalui kompetisi dan pembinaan yang berkelanjutan.
                 MISI,
         ]);
+    }
+
+    private function ensureSeedFotoExists(string $filename): void
+    {
+        $source = database_path('seeders/assets/foto_calon/'.$filename);
+        $target = 'foto_calon/'.$filename;
+
+        if (! file_exists($source)) {
+            $this->command?->warn("Seed asset tidak ditemukan: {$source}");
+
+            return;
+        }
+
+        if (! Storage::disk('public')->exists($target)) {
+            Storage::disk('public')->put($target, file_get_contents($source));
+        }
     }
 }
