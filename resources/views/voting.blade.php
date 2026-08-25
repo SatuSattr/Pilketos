@@ -49,10 +49,11 @@
                                             </div>
                                             <div
                                                 class="h-[10rem] lg:h-[22rem] bg-gradient-to-br from-gray-50 to-gray-200 flex items-center justify-center overflow-hidden relative">
-                                                <h1 class="absolute duration-200 ease-in-out top-3 m-0 left-4 font-bold opacity-20 text-6xl lg:text-9xl"
+                                                <h1 class="absolute duration-200 ease-in-out top-3 m-0 left-4 font-bold opacity-20 text-6xl lg:text-9xl z-10"
                                                     x-text="calon.nomor"></h1>
-                                                <img class="size-[140%] object-cover absolute -top-3 -right-9"
-                                                    :src="calon.urlFoto" :alt="calon.nama" />
+                                                <img :src="calon.urlFoto" :alt="calon.nama"
+                                                    :style="`object-position:${(calon.fotoCrop?.x ?? 50)}% ${(calon.fotoCrop?.y ?? 50)}%; transform:scale(${calon.fotoCrop?.zoom ?? 1}); transform-origin:${(calon.fotoCrop?.x ?? 50)}% ${(calon.fotoCrop?.y ?? 50)}%`"
+                                                    class="absolute inset-0 w-full h-full object-cover" />
                                             </div>
                                             <div class="p-3 lg:p-6 space-y-3">
                                                 <div class="flex justify-between text-sm lg:text-xl">

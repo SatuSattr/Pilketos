@@ -115,6 +115,41 @@ function getNotyf() {
 }
 
 /**
+ * Copy text to clipboard with fallback for insecure contexts (http://192.168.x.x).
+ * Uses navigator.clipboard when available and secure, otherwise falls back to
+ * a hidden textarea + document.execCommand('copy').
+ * @param {string} text
+ * @returns {Promise<boolean>} true if copied
+ */
+window.copyToClipboard = async function (text) {
+    try {
+        if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+            return true;
+        }
+        throw new Error('insecure-context');
+    } catch (_e) {
+        try {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.setAttribute('readonly', '');
+            ta.style.position = 'fixed';
+            ta.style.left = '-9999px';
+            ta.style.top = '-9999px';
+            document.body.appendChild(ta);
+            ta.focus();
+            ta.select();
+            ta.setSelectionRange(0, ta.value.length);
+            const ok = document.execCommand('copy');
+            document.body.removeChild(ta);
+            return ok;
+        } catch (_e2) {
+            return false;
+        }
+    }
+};
+
+/**
  * Show a toast notification.
  * @param {'success'|'error'|'warning'|'info'} type
  * @param {string} message

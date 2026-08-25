@@ -23,6 +23,7 @@ class VotingController extends Controller
             'lastName' => Str::after($calon->nama, ' '),
             'kelas' => $calon->kelas,
             'urlFoto' => asset('storage/foto_calon/'.$calon->foto),
+            'fotoCrop' => $calon->foto_crop_data,
             'visi' => $calon->visi,
             'misi' => $calon->misi,
         ])->values();
@@ -68,9 +69,11 @@ class VotingController extends Controller
         }
 
         // Cari voter berdasarkan nama (case-insensitive, prefix match)
+        // Escape LIKE wildcards agar input 'Gr', '%', '_' tidak jadi wildcard dan nama bergelar (",", ".") tetap literal
         $namaPemilih = strtolower(trim($request->string('nama_pemilih')->toString()));
+        $escaped = str_replace(['\\', '%', '_'], ['\\\\', '\%', '\_'], $namaPemilih);
 
-        $matchingVoters = Voter::whereRaw('LOWER(nama) LIKE ?', [$namaPemilih.'%'])->get();
+        $matchingVoters = Voter::whereRaw('LOWER(nama) LIKE ? ESCAPE "\\"', [$escaped.'%'])->get();
 
         if ($matchingVoters->isEmpty()) {
             $displayKey->incrementFailedAttempts();

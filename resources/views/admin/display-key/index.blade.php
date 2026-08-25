@@ -35,13 +35,25 @@
                                         {{ $key->key }}
                                     </code>
                                     <div
-                                        x-data="{ copied: false }"
-                                        x-tooltip="copied ? 'Tersalin!' : 'Salin key'"
+                                        x-data="{
+                                            copied: false,
+                                            async copyKey(text) {
+                                                const ok = await window.copyToClipboard(text);
+                                                if (ok) {
+                                                    this.copied = true;
+                                                    window.adminToast('success', 'Key disalin: ' + text);
+                                                    setTimeout(() => this.copied = false, 2000);
+                                                } else {
+                                                    window.adminToast('error', 'Gagal menyalin key');
+                                                }
+                                            }
+                                        }"
+                                        :title="copied ? 'Tersalin!' : 'Salin key'"
                                     >
                                         <button
                                             type="button"
                                             aria-label="Salin key"
-                                            @click="navigator.clipboard.writeText('{{ $key->key }}').then(() => { copied = true; setTimeout(() => copied = false, 2000) })"
+                                            @click="copyKey('{{ $key->key }}')"
                                             class="inline-flex items-center justify-center w-6 h-6 rounded text-gray-400 hover:text-birupesat hover:bg-birupesat/10 transition-colors focus:outline-none focus:ring-2 focus:ring-birupesat focus:ring-offset-2"
                                         >
                                             <i x-show="!copied" data-lucide="copy" class="w-3.5 h-3.5"></i>

@@ -32,10 +32,24 @@ class CalonController extends Controller
             'visi' => ['required', 'string'],
             'misi' => ['required', 'string'],
             'foto' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'foto_crop' => ['nullable', 'array'],
+            'foto_crop.x' => ['nullable', 'numeric', 'between:0,100'],
+            'foto_crop.y' => ['nullable', 'numeric', 'between:0,100'],
+            'foto_crop.zoom' => ['nullable', 'numeric', 'between:0.5,3'],
         ]);
 
         $fotoFilename = $request->file('foto')->store('foto_calon', 'public');
         $fotoFilename = basename($fotoFilename);
+
+        $crop = $validated['foto_crop'] ?? null;
+        $fotoCrop = null;
+        if (is_array($crop)) {
+            $fotoCrop = [
+                'x' => isset($crop['x']) ? round((float) $crop['x'], 2) : 50,
+                'y' => isset($crop['y']) ? round((float) $crop['y'], 2) : 50,
+                'zoom' => isset($crop['zoom']) ? round((float) $crop['zoom'], 2) : 1,
+            ];
+        }
 
         Calon::create([
             'nomor' => $validated['nomor'],
@@ -44,6 +58,7 @@ class CalonController extends Controller
             'visi' => $validated['visi'],
             'misi' => $validated['misi'],
             'foto' => $fotoFilename,
+            'foto_crop' => $fotoCrop,
         ]);
 
         return redirect()->route('admin.calon.index')
@@ -64,6 +79,10 @@ class CalonController extends Controller
             'visi' => ['required', 'string'],
             'misi' => ['required', 'string'],
             'foto' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'foto_crop' => ['nullable', 'array'],
+            'foto_crop.x' => ['nullable', 'numeric', 'between:0,100'],
+            'foto_crop.y' => ['nullable', 'numeric', 'between:0,100'],
+            'foto_crop.zoom' => ['nullable', 'numeric', 'between:0.5,3'],
         ]);
 
         $updateData = [
@@ -74,6 +93,17 @@ class CalonController extends Controller
             'misi' => $validated['misi'],
         ];
 
+        // Virtual crop metadata — file never modified
+        if ($request->has('foto_crop')) {
+            $crop = $validated['foto_crop'] ?? [];
+            $normalized = [
+                'x' => isset($crop['x']) ? round((float) $crop['x'], 2) : 50,
+                'y' => isset($crop['y']) ? round((float) $crop['y'], 2) : 50,
+                'zoom' => isset($crop['zoom']) ? round((float) $crop['zoom'], 2) : 1,
+            ];
+            $updateData['foto_crop'] = $normalized;
+        }
+
         if ($request->hasFile('foto')) {
             // Hapus foto lama
             if ($calon->foto && Storage::disk('public')->exists('foto_calon/'.$calon->foto)) {
@@ -82,6 +112,10 @@ class CalonController extends Controller
 
             $fotoFilename = $request->file('foto')->store('foto_calon', 'public');
             $updateData['foto'] = basename($fotoFilename);
+            // Reset crop to center when foto diganti jika crop tidak dikirim explicit
+            if (! isset($updateData['foto_crop'])) {
+                $updateData['foto_crop'] = ['x' => 50, 'y' => 50, 'zoom' => 1];
+            }
         }
 
         $calon->update($updateData);
