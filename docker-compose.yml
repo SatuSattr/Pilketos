@@ -6,7 +6,7 @@ services:
     container_name: pilketos_app
     restart: unless-stopped
     ports:
-      - "8085:8080"
+      - "127.0.0.1:8085:8080"
     volumes:
       # Persist SQLite database outside the container
       - ./database/database.sqlite:/var/www/html/database/database.sqlite
