@@ -55,6 +55,7 @@ import {
     Activity,
                 Copy,
                 CopyCheck,
+    ChevronDown,
 
 } from 'lucide';
 
@@ -278,6 +279,7 @@ function onPageReady() {
             Activity,
             Copy,
             CopyCheck,
+            ChevronDown,
         },
     });
 

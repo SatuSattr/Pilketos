@@ -23,13 +23,51 @@
             </div>
         </div>
 
-        {{-- Search --}}
-        <form method="GET" class="mb-4">
-            <div class="relative max-w-sm">
+        {{-- Search + Filter --}}
+        <form method="GET" class="mb-4 flex flex-row items-center gap-2">
+            <div class="relative flex-1 max-w-sm">
                 <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"></i>
                 <input type="text" name="search" value="{{ $search }}" placeholder="Cari nama pemilih..."
                     class="w-full pl-9 pr-4 py-2.5 rounded-xl border-2 border-gray-200 text-sm text-accent bg-white
                         focus:outline-none focus:ring-2 focus:ring-birupesat focus:border-birupesat">
+            </div>
+            <div x-data="{ open: false, value: '{{ $status }}' }" class="relative shrink-0">
+                <input type="hidden" name="status" :value="value">
+                <button type="button" @click="open = !open"
+                    class="flex items-center justify-between gap-2 w-full sm:w-44 rounded-xl border-2 border-gray-200 bg-white pl-4 pr-3 py-2.5 text-sm font-medium text-accent
+                        focus:outline-none focus:ring-2 focus:ring-birupesat focus:border-birupesat transition-colors"
+                    :class="open && 'border-birupesat ring-2 ring-birupesat'">
+                    <span x-text="value === 'sudah' ? 'Sudah Memilih' : value === 'belum' ? 'Belum Memilih' : 'Semua'"></span>
+                    <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 shrink-0 transition-transform duration-200" :class="open && 'rotate-180'"></i>
+                </button>
+                <div x-show="open" x-cloak
+                    @click.outside="open = false"
+                    x-transition:enter="transition ease-out duration-150"
+                    x-transition:enter-start="opacity-0 -translate-y-1"
+                    x-transition:enter-end="opacity-100 translate-y-0"
+                    x-transition:leave="transition ease-in duration-100"
+                    x-transition:leave-start="opacity-100 translate-y-0"
+                    x-transition:leave-end="opacity-0 -translate-y-1"
+                    class="absolute right-0 mt-2 w-48 bg-white rounded-xl border-2 border-gray-200 shadow-lg overflow-hidden z-20">
+                    <button type="button"
+                        @click="value = 'semua'; open = false; $nextTick(() => $el.closest('form').submit())"
+                        class="w-full text-left px-4 py-2.5 text-sm font-medium transition-colors"
+                        :class="value === 'semua' ? 'bg-birupesat text-white' : 'text-accent hover:bg-gray-50'">
+                        Semua
+                    </button>
+                    <button type="button"
+                        @click="value = 'sudah'; open = false; $nextTick(() => $el.closest('form').submit())"
+                        class="w-full text-left px-4 py-2.5 text-sm font-medium transition-colors border-t border-gray-100"
+                        :class="value === 'sudah' ? 'bg-birupesat text-white' : 'text-accent hover:bg-gray-50'">
+                        Sudah Memilih
+                    </button>
+                    <button type="button"
+                        @click="value = 'belum'; open = false; $nextTick(() => $el.closest('form').submit())"
+                        class="w-full text-left px-4 py-2.5 text-sm font-medium transition-colors border-t border-gray-100"
+                        :class="value === 'belum' ? 'bg-birupesat text-white' : 'text-accent hover:bg-gray-50'">
+                        Belum Memilih
+                    </button>
+                </div>
             </div>
         </form>
 

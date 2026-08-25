@@ -13,14 +13,20 @@ class VoterController extends Controller
     public function index(Request $request): View
     {
         $search = $request->string('search')->toString();
+        $status = $request->string('status')->toString();
+        if (! in_array($status, ['semua', 'sudah', 'belum'], true)) {
+            $status = 'semua';
+        }
 
         $voters = Voter::query()
             ->when($search, fn ($q) => $q->where('nama', 'like', "%{$search}%"))
+            ->when($status === 'sudah', fn ($q) => $q->where('has_voted', true))
+            ->when($status === 'belum', fn ($q) => $q->where('has_voted', false))
             ->orderBy('nama')
             ->paginate(25)
             ->withQueryString();
 
-        return view('admin.voter.index', compact('voters', 'search'));
+        return view('admin.voter.index', compact('voters', 'search', 'status'));
     }
 
     public function create(): View
