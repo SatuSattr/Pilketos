@@ -1,0 +1,139 @@
+- generic [ref=f19e1]:
+  - generic [ref=f19e2]:
+    - complementary [ref=f19e3]:
+      - heading [level=1] [ref=f19e142]: PILKETOS
+      - navigation [ref=f19e8]:
+        - link [ref=f19e143] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/admin
+          - text: Dashboard
+        - link [ref=f19e144] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/admin/calon
+          - text: Kelola Calon
+        - link [ref=f19e145] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/admin/hak-suara
+          - text: Kelola Hak Suara
+        - link [ref=f19e146] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/admin/tokens
+          - text: Voting Token
+        - link [ref=f19e147] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/admin/admin-config
+          - text: Konfigurasi Admin
+        - link [ref=f19e148] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/voting
+          - text: Voting Page
+      - generic [ref=f19e27]:
+        - generic [ref=f19e28]:
+          - generic [ref=f19e29]: A
+          - generic [ref=f19e31]:
+            - paragraph [ref=f19e32]: Administrator
+            - paragraph [ref=f19e33]: admin@gmail.com
+        - button [ref=f19e149] [cursor=pointer]:
+          - generic [ref=f19e36]: 
+          - text: Logout
+    - generic [ref=f19e37]:
+      - banner [ref=f19e38]:
+        - generic [ref=f19e40]:
+          - heading [level=1] [ref=f19e150]: Hak Suara
+          - paragraph [ref=f19e42]: Daftar pemilih yang berhak memberikan suara
+        - generic [ref=f19e43]:
+          - button [ref=f19e151] [cursor=pointer]:
+            - generic [ref=f19e45]: 
+            - text: Import Excel
+          - button [ref=f19e152] [cursor=pointer]:
+            - generic [ref=f19e47]: +
+            - text: Tambah
+      - main [ref=f19e48]:
+        - generic [ref=f19e49]:
+          - generic [ref=f19e50]:
+            - generic [ref=f19e52]:
+              - generic [ref=f19e53]:
+                - paragraph [ref=f19e54]: Total Pemilih
+                - heading [level=3] [ref=f19e153]: "4"
+              - generic [ref=f19e56]: 
+            - generic [ref=f19e59]:
+              - generic [ref=f19e60]:
+                - paragraph [ref=f19e61]: Sudah Memilih
+                - heading [level=3] [ref=f19e154]: "1"
+              - generic [ref=f19e63]: 
+            - generic [ref=f19e66]:
+              - generic [ref=f19e67]:
+                - paragraph [ref=f19e68]: Belum Memilih
+                - heading [level=3] [ref=f19e155]: "3"
+              - generic [ref=f19e70]: 
+            - generic [ref=f19e73]:
+              - generic [ref=f19e74]:
+                - paragraph [ref=f19e75]: Partisipasi
+                - heading [level=3] [ref=f19e156]: 25.0%
+              - generic [ref=f19e77]: 
+          - table [ref=f19e81]:
+            - rowgroup [ref=f19e82]:
+              - row [ref=f19e157]:
+                - columnheader [ref=f19e158]: "No"
+                - columnheader [ref=f19e159]: Nama
+                - columnheader [ref=f19e160]: Status
+                - columnheader [ref=f19e161]: Aksi
+            - rowgroup [ref=f19e88]:
+              - row [ref=f19e162]:
+                - cell [ref=f19e163]: "1"
+                - cell [ref=f19e164]: <script>alert('xss')</script>
+                - cell [ref=f19e165]:
+                  - generic [ref=f19e93]:
+                    - generic [ref=f19e94]: 
+                    - text: Belum Memilih
+                - cell [ref=f19e95]:
+                  - button [ref=f19e166] [cursor=pointer]:
+                    - generic [ref=f19e97]: 
+              - row [ref=f19e167]:
+                - cell [ref=f19e168]: "2"
+                - cell [ref=f19e169]: Ahmad Fauzi
+                - cell [ref=f19e170]:
+                  - generic [ref=f19e102]:
+                    - generic [ref=f19e103]: 
+                    - text: Belum Memilih
+                - cell [ref=f19e104]:
+                  - button [ref=f19e171] [cursor=pointer]:
+                    - generic [ref=f19e106]: 
+              - row [ref=f19e172]:
+                - cell [ref=f19e173]: "3"
+                - cell [ref=f19e174]: Siti Rahayu
+                - cell [ref=f19e175]:
+                  - generic [ref=f19e111]:
+                    - generic [ref=f19e112]: 
+                    - text: Belum Memilih
+                - cell [ref=f19e113]:
+                  - button [ref=f19e176] [cursor=pointer]:
+                    - generic [ref=f19e115]: 
+              - row [ref=f19e177]:
+                - cell [ref=f19e178]: "4"
+                - cell [ref=f19e179]: Budi Santoso
+                - cell [ref=f19e180]:
+                  - generic [ref=f19e120]:
+                    - generic [ref=f19e121]: 
+                    - text: Sudah Memilih
+                - cell [ref=f19e122]:
+                  - button [ref=f19e181] [cursor=pointer]:
+                    - generic [ref=f19e124]: 
+        - generic [ref=f19e125]:
+          - generic [ref=f19e126]:
+            - heading [level=2] [ref=f19e182]: Tambah Hak Suara
+            - button [ref=f19e128] [cursor=pointer]:
+              - generic [ref=f19e129]: 
+          - generic [ref=f19e131]:
+            - generic [ref=f19e132]:
+              - generic [ref=f19e133]: Nama Lengkap
+              - textbox [ref=f19e183]:
+                - /placeholder: Masukkan nama lengkap pemilih
+              - paragraph [ref=f19e135]: Nama harus sama dengan yang akan dipilih di halaman voting.
+            - generic [ref=f19e136]:
+              - button [ref=f19e184] [cursor=pointer]:
+                - generic [ref=f19e138]: 
+                - text: Simpan
+              - button [ref=f19e185] [cursor=pointer]: Batal
+  - generic [ref=f19e140]: Hak suara berhasil ditambahkan!
+  - dialog [ref=f19e187]:
+    - heading "Hapus Pemilih" [level=2] [ref=f19e192]
+    - generic [ref=f19e193]: Apakah Anda yakin ingin menghapus Budi Santoso dari daftar pemilih?
+    - text: "!"
+    - generic [ref=f19e194]:
+      - button "Batal" [ref=f19e195]
+      - button "Ya, Hapus" [active] [ref=f19e196] [cursor=pointer]

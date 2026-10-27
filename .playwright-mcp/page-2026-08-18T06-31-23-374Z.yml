@@ -1,0 +1,84 @@
+- generic [ref=f21e2]:
+  - main [ref=f21e3]:
+    - generic [ref=f21e4]:
+      - generic [ref=f21e5]:
+        - heading "Pemilihan Ketua OSIS" [level=1] [ref=f21e70]
+        - paragraph [ref=f21e7]: Pilih satu calon ketua OSIS favorit Anda
+      - generic [ref=f21e8]:
+        - generic [ref=f21e9]:
+          - generic [ref=f21e11] [cursor=pointer]:
+            - generic [ref=f21e12]:
+              - generic [ref=f21e13]: 
+              - generic [ref=f21e14]:
+                - heading "Shabira Syahla Alvaliza" [level=3] [ref=f21e71]
+                - generic [ref=f21e17]:
+                  - heading "01" [level=1] [ref=f21e72]
+                  - img "Shabira Syahla Alvaliza" [ref=f21e73]
+                - generic [ref=f21e21]:
+                  - generic [ref=f21e22]: KELAS
+                  - generic [ref=f21e23]: XI-1
+            - generic [ref=f21e82]:
+              - generic [ref=f21e83]:
+                - heading "Shabira Syahla Alvaliza" [level=3] [ref=f21e84]
+                - paragraph [ref=f21e85]: Kelas XI-1
+              - generic [ref=f21e86]:
+                - heading "Visi" [level=4] [ref=f21e89]
+                - paragraph [ref=f21e90]: Menjadikan OSIS sebagai wadah yang inklusif, kreatif, dan berprestasi untuk seluruh siswa, serta menciptakan lingkungan sekolah yang harmonis dan berintegritas.
+              - generic [ref=f21e91]:
+                - heading "Misi" [level=4] [ref=f21e94]
+                - paragraph [ref=f21e95]: 1. Mengoptimalkan peran OSIS sebagai penghubung antara siswa dan sekolah. 2. Mengembangkan program kerja yang kreatif dan bermanfaat bagi seluruh siswa. 3. Meningkatkan kegiatan akademik dan non-akademik yang mendukung prestasi siswa. 4. Mempererat kekeluargaan dan solidaritas antar siswa melalui kegiatan positif. 5. Menjadi aspirasi siswa dan menjunjung tinggi transparansi dalam setiap kegiatan.
+          - generic [ref=f21e25] [cursor=pointer]:
+            - generic [ref=f21e26]:
+              - generic [ref=f21e27]: 
+              - generic [ref=f21e28]:
+                - heading "Faiz Nabil Akram" [level=3] [ref=f21e74]
+                - generic [ref=f21e31]:
+                  - heading "02" [level=1] [ref=f21e75]
+                  - img "Faiz Nabil Akram" [ref=f21e76]
+                - generic [ref=f21e35]:
+                  - generic [ref=f21e36]: KELAS
+                  - generic [ref=f21e37]: XII-1
+            - generic:
+              - generic:
+                - generic:
+                  - heading [level=3]
+                  - paragraph
+                - generic:
+                  - generic:
+                    - heading "Visi" [level=4]
+                  - paragraph
+                - generic:
+                  - generic:
+                    - heading "Misi" [level=4]
+                  - paragraph
+          - generic [ref=f21e39] [cursor=pointer]:
+            - generic [ref=f21e40]:
+              - generic [ref=f21e41]: 
+              - generic [ref=f21e42]:
+                - heading "Fakih Abdul Karim" [level=3] [ref=f21e77]
+                - generic [ref=f21e45]:
+                  - heading "03" [level=1] [ref=f21e78]
+                  - img "Fakih Abdul Karim" [ref=f21e79]
+                - generic [ref=f21e49]:
+                  - generic [ref=f21e50]: KELAS
+                  - generic [ref=f21e51]: XI-2
+            - generic:
+              - generic:
+                - generic:
+                  - heading [level=3]
+                  - paragraph
+                - generic:
+                  - generic:
+                    - heading "Visi" [level=4]
+                  - paragraph
+                - generic:
+                  - generic:
+                    - heading "Misi" [level=4]
+                  - paragraph
+        - generic [ref=f21e52]:
+          - button "VOTE SEKARANG!" [ref=f21e96] [cursor=pointer]
+          - paragraph [ref=f21e54]: Klik untuk memberikan suara Anda
+  - contentinfo [ref=f21e55]:
+    - generic [ref=f21e57]:
+      - paragraph [ref=f21e58]: Pilketos v2.0 FOSS - Sistem Pemilihan Ketua OSIS
+      - paragraph [ref=f21e59]: Made with $20 Claude subscription by Sattar

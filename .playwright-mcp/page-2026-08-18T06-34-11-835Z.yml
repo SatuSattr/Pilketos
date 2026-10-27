@@ -1,0 +1,87 @@
+- generic [ref=f22e1]:
+  - generic [ref=f22e2]:
+    - main [ref=f22e3]:
+      - generic [ref=f22e4]:
+        - generic [ref=f22e5]:
+          - heading [level=1] [ref=f22e76]: Pemilihan Ketua OSIS
+          - paragraph [ref=f22e7]: Pilih satu calon ketua OSIS favorit Anda
+        - generic [ref=f22e8]:
+          - generic [ref=f22e9]:
+            - generic [ref=f22e11] [cursor=pointer]:
+              - generic [ref=f22e12]:
+                - generic [ref=f22e13]: 
+                - generic [ref=f22e14]:
+                  - heading [level=3] [ref=f22e77]: Shabira Syahla Alvaliza
+                  - heading [level=1] [ref=f22e78]: "01"
+                  - generic [ref=f22e21]:
+                    - generic [ref=f22e22]: KELAS
+                    - generic [ref=f22e23]: XI-1
+              - generic [ref=f22e61]:
+                - generic [ref=f22e62]:
+                  - heading [level=3] [ref=f22e80]: Shabira Syahla Alvaliza
+                  - paragraph [ref=f22e64]: Kelas XI-1
+                - generic [ref=f22e65]:
+                  - heading [level=4] [ref=f22e81]: Visi
+                  - paragraph [ref=f22e69]: Menjadikan OSIS sebagai wadah yang inklusif, kreatif, dan berprestasi untuk seluruh siswa, serta menciptakan lingkungan sekolah yang harmonis dan berintegritas.
+                - generic [ref=f22e70]:
+                  - heading [level=4] [ref=f22e82]: Misi
+                  - paragraph [ref=f22e74]: 1. Mengoptimalkan peran OSIS sebagai penghubung antara siswa dan sekolah. 2. Mengembangkan program kerja yang kreatif dan bermanfaat bagi seluruh siswa. 3. Meningkatkan kegiatan akademik dan non-akademik yang mendukung prestasi siswa. 4. Mempererat kekeluargaan dan solidaritas antar siswa melalui kegiatan positif. 5. Menjadi aspirasi siswa dan menjunjung tinggi transparansi dalam setiap kegiatan.
+            - generic [ref=f22e25] [cursor=pointer]:
+              - generic [ref=f22e26]:
+                - generic [ref=f22e27]: 
+                - generic [ref=f22e28]:
+                  - heading [level=3] [ref=f22e83]: Faiz Nabil Akram
+                  - heading [level=1] [ref=f22e84]: "02"
+                  - generic [ref=f22e35]:
+                    - generic [ref=f22e36]: KELAS
+                    - generic [ref=f22e37]: XII-1
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading [level=4]: Visi
+                    - paragraph
+                  - generic:
+                    - generic:
+                      - heading [level=4]: Misi
+                    - paragraph
+            - generic [ref=f22e39] [cursor=pointer]:
+              - generic [ref=f22e40]:
+                - generic [ref=f22e41]: 
+                - generic [ref=f22e42]:
+                  - heading [level=3] [ref=f22e86]: Fakih Abdul Karim
+                  - heading [level=1] [ref=f22e87]: "03"
+                  - generic [ref=f22e49]:
+                    - generic [ref=f22e50]: KELAS
+                    - generic [ref=f22e51]: XI-2
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading [level=4]: Visi
+                    - paragraph
+                  - generic:
+                    - generic:
+                      - heading [level=4]: Misi
+                    - paragraph
+          - generic [ref=f22e52]:
+            - button [ref=f22e89] [cursor=pointer]: VOTE SEKARANG!
+            - paragraph [ref=f22e54]: Klik untuk memberikan suara Anda
+    - contentinfo [ref=f22e55]:
+      - generic [ref=f22e57]:
+        - paragraph [ref=f22e58]: Pilketos v2.0 FOSS - Sistem Pemilihan Ketua OSIS
+        - paragraph [ref=f22e59]: Made with $20 Claude subscription by Sattar
+  - dialog [ref=f22e91]:
+    - generic [ref=f22e92]: "?"
+    - heading "Konfirmasi Pilihan" [level=2] [ref=f22e94]
+    - generic [ref=f22e95]:
+      - text: Apakah Anda yakin ingin memilih
+      - strong [ref=f22e96]: Shabira Syahla Alvaliza
+      - text: sebagai calon ketua OSIS?
+    - generic [ref=f22e97]: Masukkan Nama Anda
+    - textbox "Masukkan Nama Anda" [active] [ref=f22e98]:
+      - /placeholder: "Contoh: Shabira Syahla"
+    - text: "!"
+    - generic [ref=f22e99]:
+      - button "Batal" [ref=f22e100] [cursor=pointer]
+      - button "Ya, Pilih Calon Ini" [ref=f22e101] [cursor=pointer]

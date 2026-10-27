@@ -1,0 +1,101 @@
+- generic [ref=f15e2]:
+  - complementary [ref=f15e3]:
+    - generic [ref=f15e5]:
+      - img "Pilketos" [ref=f15e6]
+      - heading "PILKETOS" [level=1] [ref=f15e7]
+    - navigation [ref=f15e8]:
+      - link "Dashboard" [ref=f15e9] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin
+      - link "Kelola Calon" [ref=f15e12] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin/calon
+      - link "Kelola Hak Suara" [ref=f15e15] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin/hak-suara
+      - link "Voting Token" [ref=f15e18] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin/tokens
+      - link "Konfigurasi Admin" [ref=f15e21] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin/admin-config
+      - link "Voting Page" [ref=f15e24] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/voting
+    - generic [ref=f15e27]:
+      - generic [ref=f15e28]:
+        - generic [ref=f15e29]: A
+        - generic [ref=f15e31]:
+          - paragraph [ref=f15e32]: Administrator
+          - paragraph [ref=f15e33]: admin@gmail.com
+      - button "Logout" [ref=f15e35] [cursor=pointer]:
+        - generic [ref=f15e36]: 
+        - text: Logout
+  - generic [ref=f15e37]:
+    - banner [ref=f15e38]:
+      - generic [ref=f15e40]:
+        - heading "Dashboard" [level=1] [ref=f15e41]
+        - paragraph [ref=f15e42]: Selamat datang di sistem pemilihan ketua OSIS
+    - main [ref=f15e43]:
+      - generic [ref=f15e44]:
+        - generic [ref=f15e45]:
+          - generic [ref=f15e47]:
+            - generic [ref=f15e48]:
+              - paragraph [ref=f15e49]: Jumlah Calon
+              - heading "3" [level=3] [ref=f15e50]
+            - generic [ref=f15e51]: 
+          - generic [ref=f15e54]:
+            - generic [ref=f15e55]:
+              - paragraph [ref=f15e56]: Total Hak Suara
+              - heading "0" [level=3] [ref=f15e57]
+            - generic [ref=f15e58]: 
+          - generic [ref=f15e61]:
+            - generic [ref=f15e62]:
+              - paragraph [ref=f15e63]: Total Votes
+              - heading "0" [level=3] [ref=f15e64]
+            - generic [ref=f15e65]: 
+          - generic [ref=f15e68]:
+            - generic [ref=f15e69]:
+              - paragraph [ref=f15e70]: Tingkat Partisipasi
+              - heading "0%" [level=3] [ref=f15e71]
+            - generic [ref=f15e72]: 
+        - generic [ref=f15e74]:
+          - heading "Tren Suara Masuk" [level=2] [ref=f15e76]
+          - generic [ref=f15e79]:
+            - heading "Suara Terkini" [level=2] [ref=f15e80]
+            - paragraph [ref=f15e82]: Belum ada suara masuk.
+        - generic [ref=f15e83]:
+          - generic [ref=f15e84]:
+            - heading "Calon Ketos" [level=2] [ref=f15e85]
+            - generic [ref=f15e87]:
+              - generic [ref=f15e91]:
+                - heading "Shabira Syahla Alvaliza" [level=3] [ref=f15e93]
+                - generic [ref=f15e94]:
+                  - heading "01" [level=1] [ref=f15e95]
+                  - img "Shabira Syahla Alvaliza" [ref=f15e96]
+                - generic [ref=f15e97]:
+                  - generic [ref=f15e98]:
+                    - generic [ref=f15e99]: SUARA
+                    - generic [ref=f15e100]: "0"
+                  - generic [ref=f15e101]:
+                    - generic [ref=f15e102]: KELAS
+                    - generic [ref=f15e103]: XI-1
+              - generic [ref=f15e107]:
+                - heading "Faiz Nabil Akram" [level=3] [ref=f15e109]
+                - generic [ref=f15e110]:
+                  - heading "02" [level=1] [ref=f15e111]
+                  - img "Faiz Nabil Akram" [ref=f15e112]
+                - generic [ref=f15e113]:
+                  - generic [ref=f15e114]:
+                    - generic [ref=f15e115]: SUARA
+                    - generic [ref=f15e116]: "0"
+                  - generic [ref=f15e117]:
+                    - generic [ref=f15e118]: KELAS
+                    - generic [ref=f15e119]: XII-1
+              - generic [ref=f15e123]:
+                - heading "Fakih Abdul Karim" [level=3] [ref=f15e125]
+                - generic [ref=f15e126]:
+                  - heading "03" [level=1] [ref=f15e127]
+                  - img "Fakih Abdul Karim" [ref=f15e128]
+                - generic [ref=f15e129]:
+                  - generic [ref=f15e130]:
+                    - generic [ref=f15e131]: SUARA
+                    - generic [ref=f15e132]: "0"
+                  - generic [ref=f15e133]:
+                    - generic [ref=f15e134]: KELAS
+                    - generic [ref=f15e135]: XI-2
+          - heading "Distribusi Suara" [level=2] [ref=f15e137]

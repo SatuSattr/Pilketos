@@ -1,0 +1,131 @@
+- generic [ref=f17e2]:
+  - complementary [ref=f17e3]:
+    - generic [ref=f17e5]:
+      - img "Pilketos" [ref=f17e179]
+      - heading "PILKETOS" [level=1] [ref=f17e180]
+    - navigation [ref=f17e8]:
+      - link "Dashboard" [ref=f17e181] [cursor=pointer]:
+        - /url: http://localhost:8000/admin
+      - link "Kelola Calon" [ref=f17e182] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/calon
+      - link "Kelola Hak Suara" [ref=f17e183] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/hak-suara
+      - link "Voting Token" [ref=f17e184] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/tokens
+      - link "Konfigurasi Admin" [ref=f17e185] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/admin-config
+      - link "Voting Page" [ref=f17e186] [cursor=pointer]:
+        - /url: http://localhost:8000/voting
+    - generic [ref=f17e27]:
+      - generic [ref=f17e28]:
+        - generic [ref=f17e29]: A
+        - generic [ref=f17e31]:
+          - paragraph [ref=f17e32]: Administrator
+          - paragraph [ref=f17e33]: admin@gmail.com
+      - button "Logout" [ref=f17e187] [cursor=pointer]:
+        - generic [ref=f17e36]: 
+        - text: Logout
+  - generic [ref=f17e37]:
+    - banner [ref=f17e38]:
+      - generic [ref=f17e40]:
+        - heading "Data Calon" [level=1] [ref=f17e188]
+        - paragraph [ref=f17e42]: Kelola data calon ketua OSIS
+      - button "Tambah Calon" [ref=f17e189] [cursor=pointer]:
+        - generic [ref=f17e45]: +
+        - text: Tambah Calon
+    - main [ref=f17e46]:
+      - generic [ref=f17e47]:
+        - generic [ref=f17e48]:
+          - generic [ref=f17e49]:
+            - heading "Daftar Calon" [level=2] [ref=f17e190]
+            - generic [ref=f17e51]: 3 calon
+          - generic [ref=f17e52]:
+            - generic [ref=f17e53] [cursor=pointer]:
+              - img "Shabira Syahla Alvaliza Fathulloh" [ref=f17e191]
+              - generic [ref=f17e56]:
+                - generic [ref=f17e57]:
+                  - generic [ref=f17e58]: "1"
+                  - heading "Shabira Syahla Alvaliza Fathulloh" [level=3] [ref=f17e192]
+                - paragraph [ref=f17e60]: XI-1
+              - generic [ref=f17e61]: 
+            - generic [ref=f17e62] [cursor=pointer]:
+              - img "Faiz Nabil Akram" [ref=f17e193]
+              - generic [ref=f17e65]:
+                - generic [ref=f17e66]:
+                  - generic [ref=f17e67]: "2"
+                  - heading "Faiz Nabil Akram" [level=3] [ref=f17e194]
+                - paragraph [ref=f17e69]: XII-1
+              - generic [ref=f17e70]: 
+            - generic [ref=f17e71] [cursor=pointer]:
+              - img "Fakih Abdul Karim" [ref=f17e195]
+              - generic [ref=f17e74]:
+                - generic [ref=f17e75]:
+                  - generic [ref=f17e76]: "3"
+                  - heading "Fakih Abdul Karim" [level=3] [ref=f17e196]
+                - paragraph [ref=f17e78]: XI-2
+              - generic [ref=f17e79]: 
+        - generic [ref=f17e80]:
+          - text: 
+          - generic [ref=f17e81]:
+            - generic [ref=f17e82]:
+              - heading "Detail Calon" [level=2] [ref=f17e197]
+              - generic [ref=f17e84]:
+                - button "Edit" [ref=f17e198] [cursor=pointer]:
+                  - generic [ref=f17e86]: 
+                - button "Hapus" [active] [ref=f17e199] [cursor=pointer]:
+                  - generic [ref=f17e88]: 
+            - generic [ref=f17e92]:
+              - generic [ref=f17e93]:
+                - generic [ref=f17e94]: No. 1
+                - heading "Shabira Syahla Alvaliza Fathulloh" [level=3] [ref=f17e200]
+                - paragraph [ref=f17e97]: Kelas XI-1
+              - generic [ref=f17e98]:
+                - heading "Visi" [level=4] [ref=f17e201]
+                - paragraph [ref=f17e102]: Menjadikan OSIS sebagai wadah yang inklusif, kreatif, dan berprestasi untuk seluruh siswa, serta menciptakan lingkungan sekolah yang harmonis dan berintegritas.
+              - generic [ref=f17e103]:
+                - heading "Misi" [level=4] [ref=f17e202]
+                - paragraph [ref=f17e107]: 1. Mengoptimalkan peran OSIS sebagai penghubung antara siswa dan sekolah. 2. Mengembangkan program kerja yang kreatif dan bermanfaat bagi seluruh siswa. 3. Meningkatkan kegiatan akademik dan non-akademik yang mendukung prestasi siswa. 4. Mempererat kekeluargaan dan solidaritas antar siswa melalui kegiatan positif. 5. Menjadi aspirasi siswa dan menjunjung tinggi transparansi dalam setiap kegiatan.
+      - generic:
+        - generic:
+          - heading "Edit Calon" [level=2]
+          - button:
+            - generic: 
+        - generic:
+          - generic:
+            - generic:
+              - generic: Nama Lengkap
+              - textbox: Shabira Syahla Alvaliza Fathulloh
+            - generic:
+              - generic:
+                - generic: Kelas
+                - combobox:
+                  - option "Pilih Kelas"
+                  - option "X-1"
+                  - option "X-2"
+                  - option "X-3"
+                  - option "XI-1" [selected]
+                  - option "XI-2"
+                  - option "XI-3"
+                  - option "XII-1"
+                  - option "XII-2"
+                  - option "XII-3"
+              - generic:
+                - generic: Nomor Urut
+                - spinbutton: "1"
+            - generic:
+              - generic: Upload Foto
+              - generic:
+                - generic:
+                  - img "Preview"
+                - generic: Klik untuk memilih foto
+            - generic:
+              - generic: Visi
+              - textbox: Menjadikan OSIS sebagai wadah yang inklusif, kreatif, dan berprestasi untuk seluruh siswa, serta menciptakan lingkungan sekolah yang harmonis dan berintegritas.
+            - generic:
+              - generic: Misi
+              - textbox: 1. Mengoptimalkan peran OSIS sebagai penghubung antara siswa dan sekolah. 2. Mengembangkan program kerja yang kreatif dan bermanfaat bagi seluruh siswa. 3. Meningkatkan kegiatan akademik dan non-akademik yang mendukung prestasi siswa. 4. Mempererat kekeluargaan dan solidaritas antar siswa melalui kegiatan positif. 5. Menjadi aspirasi siswa dan menjunjung tinggi transparansi dalam setiap kegiatan.
+            - generic:
+              - button "Simpan":
+                - generic: 
+                - text: Simpan
+              - button "Batal"

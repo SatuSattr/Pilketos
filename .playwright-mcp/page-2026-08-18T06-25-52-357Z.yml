@@ -1,0 +1,87 @@
+- generic [ref=f16e2]:
+  - main [ref=f16e3]:
+    - generic [ref=f16e4]:
+      - generic [ref=f16e5]:
+        - heading "Pemilihan Ketua OSIS" [level=1] [ref=f16e66]
+        - paragraph [ref=f16e7]: Pilih satu calon ketua OSIS favorit Anda
+      - generic [ref=f16e8]:
+        - generic [ref=f16e9]:
+          - generic [ref=f16e11] [cursor=pointer]:
+            - generic [ref=f16e12]:
+              - generic [ref=f16e13]: 
+              - generic [ref=f16e14]:
+                - heading "Shabira Syahla Alvaliza" [level=3] [ref=f16e67]
+                - generic [ref=f16e17]:
+                  - heading "01" [level=1] [ref=f16e68]
+                  - img "Shabira Syahla Alvaliza" [ref=f16e69]
+                - generic [ref=f16e21]:
+                  - generic [ref=f16e22]: KELAS
+                  - generic [ref=f16e23]: XI-1
+            - generic:
+              - generic:
+                - generic:
+                  - heading [level=3]
+                  - paragraph
+                - generic:
+                  - generic:
+                    - heading "Visi" [level=4]
+                  - paragraph
+                - generic:
+                  - generic:
+                    - heading "Misi" [level=4]
+                  - paragraph
+          - generic [ref=f16e25] [cursor=pointer]:
+            - generic [ref=f16e26]:
+              - generic [ref=f16e27]: 
+              - generic [ref=f16e28]:
+                - heading "Faiz Nabil Akram" [level=3] [ref=f16e70]
+                - generic [ref=f16e31]:
+                  - heading "02" [level=1] [ref=f16e71]
+                  - img "Faiz Nabil Akram" [ref=f16e72]
+                - generic [ref=f16e35]:
+                  - generic [ref=f16e36]: KELAS
+                  - generic [ref=f16e37]: XII-1
+            - generic:
+              - generic:
+                - generic:
+                  - heading [level=3]
+                  - paragraph
+                - generic:
+                  - generic:
+                    - heading "Visi" [level=4]
+                  - paragraph
+                - generic:
+                  - generic:
+                    - heading "Misi" [level=4]
+                  - paragraph
+          - generic [ref=f16e39] [cursor=pointer]:
+            - generic [ref=f16e40]:
+              - generic [ref=f16e41]: 
+              - generic [ref=f16e42]:
+                - heading "Fakih Abdul Karim" [level=3] [ref=f16e73]
+                - generic [ref=f16e45]:
+                  - heading "03" [level=1] [ref=f16e74]
+                  - img "Fakih Abdul Karim" [ref=f16e75]
+                - generic [ref=f16e49]:
+                  - generic [ref=f16e50]: KELAS
+                  - generic [ref=f16e51]: XI-2
+            - generic:
+              - generic:
+                - generic:
+                  - heading [level=3]
+                  - paragraph
+                - generic:
+                  - generic:
+                    - heading "Visi" [level=4]
+                  - paragraph
+                - generic:
+                  - generic:
+                    - heading "Misi" [level=4]
+                  - paragraph
+        - generic [ref=f16e52]:
+          - button "Pilih Calon Favorit" [disabled] [ref=f16e76]
+          - paragraph [ref=f16e54]: Silakan pilih salah satu calon terlebih dahulu
+  - contentinfo [ref=f16e55]:
+    - generic [ref=f16e57]:
+      - paragraph [ref=f16e58]: Pilketos v2.0 FOSS - Sistem Pemilihan Ketua OSIS
+      - paragraph [ref=f16e59]: Made with $20 Claude subscription by Sattar

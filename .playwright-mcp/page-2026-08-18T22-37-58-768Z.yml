@@ -1,0 +1,84 @@
+- generic [ref=f5e2]:
+  - main [ref=f5e3]:
+    - generic [ref=f5e4]:
+      - generic [ref=f5e5]:
+        - heading "Pemilihan Ketua OSIS" [level=1] [ref=f5e6]
+        - paragraph [ref=f5e7]: Pilih satu calon ketua OSIS favorit Anda
+      - generic [ref=f5e8]:
+        - generic [ref=f5e9]:
+          - generic [ref=f5e11] [cursor=pointer]:
+            - generic [ref=f5e12]:
+              - generic [ref=f5e13]: 
+              - generic [ref=f5e14]:
+                - heading "Shabira Syahla Alvaliza" [level=3] [ref=f5e16]
+                - generic [ref=f5e17]:
+                  - heading "01" [level=1] [ref=f5e18]
+                  - img "Shabira Syahla Alvaliza" [ref=f5e19]
+                - generic [ref=f5e21]:
+                  - generic [ref=f5e22]: KELAS
+                  - generic [ref=f5e23]: XI-1
+            - generic:
+              - generic:
+                - generic:
+                  - heading [level=3]
+                  - paragraph
+                - generic:
+                  - generic:
+                    - heading "Visi" [level=4]
+                  - paragraph
+                - generic:
+                  - generic:
+                    - heading "Misi" [level=4]
+                  - paragraph
+          - generic [ref=f5e25] [cursor=pointer]:
+            - generic [ref=f5e26]:
+              - generic [ref=f5e27]: 
+              - generic [ref=f5e28]:
+                - heading "Faiz Nabil Akram" [level=3] [ref=f5e30]
+                - generic [ref=f5e31]:
+                  - heading "02" [level=1] [ref=f5e32]
+                  - img "Faiz Nabil Akram" [ref=f5e33]
+                - generic [ref=f5e35]:
+                  - generic [ref=f5e36]: KELAS
+                  - generic [ref=f5e37]: XII-1
+            - generic [ref=f5e61]:
+              - generic [ref=f5e62]:
+                - heading "Faiz Nabil Akram" [level=3] [ref=f5e63]
+                - paragraph [ref=f5e64]: Kelas XII-1
+              - generic [ref=f5e65]:
+                - heading "Visi" [level=4] [ref=f5e68]
+                - paragraph [ref=f5e69]: Mewujudkan OSIS yang profesional, berwawasan lingkungan, dan berorientasi pada pengembangan karakter siswa untuk menyongsong generasi emas Indonesia.
+              - generic [ref=f5e70]:
+                - heading "Misi" [level=4] [ref=f5e73]
+                - paragraph [ref=f5e74]: 1. Membangun OSIS yang profesional dengan sistem manajemen yang terstruktur dan akuntabel. 2. Menggalakkan program peduli lingkungan seperti go green dan pengelolaan sampah. 3. Menyelenggarakan pelatihan kepemimpinan dan soft skill bagi seluruh siswa. 4. Memperbanyak kegiatan sosial dan bakti masyarakat untuk menumbuhkan kepedulian sosial. 5. Mendorong siswa berprestasi melalui kompetisi dan pembinaan yang berkelanjutan.
+          - generic [ref=f5e39] [cursor=pointer]:
+            - generic [ref=f5e40]:
+              - generic [ref=f5e41]: 
+              - generic [ref=f5e42]:
+                - heading "Fakih Abdul Karim" [level=3] [ref=f5e44]
+                - generic [ref=f5e45]:
+                  - heading "03" [level=1] [ref=f5e46]
+                  - img "Fakih Abdul Karim" [ref=f5e47]
+                - generic [ref=f5e49]:
+                  - generic [ref=f5e50]: KELAS
+                  - generic [ref=f5e51]: XI-2
+            - generic:
+              - generic:
+                - generic:
+                  - heading [level=3]
+                  - paragraph
+                - generic:
+                  - generic:
+                    - heading "Visi" [level=4]
+                  - paragraph
+                - generic:
+                  - generic:
+                    - heading "Misi" [level=4]
+                  - paragraph
+        - generic [ref=f5e52]:
+          - button "VOTE SEKARANG!" [ref=f5e75] [cursor=pointer]
+          - paragraph [ref=f5e54]: Klik untuk memberikan suara Anda
+  - contentinfo [ref=f5e55]:
+    - generic [ref=f5e57]:
+      - paragraph [ref=f5e58]: Pilketos v2.0 FOSS - Sistem Pemilihan Ketua OSIS
+      - paragraph [ref=f5e59]: Made with $20 Claude subscription by Sattar

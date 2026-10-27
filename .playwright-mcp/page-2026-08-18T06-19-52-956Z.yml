@@ -1,0 +1,19 @@
+- generic [ref=f9e3]:
+  - generic [ref=f9e4]:
+    - generic [ref=f9e5]:
+      - img "Pilketos" [ref=f9e6]
+      - heading "PILKETOS" [level=1] [ref=f9e7]
+    - paragraph [ref=f9e8]: Sistem Pemilihan Ketua OSIS
+  - generic [ref=f9e9]:
+    - heading "Login Administrator" [level=2] [ref=f9e10]
+    - generic [ref=f9e11]:
+      - generic [ref=f9e12]:
+        - generic [ref=f9e13]: Email
+        - textbox "Email" [ref=f9e14]:
+          - /placeholder: admin@gmail.com
+      - generic [ref=f9e15]:
+        - generic [ref=f9e16]: Password
+        - textbox "Password" [ref=f9e17]:
+          - /placeholder: Masukkan password
+      - button "Login" [ref=f9e18]
+    - paragraph [ref=f9e19]: Pilketos v2.0 © 2026

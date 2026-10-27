@@ -1,0 +1,127 @@
+- generic [ref=f20e2]:
+  - complementary [ref=f20e3]:
+    - generic [ref=f20e5]:
+      - img "Pilketos" [ref=f20e6]
+      - heading "PILKETOS" [level=1] [ref=f20e7]
+    - navigation [ref=f20e8]:
+      - link "Dashboard" [ref=f20e9] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin
+      - link "Kelola Calon" [ref=f20e12] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin/calon
+      - link "Kelola Hak Suara" [ref=f20e15] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin/hak-suara
+      - link "Voting Token" [ref=f20e18] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin/tokens
+      - link "Konfigurasi Admin" [ref=f20e21] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin/admin-config
+      - link "Voting Page" [ref=f20e24] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/voting
+    - generic [ref=f20e27]:
+      - generic [ref=f20e28]:
+        - generic [ref=f20e29]: A
+        - generic [ref=f20e31]:
+          - paragraph [ref=f20e32]: Administrator
+          - paragraph [ref=f20e33]: admin@gmail.com
+      - button "Logout" [ref=f20e35] [cursor=pointer]:
+        - generic [ref=f20e36]: 
+        - text: Logout
+  - generic [ref=f20e37]:
+    - banner [ref=f20e38]:
+      - generic [ref=f20e40]:
+        - heading "Data Calon" [level=1] [ref=f20e41]
+        - paragraph [ref=f20e42]: Kelola data calon ketua OSIS
+      - button "Tambah Calon" [ref=f20e44] [cursor=pointer]:
+        - generic [ref=f20e45]: +
+        - text: Tambah Calon
+    - main [ref=f20e46]:
+      - generic [ref=f20e47]:
+        - generic [ref=f20e48]:
+          - generic [ref=f20e49]:
+            - heading "Daftar Calon" [level=2] [ref=f20e50]
+            - generic [ref=f20e51]: 3 calon
+          - generic [ref=f20e52]:
+            - generic [ref=f20e53] [cursor=pointer]:
+              - img "Shabira Syahla Alvaliza" [ref=f20e55]
+              - generic [ref=f20e56]:
+                - generic [ref=f20e57]:
+                  - generic [ref=f20e58]: "1"
+                  - heading "Shabira Syahla Alvaliza" [level=3] [ref=f20e59]
+                - paragraph [ref=f20e60]: XI-1
+              - generic [ref=f20e61]: 
+            - generic [ref=f20e62] [cursor=pointer]:
+              - img "Faiz Nabil Akram" [ref=f20e64]
+              - generic [ref=f20e65]:
+                - generic [ref=f20e66]:
+                  - generic [ref=f20e67]: "2"
+                  - heading "Faiz Nabil Akram" [level=3] [ref=f20e68]
+                - paragraph [ref=f20e69]: XII-1
+              - generic [ref=f20e70]: 
+            - generic [ref=f20e71] [cursor=pointer]:
+              - img "Fakih Abdul Karim" [ref=f20e73]
+              - generic [ref=f20e74]:
+                - generic [ref=f20e75]:
+                  - generic [ref=f20e76]: "3"
+                  - heading "Fakih Abdul Karim" [level=3] [ref=f20e77]
+                - paragraph [ref=f20e78]: XI-2
+              - generic [ref=f20e79]: 
+        - generic [ref=f20e80]:
+          - text: 
+          - generic [ref=f20e81]:
+            - generic [ref=f20e82]:
+              - heading "Detail Calon" [level=2] [ref=f20e83]
+              - generic [ref=f20e84]:
+                - button "Edit" [ref=f20e85] [cursor=pointer]:
+                  - generic [ref=f20e86]: 
+                - button "Hapus" [ref=f20e87] [cursor=pointer]:
+                  - generic [ref=f20e88]: 
+            - generic [ref=f20e92]:
+              - generic [ref=f20e93]:
+                - generic [ref=f20e94]: No. 1
+                - heading "Shabira Syahla Alvaliza" [level=3] [ref=f20e96]
+                - paragraph [ref=f20e97]: Kelas XI-1
+              - generic [ref=f20e98]:
+                - heading "Visi" [level=4] [ref=f20e101]
+                - paragraph [ref=f20e102]: Menjadikan OSIS sebagai wadah yang inklusif, kreatif, dan berprestasi untuk seluruh siswa, serta menciptakan lingkungan sekolah yang harmonis dan berintegritas.
+              - generic [ref=f20e103]:
+                - heading "Misi" [level=4] [ref=f20e106]
+                - paragraph [ref=f20e107]: 1. Mengoptimalkan peran OSIS sebagai penghubung antara siswa dan sekolah. 2. Mengembangkan program kerja yang kreatif dan bermanfaat bagi seluruh siswa. 3. Meningkatkan kegiatan akademik dan non-akademik yang mendukung prestasi siswa. 4. Mempererat kekeluargaan dan solidaritas antar siswa melalui kegiatan positif. 5. Menjadi aspirasi siswa dan menjunjung tinggi transparansi dalam setiap kegiatan.
+      - generic [ref=f20e108]:
+        - generic [ref=f20e109]:
+          - heading "Tambah Calon" [level=2] [ref=f20e110]
+          - button [ref=f20e111] [cursor=pointer]:
+            - generic [ref=f20e112]: 
+        - generic [ref=f20e114]:
+          - generic [ref=f20e115]:
+            - generic [ref=f20e116]: Nama Lengkap
+            - textbox [ref=f20e117]
+          - generic [ref=f20e118]:
+            - generic [ref=f20e119]:
+              - generic [ref=f20e120]: Kelas
+              - combobox [ref=f20e121]:
+                - option "Pilih Kelas" [selected]
+                - option "X-1"
+                - option "X-2"
+                - option "X-3"
+                - option "XI-1"
+                - option "XI-2"
+                - option "XI-3"
+                - option "XII-1"
+                - option "XII-2"
+                - option "XII-3"
+            - generic [ref=f20e122]:
+              - generic [ref=f20e123]: Nomor Urut
+              - spinbutton [ref=f20e124]
+          - generic [ref=f20e125]:
+            - generic [ref=f20e126]: Upload Foto
+            - generic [ref=f20e127]: Klik untuk memilih foto
+          - generic [ref=f20e130]:
+            - generic [ref=f20e131]: Visi
+            - textbox [ref=f20e132]
+          - generic [ref=f20e133]:
+            - generic [ref=f20e134]: Misi
+            - textbox [ref=f20e135]
+          - generic [ref=f20e136]:
+            - button "Simpan" [ref=f20e137] [cursor=pointer]:
+              - generic [ref=f20e138]: 
+              - text: Simpan
+            - button "Batal" [ref=f20e139] [cursor=pointer]

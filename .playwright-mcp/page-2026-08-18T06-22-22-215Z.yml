@@ -1,0 +1,101 @@
+- generic [ref=e2]:
+  - complementary [ref=e3]:
+    - generic [ref=e5]:
+      - img "Pilketos" [ref=e6]
+      - heading "PILKETOS" [level=1] [ref=e7]
+    - navigation [ref=e8]:
+      - link "Dashboard" [ref=e9] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin
+      - link "Kelola Calon" [ref=e12] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin/calon
+      - link "Kelola Hak Suara" [ref=e15] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin/hak-suara
+      - link "Voting Token" [ref=e18] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin/tokens
+      - link "Konfigurasi Admin" [ref=e21] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin/admin-config
+      - link "Voting Page" [ref=e24] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/voting
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - generic [ref=e29]: A
+        - generic [ref=e31]:
+          - paragraph [ref=e32]: Administrator
+          - paragraph [ref=e33]: admin@gmail.com
+      - button "Logout" [ref=e35] [cursor=pointer]:
+        - generic [ref=e36]: 
+        - text: Logout
+  - generic [ref=e37]:
+    - banner [ref=e38]:
+      - generic [ref=e40]:
+        - heading "Dashboard" [level=1] [ref=e41]
+        - paragraph [ref=e42]: Selamat datang di sistem pemilihan ketua OSIS
+    - main [ref=e43]:
+      - generic [ref=e44]:
+        - generic [ref=e45]:
+          - generic [ref=e47]:
+            - generic [ref=e48]:
+              - paragraph [ref=e49]: Jumlah Calon
+              - heading "3" [level=3] [ref=e50]
+            - generic [ref=e51]: 
+          - generic [ref=e54]:
+            - generic [ref=e55]:
+              - paragraph [ref=e56]: Total Hak Suara
+              - heading "0" [level=3] [ref=e57]
+            - generic [ref=e58]: 
+          - generic [ref=e61]:
+            - generic [ref=e62]:
+              - paragraph [ref=e63]: Total Votes
+              - heading "0" [level=3] [ref=e64]
+            - generic [ref=e65]: 
+          - generic [ref=e68]:
+            - generic [ref=e69]:
+              - paragraph [ref=e70]: Tingkat Partisipasi
+              - heading "0%" [level=3] [ref=e71]
+            - generic [ref=e72]: 
+        - generic [ref=e74]:
+          - heading "Tren Suara Masuk" [level=2] [ref=e76]
+          - generic [ref=e79]:
+            - heading "Suara Terkini" [level=2] [ref=e80]
+            - paragraph [ref=e82]: Belum ada suara masuk.
+        - generic [ref=e83]:
+          - generic [ref=e84]:
+            - heading "Calon Ketos" [level=2] [ref=e85]
+            - generic [ref=e87]:
+              - generic [ref=e91]:
+                - heading "Shabira Syahla Alvaliza" [level=3] [ref=e93]
+                - generic [ref=e94]:
+                  - heading "01" [level=1] [ref=e95]
+                  - img "Shabira Syahla Alvaliza" [ref=e96]
+                - generic [ref=e97]:
+                  - generic [ref=e98]:
+                    - generic [ref=e99]: SUARA
+                    - generic [ref=e100]: "0"
+                  - generic [ref=e101]:
+                    - generic [ref=e102]: KELAS
+                    - generic [ref=e103]: XI-1
+              - generic [ref=e107]:
+                - heading "Faiz Nabil Akram" [level=3] [ref=e109]
+                - generic [ref=e110]:
+                  - heading "02" [level=1] [ref=e111]
+                  - img "Faiz Nabil Akram" [ref=e112]
+                - generic [ref=e113]:
+                  - generic [ref=e114]:
+                    - generic [ref=e115]: SUARA
+                    - generic [ref=e116]: "0"
+                  - generic [ref=e117]:
+                    - generic [ref=e118]: KELAS
+                    - generic [ref=e119]: XII-1
+              - generic [ref=e123]:
+                - heading "Fakih Abdul Karim" [level=3] [ref=e125]
+                - generic [ref=e126]:
+                  - heading "03" [level=1] [ref=e127]
+                  - img "Fakih Abdul Karim" [ref=e128]
+                - generic [ref=e129]:
+                  - generic [ref=e130]:
+                    - generic [ref=e131]: SUARA
+                    - generic [ref=e132]: "0"
+                  - generic [ref=e133]:
+                    - generic [ref=e134]: KELAS
+                    - generic [ref=e135]: XI-2
+          - heading "Distribusi Suara" [level=2] [ref=e137]

@@ -1,0 +1,127 @@
+- generic [ref=f17e1]:
+  - generic [ref=f17e2]:
+    - complementary [ref=f17e3]:
+      - heading [level=1] [ref=f17e145]: PILKETOS
+      - navigation [ref=f17e8]:
+        - link [ref=f17e146] [cursor=pointer]:
+          - /url: http://localhost:8000/admin
+          - text: Dashboard
+        - link [ref=f17e147] [cursor=pointer]:
+          - /url: http://localhost:8000/admin/calon
+          - text: Kelola Calon
+        - link [ref=f17e148] [cursor=pointer]:
+          - /url: http://localhost:8000/admin/hak-suara
+          - text: Kelola Hak Suara
+        - link [ref=f17e149] [cursor=pointer]:
+          - /url: http://localhost:8000/admin/tokens
+          - text: Voting Token
+        - link [ref=f17e150] [cursor=pointer]:
+          - /url: http://localhost:8000/admin/admin-config
+          - text: Konfigurasi Admin
+        - link [ref=f17e151] [cursor=pointer]:
+          - /url: http://localhost:8000/voting
+          - text: Voting Page
+      - generic [ref=f17e27]:
+        - generic [ref=f17e28]:
+          - generic [ref=f17e29]: A
+          - generic [ref=f17e31]:
+            - paragraph [ref=f17e32]: Administrator
+            - paragraph [ref=f17e33]: admin@gmail.com
+        - button [ref=f17e152] [cursor=pointer]:
+          - generic [ref=f17e36]: 
+          - text: Logout
+    - generic [ref=f17e37]:
+      - banner [ref=f17e38]:
+        - generic [ref=f17e40]:
+          - heading [level=1] [ref=f17e153]: Data Calon
+          - paragraph [ref=f17e42]: Kelola data calon ketua OSIS
+        - button [ref=f17e154] [cursor=pointer]:
+          - generic [ref=f17e45]: +
+          - text: Tambah Calon
+      - main [ref=f17e46]:
+        - generic [ref=f17e47]:
+          - generic [ref=f17e48]:
+            - generic [ref=f17e49]:
+              - heading [level=2] [ref=f17e155]: Daftar Calon
+              - generic [ref=f17e51]: 3 calon
+            - generic [ref=f17e52]:
+              - generic [ref=f17e53] [cursor=pointer]:
+                - generic [ref=f17e56]:
+                  - generic [ref=f17e57]:
+                    - generic [ref=f17e58]: "1"
+                    - heading [level=3] [ref=f17e157]: Shabira Syahla Alvaliza Fathulloh
+                  - paragraph [ref=f17e60]: XI-1
+                - generic [ref=f17e61]: 
+              - generic [ref=f17e62] [cursor=pointer]:
+                - generic [ref=f17e65]:
+                  - generic [ref=f17e66]:
+                    - generic [ref=f17e67]: "2"
+                    - heading [level=3] [ref=f17e159]: Faiz Nabil Akram
+                  - paragraph [ref=f17e69]: XII-1
+                - generic [ref=f17e70]: 
+              - generic [ref=f17e71] [cursor=pointer]:
+                - generic [ref=f17e74]:
+                  - generic [ref=f17e75]:
+                    - generic [ref=f17e76]: "3"
+                    - heading [level=3] [ref=f17e161]: Fakih Abdul Karim
+                  - paragraph [ref=f17e78]: XI-2
+                - generic [ref=f17e79]: 
+          - generic [ref=f17e80]:
+            - text: 
+            - generic [ref=f17e81]:
+              - generic [ref=f17e82]:
+                - heading [level=2] [ref=f17e162]: Detail Calon
+                - generic [ref=f17e84]:
+                  - button [ref=f17e163] [cursor=pointer]:
+                    - generic [ref=f17e86]: 
+                  - button [ref=f17e164] [cursor=pointer]:
+                    - generic [ref=f17e88]: 
+              - generic [ref=f17e92]:
+                - generic [ref=f17e93]:
+                  - generic [ref=f17e94]: No. 1
+                  - heading [level=3] [ref=f17e165]: Shabira Syahla Alvaliza Fathulloh
+                  - paragraph [ref=f17e97]: Kelas XI-1
+                - generic [ref=f17e98]:
+                  - heading [level=4] [ref=f17e166]: Visi
+                  - paragraph [ref=f17e102]: Menjadikan OSIS sebagai wadah yang inklusif, kreatif, dan berprestasi untuk seluruh siswa, serta menciptakan lingkungan sekolah yang harmonis dan berintegritas.
+                - generic [ref=f17e103]:
+                  - heading [level=4] [ref=f17e167]: Misi
+                  - paragraph [ref=f17e107]: 1. Mengoptimalkan peran OSIS sebagai penghubung antara siswa dan sekolah. 2. Mengembangkan program kerja yang kreatif dan bermanfaat bagi seluruh siswa. 3. Meningkatkan kegiatan akademik dan non-akademik yang mendukung prestasi siswa. 4. Mempererat kekeluargaan dan solidaritas antar siswa melalui kegiatan positif. 5. Menjadi aspirasi siswa dan menjunjung tinggi transparansi dalam setiap kegiatan.
+        - generic:
+          - generic:
+            - heading [level=2]: Edit Calon
+            - button:
+              - generic: 
+          - generic:
+            - generic:
+              - generic:
+                - generic: Nama Lengkap
+                - textbox: Shabira Syahla Alvaliza Fathulloh
+              - generic:
+                - generic:
+                  - generic: Kelas
+                  - combobox
+                - generic:
+                  - generic: Nomor Urut
+                  - spinbutton: "1"
+              - generic:
+                - generic: Upload Foto
+                - generic: Klik untuk memilih foto
+              - generic:
+                - generic: Visi
+                - textbox: Menjadikan OSIS sebagai wadah yang inklusif, kreatif, dan berprestasi untuk seluruh siswa, serta menciptakan lingkungan sekolah yang harmonis dan berintegritas.
+              - generic:
+                - generic: Misi
+                - textbox: 1. Mengoptimalkan peran OSIS sebagai penghubung antara siswa dan sekolah. 2. Mengembangkan program kerja yang kreatif dan bermanfaat bagi seluruh siswa. 3. Meningkatkan kegiatan akademik dan non-akademik yang mendukung prestasi siswa. 4. Mempererat kekeluargaan dan solidaritas antar siswa melalui kegiatan positif. 5. Menjadi aspirasi siswa dan menjunjung tinggi transparansi dalam setiap kegiatan.
+              - generic:
+                - button:
+                  - generic: 
+                  - text: Simpan
+                - button: Batal
+  - dialog [ref=f17e169]:
+    - heading "Hapus Calon" [level=2] [ref=f17e174]
+    - generic [ref=f17e175]: Apakah Anda yakin ingin menghapus calon Shabira Syahla Alvaliza Fathulloh? Foto juga akan dihapus.
+    - text: "!"
+    - generic [ref=f17e176]:
+      - button "Batal" [ref=f17e177]
+      - button "Ya, Hapus" [active] [ref=f17e178] [cursor=pointer]

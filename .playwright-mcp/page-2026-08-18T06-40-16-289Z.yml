@@ -1,0 +1,100 @@
+- generic [active] [ref=f3e1]:
+  - generic [ref=f3e2]:
+    - complementary [ref=f3e3]:
+      - generic [ref=f3e5]:
+        - img "Pilketos" [ref=f3e6]
+        - heading "PILKETOS" [level=1] [ref=f3e7]
+      - navigation [ref=f3e8]:
+        - link "Dashboard" [ref=f3e9] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/admin
+        - link "Kelola Calon" [ref=f3e12] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/admin/calon
+        - link "Kelola Hak Suara" [ref=f3e15] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/admin/hak-suara
+        - link "Voting Token" [ref=f3e18] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/admin/tokens
+        - link "Konfigurasi Admin" [ref=f3e21] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/admin/admin-config
+        - link "Voting Page" [ref=f3e24] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/voting
+      - generic [ref=f3e27]:
+        - generic [ref=f3e28]:
+          - generic [ref=f3e29]: A
+          - generic [ref=f3e31]:
+            - paragraph [ref=f3e32]: Administrator
+            - paragraph [ref=f3e33]: admin@gmail.com
+        - button "Logout" [ref=f3e35] [cursor=pointer]:
+          - generic [ref=f3e36]: 
+          - text: Logout
+    - generic [ref=f3e37]:
+      - banner [ref=f3e38]:
+        - generic [ref=f3e40]:
+          - heading "Display Token" [level=1] [ref=f3e41]
+          - paragraph [ref=f3e42]: Kelola token untuk akses halaman voting
+        - button "Tambah Token" [ref=f3e44] [cursor=pointer]:
+          - generic [ref=f3e45]: +
+          - text: Tambah Token
+      - main [ref=f3e46]:
+        - generic [ref=f3e47]:
+          - generic [ref=f3e48]:
+            - generic [ref=f3e50]:
+              - generic [ref=f3e51]:
+                - paragraph [ref=f3e52]: Total Token
+                - heading "1" [level=3] [ref=f3e53]
+              - generic [ref=f3e54]: 
+            - generic [ref=f3e57]:
+              - generic [ref=f3e58]:
+                - paragraph [ref=f3e59]: Token Aktif
+                - heading "1" [level=3] [ref=f3e60]
+              - generic [ref=f3e61]: 
+            - generic [ref=f3e64]:
+              - generic [ref=f3e65]:
+                - paragraph [ref=f3e66]: Token Nonaktif
+                - heading "0" [level=3] [ref=f3e67]
+              - generic [ref=f3e68]: 
+            - generic [ref=f3e71]:
+              - generic [ref=f3e72]:
+                - paragraph [ref=f3e73]: Rasio Aktif
+                - heading "100.0%" [level=3] [ref=f3e74]
+              - generic [ref=f3e75]: 
+          - table [ref=f3e79]:
+            - rowgroup [ref=f3e80]:
+              - row [ref=f3e81]:
+                - columnheader "No" [ref=f3e82]
+                - columnheader "Token" [ref=f3e83]
+                - columnheader "Status" [ref=f3e84]
+                - columnheader "Aksi" [ref=f3e85]
+            - rowgroup [ref=f3e86]:
+              - row [ref=f3e87]:
+                - cell "1" [ref=f3e88]
+                - cell [ref=f3e89]:
+                  - code [ref=f3e90]: OI9A3M
+                - cell [ref=f3e91]:
+                  - button "Aktif" [ref=f3e93]:
+                    - generic [ref=f3e94]: 
+                    - text: Aktif
+                - cell [ref=f3e95]:
+                  - button "Hapus" [ref=f3e96] [cursor=pointer]:
+                    - generic [ref=f3e97]: 
+        - generic [ref=f3e98]:
+          - generic [ref=f3e99]:
+            - heading "Tambah Token" [level=2] [ref=f3e100]
+            - button [ref=f3e101] [cursor=pointer]:
+              - generic [ref=f3e102]: 
+          - generic [ref=f3e104]:
+            - generic [ref=f3e105]:
+              - generic [ref=f3e106]: Token
+              - generic [ref=f3e107]:
+                - textbox "ABC123" [ref=f3e108]
+                - button "Generate" [ref=f3e109] [cursor=pointer]
+              - paragraph [ref=f3e110]: Maksimal 10 karakter. Huruf dan angka saja.
+            - generic [ref=f3e111]:
+              - button "Simpan" [ref=f3e112] [cursor=pointer]:
+                - generic [ref=f3e113]: 
+                - text: Simpan
+              - button "Batal" [ref=f3e114] [cursor=pointer]
+  - generic [ref=f3e116]:
+    - generic [ref=f3e117]: 
+    - generic [ref=f3e119]: Status token berhasil diupdate!
+    - button [ref=f3e121] [cursor=pointer]
+  - generic [ref=f3e123]: Status token berhasil diupdate!

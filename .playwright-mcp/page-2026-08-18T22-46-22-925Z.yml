@@ -1,0 +1,84 @@
+- generic [ref=f1e2]:
+  - main [ref=f1e3]:
+    - generic [ref=f1e4]:
+      - generic [ref=f1e5]:
+        - heading "Pemilihan Ketua OSIS" [level=1] [ref=f1e66]
+        - paragraph [ref=f1e7]: Pilih satu calon ketua OSIS favorit Anda
+      - generic [ref=f1e8]:
+        - generic [ref=f1e9]:
+          - generic [ref=f1e11] [cursor=pointer]:
+            - generic [ref=f1e12]:
+              - generic [ref=f1e13]: 
+              - generic [ref=f1e14]:
+                - heading "Shabira Syahla Alvaliza" [level=3] [ref=f1e67]
+                - generic [ref=f1e17]:
+                  - heading "01" [level=1] [ref=f1e68]
+                  - img "Shabira Syahla Alvaliza" [ref=f1e69]
+                - generic [ref=f1e21]:
+                  - generic [ref=f1e22]: KELAS
+                  - generic [ref=f1e23]: XI-1
+            - generic:
+              - generic:
+                - generic:
+                  - heading "Shabira Syahla Alvaliza" [level=3]
+                  - paragraph: Kelas XI-1
+                - generic:
+                  - generic:
+                    - heading "Visi" [level=4]
+                  - paragraph: Menjadikan OSIS sebagai wadah yang inklusif, kreatif, dan berprestasi untuk seluruh siswa, serta menciptakan lingkungan sekolah yang harmonis dan berintegritas.
+                - generic:
+                  - generic:
+                    - heading "Misi" [level=4]
+                  - paragraph: 1. Mengoptimalkan peran OSIS sebagai penghubung antara siswa dan sekolah. 2. Mengembangkan program kerja yang kreatif dan bermanfaat bagi seluruh siswa. 3. Meningkatkan kegiatan akademik dan non-akademik yang mendukung prestasi siswa. 4. Mempererat kekeluargaan dan solidaritas antar siswa melalui kegiatan positif. 5. Menjadi aspirasi siswa dan menjunjung tinggi transparansi dalam setiap kegiatan.
+          - generic [ref=f1e25] [cursor=pointer]:
+            - generic [ref=f1e26]:
+              - generic [ref=f1e27]: 
+              - generic [ref=f1e28]:
+                - heading "Faiz Nabil Akram" [level=3] [ref=f1e85]
+                - generic [ref=f1e31]:
+                  - heading "02" [level=1] [ref=f1e86]
+                  - img "Faiz Nabil Akram" [ref=f1e87]
+                - generic [ref=f1e35]:
+                  - generic [ref=f1e36]: KELAS
+                  - generic [ref=f1e37]: XII-1
+            - generic [ref=f1e93]:
+              - generic [ref=f1e94]:
+                - heading "Faiz Nabil Akram" [level=3] [ref=f1e95]
+                - paragraph [ref=f1e96]: Kelas XII-1
+              - generic [ref=f1e97]:
+                - heading "Visi" [level=4] [ref=f1e100]
+                - paragraph [ref=f1e101]: Mewujudkan OSIS yang profesional, berwawasan lingkungan, dan berorientasi pada pengembangan karakter siswa untuk menyongsong generasi emas Indonesia.
+              - generic [ref=f1e102]:
+                - heading "Misi" [level=4] [ref=f1e105]
+                - paragraph [ref=f1e106]: 1. Membangun OSIS yang profesional dengan sistem manajemen yang terstruktur dan akuntabel. 2. Menggalakkan program peduli lingkungan seperti go green dan pengelolaan sampah. 3. Menyelenggarakan pelatihan kepemimpinan dan soft skill bagi seluruh siswa. 4. Memperbanyak kegiatan sosial dan bakti masyarakat untuk menumbuhkan kepedulian sosial. 5. Mendorong siswa berprestasi melalui kompetisi dan pembinaan yang berkelanjutan.
+          - generic [ref=f1e39] [cursor=pointer]:
+            - generic [ref=f1e40]:
+              - generic [ref=f1e41]: 
+              - generic [ref=f1e42]:
+                - heading "Fakih Abdul Karim" [level=3] [ref=f1e88]
+                - generic [ref=f1e45]:
+                  - heading "03" [level=1] [ref=f1e89]
+                  - img "Fakih Abdul Karim" [ref=f1e90]
+                - generic [ref=f1e49]:
+                  - generic [ref=f1e50]: KELAS
+                  - generic [ref=f1e51]: XI-2
+            - generic:
+              - generic:
+                - generic:
+                  - heading [level=3]
+                  - paragraph
+                - generic:
+                  - generic:
+                    - heading "Visi" [level=4]
+                  - paragraph
+                - generic:
+                  - generic:
+                    - heading "Misi" [level=4]
+                  - paragraph
+        - generic [ref=f1e52]:
+          - button "VOTE SEKARANG!" [ref=f1e91] [cursor=pointer]
+          - paragraph [ref=f1e54]: Klik untuk memberikan suara Anda
+  - contentinfo [ref=f1e55]:
+    - generic [ref=f1e57]:
+      - paragraph [ref=f1e58]: Pilketos v2.0 FOSS - Sistem Pemilihan Ketua OSIS
+      - paragraph [ref=f1e59]: Made with $20 Claude subscription by Sattar

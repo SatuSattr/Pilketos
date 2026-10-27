@@ -1,0 +1,130 @@
+- generic [ref=f6e1]:
+  - generic [ref=f6e2]:
+    - complementary [ref=f6e3]:
+      - heading [level=1] [ref=f6e139]: PILKETOS
+      - navigation [ref=f6e8]:
+        - link [ref=f6e140] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/admin
+          - text: Dashboard
+        - link [ref=f6e141] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/admin/calon
+          - text: Kelola Calon
+        - link [ref=f6e142] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/admin/hak-suara
+          - text: Kelola Hak Suara
+        - link [ref=f6e143] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/admin/tokens
+          - text: Voting Token
+        - link [ref=f6e144] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/admin/admin-config
+          - text: Konfigurasi Admin
+        - link [ref=f6e145] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/voting
+          - text: Voting Page
+      - generic [ref=f6e27]:
+        - generic [ref=f6e28]:
+          - generic [ref=f6e29]: A
+          - generic [ref=f6e31]:
+            - paragraph [ref=f6e32]: Administrator
+            - paragraph [ref=f6e33]: admin@gmail.com
+        - button [ref=f6e146] [cursor=pointer]:
+          - generic [ref=f6e36]: 
+          - text: Logout
+    - generic [ref=f6e37]:
+      - banner [ref=f6e38]:
+        - generic [ref=f6e40]:
+          - heading [level=1] [ref=f6e147]: Display Token
+          - paragraph [ref=f6e42]: Kelola token untuk akses halaman voting
+        - button [ref=f6e148] [cursor=pointer]:
+          - generic [ref=f6e45]: +
+          - text: Tambah Token
+      - main [ref=f6e46]:
+        - generic [ref=f6e47]:
+          - generic [ref=f6e48]:
+            - generic [ref=f6e50]:
+              - generic [ref=f6e51]:
+                - paragraph [ref=f6e52]: Total Token
+                - heading [level=3] [ref=f6e149]: "3"
+              - generic [ref=f6e54]: 
+            - generic [ref=f6e57]:
+              - generic [ref=f6e58]:
+                - paragraph [ref=f6e59]: Token Aktif
+                - heading [level=3] [ref=f6e150]: "3"
+              - generic [ref=f6e61]: 
+            - generic [ref=f6e64]:
+              - generic [ref=f6e65]:
+                - paragraph [ref=f6e66]: Token Nonaktif
+                - heading [level=3] [ref=f6e151]: "0"
+              - generic [ref=f6e68]: 
+            - generic [ref=f6e71]:
+              - generic [ref=f6e72]:
+                - paragraph [ref=f6e73]: Rasio Aktif
+                - heading [level=3] [ref=f6e152]: 100.0%
+              - generic [ref=f6e75]: 
+          - table [ref=f6e79]:
+            - rowgroup [ref=f6e80]:
+              - row [ref=f6e153]:
+                - columnheader [ref=f6e154]: "No"
+                - columnheader [ref=f6e155]: Token
+                - columnheader [ref=f6e156]: Status
+                - columnheader [ref=f6e157]: Aksi
+            - rowgroup [ref=f6e86]:
+              - row [ref=f6e158]:
+                - cell [ref=f6e159]: "1"
+                - cell [ref=f6e160]:
+                  - code [ref=f6e90]: "!@#$TOKEN"
+                - cell [ref=f6e161]:
+                  - button [ref=f6e162]:
+                    - generic [ref=f6e94]: 
+                    - text: Aktif
+                - cell [ref=f6e95]:
+                  - button [ref=f6e163] [cursor=pointer]:
+                    - generic [ref=f6e97]: 
+              - row [ref=f6e164]:
+                - cell [ref=f6e165]: "2"
+                - cell [ref=f6e166]:
+                  - code [ref=f6e101]: TESTTOKEN
+                - cell [ref=f6e167]:
+                  - button [ref=f6e168]:
+                    - generic [ref=f6e105]: 
+                    - text: Aktif
+                - cell [ref=f6e106]:
+                  - button [ref=f6e169] [cursor=pointer]:
+                    - generic [ref=f6e108]: 
+              - row [ref=f6e170]:
+                - cell [ref=f6e171]: "3"
+                - cell [ref=f6e172]:
+                  - code [ref=f6e112]: OI9A3M
+                - cell [ref=f6e173]:
+                  - button [ref=f6e174]:
+                    - generic [ref=f6e116]: 
+                    - text: Aktif
+                - cell [ref=f6e117]:
+                  - button [ref=f6e175] [cursor=pointer]:
+                    - generic [ref=f6e119]: 
+        - generic [ref=f6e120]:
+          - generic [ref=f6e121]:
+            - heading [level=2] [ref=f6e176]: Tambah Token
+            - button [ref=f6e123] [cursor=pointer]:
+              - generic [ref=f6e124]: 
+          - generic [ref=f6e126]:
+            - generic [ref=f6e127]:
+              - generic [ref=f6e128]: Token
+              - generic [ref=f6e129]:
+                - textbox [ref=f6e177]:
+                  - /placeholder: ABC123
+                - button [ref=f6e178] [cursor=pointer]: Generate
+              - paragraph [ref=f6e132]: Maksimal 10 karakter. Huruf dan angka saja.
+            - generic [ref=f6e133]:
+              - button [ref=f6e179] [cursor=pointer]:
+                - generic [ref=f6e135]: 
+                - text: Simpan
+              - button [ref=f6e180] [cursor=pointer]: Batal
+  - generic [ref=f6e137]: Token berhasil ditambahkan!
+  - dialog [ref=f6e182]:
+    - heading "Hapus Token" [level=2] [ref=f6e187]
+    - generic [ref=f6e188]: Apakah Anda yakin ingin menghapus token !@#$TOKEN?
+    - text: "!"
+    - generic [ref=f6e189]:
+      - button "Batal" [ref=f6e190]
+      - button "Ya, Hapus" [active] [ref=f6e191] [cursor=pointer]

@@ -1,0 +1,134 @@
+- generic [ref=f13e1]:
+  - generic [ref=f13e2]:
+    - complementary [ref=f13e3]:
+      - heading [level=1] [ref=f13e151]: PILKETOS
+      - navigation [ref=f13e8]:
+        - link [ref=f13e152] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/admin
+          - text: Dashboard
+        - link [ref=f13e153] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/admin/calon
+          - text: Kelola Calon
+        - link [ref=f13e154] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/admin/hak-suara
+          - text: Kelola Hak Suara
+        - link [ref=f13e155] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/admin/tokens
+          - text: Voting Token
+        - link [ref=f13e156] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/admin/admin-config
+          - text: Konfigurasi Admin
+        - link [ref=f13e157] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/voting
+          - text: Voting Page
+      - generic [ref=f13e27]:
+        - generic [ref=f13e28]:
+          - generic [ref=f13e29]: A
+          - generic [ref=f13e31]:
+            - paragraph [ref=f13e32]: Administrator
+            - paragraph [ref=f13e33]: admin@gmail.com
+        - button [ref=f13e158] [cursor=pointer]:
+          - generic [ref=f13e36]: 
+          - text: Logout
+    - generic [ref=f13e37]:
+      - banner [ref=f13e38]:
+        - generic [ref=f13e40]:
+          - heading [level=1] [ref=f13e159]: Data Calon
+          - paragraph [ref=f13e42]: Kelola data calon ketua OSIS
+        - button [ref=f13e160] [cursor=pointer]:
+          - generic [ref=f13e45]: +
+          - text: Tambah Calon
+      - main [ref=f13e46]:
+        - generic [ref=f13e47]:
+          - generic [ref=f13e48]:
+            - generic [ref=f13e49]:
+              - heading [level=2] [ref=f13e161]: Daftar Calon
+              - generic [ref=f13e51]: 4 calon
+            - generic [ref=f13e52]:
+              - generic [ref=f13e53] [cursor=pointer]:
+                - generic [ref=f13e56]:
+                  - generic [ref=f13e57]:
+                    - generic [ref=f13e58]: "-5"
+                    - heading [level=3] [ref=f13e163]: Test Calon
+                  - paragraph [ref=f13e60]: XI-1
+                - generic [ref=f13e61]: 
+              - generic [ref=f13e62] [cursor=pointer]:
+                - generic [ref=f13e65]:
+                  - generic [ref=f13e66]:
+                    - generic [ref=f13e67]: "1"
+                    - heading [level=3] [ref=f13e165]: Shabira Syahla Alvaliza
+                  - paragraph [ref=f13e69]: XI-1
+                - generic [ref=f13e70]: 
+              - generic [ref=f13e71] [cursor=pointer]:
+                - generic [ref=f13e74]:
+                  - generic [ref=f13e75]:
+                    - generic [ref=f13e76]: "2"
+                    - heading [level=3] [ref=f13e167]: Faiz Nabil Akram
+                  - paragraph [ref=f13e78]: XII-1
+                - generic [ref=f13e79]: 
+              - generic [ref=f13e80] [cursor=pointer]:
+                - generic [ref=f13e83]:
+                  - generic [ref=f13e84]:
+                    - generic [ref=f13e85]: "3"
+                    - heading [level=3] [ref=f13e169]: Fakih Abdul Karim
+                  - paragraph [ref=f13e87]: XI-2
+                - generic [ref=f13e88]: 
+          - generic [ref=f13e89]:
+            - text: 
+            - generic [ref=f13e90]:
+              - generic [ref=f13e91]:
+                - heading [level=2] [ref=f13e170]: Detail Calon
+                - generic [ref=f13e93]:
+                  - button [ref=f13e171] [cursor=pointer]:
+                    - generic [ref=f13e95]: 
+                  - button [ref=f13e172] [cursor=pointer]:
+                    - generic [ref=f13e97]: 
+              - generic [ref=f13e101]:
+                - generic [ref=f13e102]:
+                  - generic [ref=f13e103]: No. -5
+                  - heading [level=3] [ref=f13e173]: Test Calon
+                  - paragraph [ref=f13e106]: Kelas XI-1
+                - generic [ref=f13e107]:
+                  - heading [level=4] [ref=f13e174]: Visi
+                  - paragraph [ref=f13e111]: Test visi calon
+                - generic [ref=f13e112]:
+                  - heading [level=4] [ref=f13e175]: Misi
+                  - paragraph [ref=f13e116]: Test misi calon
+        - generic [ref=f13e117]:
+          - generic [ref=f13e118]:
+            - heading [level=2] [ref=f13e176]: Tambah Calon
+            - button [ref=f13e120] [cursor=pointer]:
+              - generic [ref=f13e121]: 
+          - generic [ref=f13e123]:
+            - generic [ref=f13e124]:
+              - generic [ref=f13e125]: Nama Lengkap
+              - textbox [ref=f13e126]
+            - generic [ref=f13e127]:
+              - generic [ref=f13e128]:
+                - generic [ref=f13e129]: Kelas
+                - combobox [ref=f13e130]
+              - generic [ref=f13e131]:
+                - generic [ref=f13e132]: Nomor Urut
+                - spinbutton [ref=f13e133]
+            - generic [ref=f13e134]:
+              - generic [ref=f13e135]: Upload Foto
+              - generic [ref=f13e136]: Klik untuk memilih foto
+            - generic [ref=f13e139]:
+              - generic [ref=f13e140]: Visi
+              - textbox [ref=f13e141]
+            - generic [ref=f13e142]:
+              - generic [ref=f13e143]: Misi
+              - textbox [ref=f13e144]
+            - generic [ref=f13e145]:
+              - button [ref=f13e177] [cursor=pointer]:
+                - generic [ref=f13e147]: 
+                - text: Simpan
+              - button [ref=f13e178] [cursor=pointer]: Batal
+  - generic [ref=f13e149]: Calon berhasil ditambahkan!
+  - dialog [ref=f13e180]:
+    - heading "Hapus Calon" [level=2] [ref=f13e185]
+    - generic [ref=f13e186]: Apakah Anda yakin ingin menghapus calon Test Calon? Foto juga akan dihapus.
+    - text: "!"
+    - generic [ref=f13e187]:
+      - button "Batal" [ref=f13e188]
+      - button "Ya, Hapus" [active] [ref=f13e189] [cursor=pointer]

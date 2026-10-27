@@ -1,0 +1,804 @@
+﻿<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Pilketos | Pilih Calon Ketua OSIS</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        />
+        <link rel="icon" type="image/x-icon" href="public/img/logo.png" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"
+        ></script>
+
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: [
+                                "Montserrat",
+                                "ui-sans-serif",
+                                "system-ui",
+                                "sans-serif",
+                            ],
+                        },
+                        colors: {
+                            primary: "var(--color-primary)",
+                            secondary: "var(--color-secondary)",
+                            accent: "var(--color-accent)",
+                            birupesat: "var(--color-birupesat)",
+                            "birupesat-hover": "var(--color-birupesat-hover)",
+                        },
+                    },
+                },
+            };
+        </script>
+
+        <style>
+            :root {
+                /* Warna Brand */
+                --color-primary: #fbfafb;
+                --color-secondary: #fffefe;
+                --color-accent: #232322;
+                --color-birupesat: #2f2575;
+                --color-birupesat-hover: #221a56;
+                --color-ink: #1a1a1b;
+
+                /* Warna Netral */
+                --color-white: #ffffff;
+                --color-gray-50: #f9fafb;
+                --color-gray-100: #f3f4f6;
+                --color-gray-200: #e5e7eb;
+                --color-gray-300: #d1d5db;
+                --color-gray-400: #9ca3af;
+                --color-gray-500: #6b7280;
+                --color-gray-600: #4b5563;
+                --color-gray-700: #374151;
+                --color-gray-800: #1f2937;
+                --color-gray-900: #111827;
+
+                /* Warna Status */
+                --color-danger: #dc2626;
+                --color-info-hover: #1d4ed8;
+                --color-success: #10b981;
+                --color-error: #ef4444;
+                --color-warning: #f59e0b;
+                --color-question: #3b82f6;
+            }
+
+            body {
+                font-family: "Montserrat", sans-serif;
+                background-color: var(--color-primary);
+                background-image:
+                    linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+                    linear-gradient(
+                        90deg,
+                        rgba(0, 0, 0, 0.03) 1px,
+                        transparent 1px
+                    );
+                background-size: 40px 40px;
+            }
+
+            body.swal2-shown {
+                padding-right: 0 !important;
+            }
+
+            .swal2-popup {
+                font-family: "Montserrat", sans-serif !important;
+                border-radius: 1.5rem !important;
+                padding: 2rem !important;
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+            }
+            .swal2-title {
+                color: var(--color-ink) !important;
+                font-weight: 700 !important;
+                font-size: 1.875rem !important;
+                margin-bottom: 1rem !important;
+            }
+            .swal2-html-container {
+                color: var(--color-gray-500) !important;
+                font-size: 1rem !important;
+                line-height: 1.5 !important;
+                margin-bottom: 1.5rem !important;
+            }
+            .swal2-confirm {
+                background-color: var(--color-ink) !important;
+                color: var(--color-white) !important;
+                border: none !important;
+                border-radius: 0.75rem !important;
+                padding: 0.75rem 2rem !important;
+                font-weight: 600 !important;
+                font-size: 1rem !important;
+                transition: all 0.3s ease !important;
+                box-shadow: none !important;
+            }
+            .swal2-confirm:hover {
+                background-color: var(--color-gray-700) !important;
+                transform: translateY(-1px) !important;
+            }
+            .swal2-cancel {
+                background-color: var(--color-gray-500) !important;
+                color: var(--color-white) !important;
+                border: none !important;
+                border-radius: 0.75rem !important;
+                padding: 0.75rem 2rem !important;
+                font-weight: 600 !important;
+                font-size: 1rem !important;
+                margin-right: 1rem !important;
+                box-shadow: none !important;
+            }
+            .swal2-cancel:hover {
+                background-color: var(--color-gray-600) !important;
+            }
+            .swal2-icon.swal2-success {
+                border-color: var(--color-success) !important;
+                color: var(--color-success) !important;
+            }
+            .swal2-icon.swal2-error {
+                border-color: var(--color-error) !important;
+                color: var(--color-error) !important;
+            }
+            .swal2-icon.swal2-warning {
+                border-color: var(--color-warning) !important;
+                color: var(--color-warning) !important;
+            }
+            .swal2-icon.swal2-question {
+                border-color: var(--color-question) !important;
+                color: var(--color-question) !important;
+            }
+            .card:not(.selected):hover {
+                border-color: var(--color-birupesat) !important;
+                box-shadow: 0 10px 25px -5px rgba(47, 37, 117, 0.3) !important;
+                cursor: pointer;
+            }
+            .card.selected {
+                border-color: var(--color-birupesat) !important;
+                box-shadow: 0 10px 25px -5px rgba(47, 37, 117, 0.5) !important;
+                cursor: pointer;
+            }
+            .card.selected .selection-indicator {
+                opacity: 100;
+            }
+        </style>
+    </head>
+
+    <body class="bg-primary">
+        <div class="flex flex-col min-h-screen">
+            <main class="flex-grow flex items-center justify-center">
+                <div class="mx-auto w-full">
+                    <div class="text-center px-6 lg:p-0 mb-6 lg:mb-12">
+                        <h1
+                            class="text-2xl lg:text-4xl font-bold text-accent mb-2 lg:mb-2"
+                        >
+                            Pemilihan Ketua OSIS
+                        </h1>
+                        <p class="text-lg lg:text-xl text-gray-600 mb-2">
+                            Pilih satu calon ketua OSIS favorit Anda
+                        </p>
+                    </div>
+
+                    <form id="votingForm" class="space-y-8">
+                        <div
+                            class="flex flex-nowrap gap-2 lg:gap-8 items-center justify-center"
+                            x-data="voting"
+                        >
+                            <template
+                                x-for="(calon, index) in calons"
+                                :key="calon.id"
+                            >
+                                <div
+                                    :id="'caketos-container-' + (index + 1)"
+                                    class="caketos-item"
+                                >
+                                    <div
+                                        class="cursor-pointer flex w-[10rem] lg:w-[22rem] group items-center relative"
+                                    >
+                                        <div
+                                            class="bg-white z-10 card w-full border-2 border-gray-200 rounded-xl shadow-lg hover:shadow-xl hover:border-birupesat cursor-pointer transition-all duration-300 overflow-hidden max-w-sm group relative"
+                                            :data-calon-id="calon.id"
+                                            :data-visi="calon.visi"
+                                            :data-misi="calon.misi"
+                                            :data-nama="calon.nama"
+                                            :data-kelas="calon.kelas"
+                                        >
+                                            <i
+                                                class="selection-indicator opacity-0 text-birupesat absolute top-2.5 right-2.5 text-lg lg:text-2xl fa-solid fa-circle-check z-20 transition-opacity duration-150 ease-in-out"
+                                            ></i>
+
+                                            <input
+                                                type="radio"
+                                                name="id_calon"
+                                                :value="calon.id"
+                                                :id="'calon_' + calon.id"
+                                                class="hidden candidate-radio"
+                                            />
+
+                                            <label
+                                                :for="'calon_' + calon.id"
+                                                class="cursor-pointer block"
+                                            >
+                                                <div
+                                                    class="flex gap-3 p-3 lg:p-6 border-b border-gray-100"
+                                                >
+                                                    <h3
+                                                        class="font-bold text-lg lg:text-2xl leading-5 lg:leading-6"
+                                                    >
+                                                        <span
+                                                            x-text="calon.firstName"
+                                                        ></span
+                                                        ><br />
+                                                        <span
+                                                            class="text-gray-500 text-sm lg:text-xl font-medium"
+                                                            x-text="calon.lastName"
+                                                        ></span>
+                                                    </h3>
+                                                </div>
+                                                <div
+                                                    class="h-[10rem] lg:h-[22rem] bg-gradient-to-br from-gray-50 to-gray-200 flex items-center justify-center overflow-hidden relative"
+                                                >
+                                                    <h1
+                                                        class="absolute duration-200 ease-in-out top-3 m-0 left-4 font-bold opacity-20 text-6xl lg:text-9xl"
+                                                        x-text="calon.nomor"
+                                                    ></h1>
+                                                    <img
+                                                        class="size-[140%] object-cover absolute -top-3 -right-9"
+                                                        :src="calon.urlFoto"
+                                                        :alt="calon.nama"
+                                                    />
+                                                </div>
+                                                <div
+                                                    class="p-3 lg:p-6 space-y-3"
+                                                >
+                                                    <div
+                                                        class="flex justify-between text-sm lg:text-xl"
+                                                    >
+                                                        <span
+                                                            class="text-gray-500 font-medium"
+                                                            >KELAS</span
+                                                        >
+                                                        <span
+                                                            class="text-accent font-semibold"
+                                                            x-text="calon.kelas"
+                                                        ></span>
+                                                    </div>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div
+                                            class="detail-panel absolute top-[5%] left-0 w-[10rem] lg:w-[22rem] h-[90%] bg-white border-2 border-birupesat rounded-xl shadow-xl overflow-hidden pointer-events-none z-0"
+                                            style="transform: translateX(0)"
+                                        >
+                                            <div
+                                                class="p-4 pl-7 lg:p-6 lg:pl-9 h-full overflow-y-auto"
+                                            >
+                                                <div class="mb-4">
+                                                    <h3
+                                                        class="font-bold text-lg lg:text-2xl text-accent mb-1 detail-nama"
+                                                    ></h3>
+                                                    <p
+                                                        class="text-sm lg:text-base text-gray-600 detail-kelas"
+                                                    ></p>
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <div
+                                                        class="flex items-center gap-2 mb-2"
+                                                    >
+                                                        <div
+                                                            class="w-1 h-4 rounded-full bg-birupesat"
+                                                        ></div>
+                                                        <h4
+                                                            class="text-xs lg:text-sm font-semibold text-gray-700 uppercase tracking-wide"
+                                                        >
+                                                            Visi
+                                                        </h4>
+                                                    </div>
+                                                    <p
+                                                        class="text-xs lg:text-sm text-gray-600 leading-relaxed bg-gray-50 rounded-lg p-3 detail-visi"
+                                                    ></p>
+                                                </div>
+
+                                                <div>
+                                                    <div
+                                                        class="flex items-center gap-2 mb-2"
+                                                    >
+                                                        <div
+                                                            class="w-1 h-4 rounded-full bg-accent"
+                                                        ></div>
+                                                        <h4
+                                                            class="text-xs lg:text-sm font-semibold text-gray-700 uppercase tracking-wide"
+                                                        >
+                                                            Misi
+                                                        </h4>
+                                                    </div>
+                                                    <p
+                                                        class="text-xs lg:text-sm text-gray-600 leading-relaxed bg-gray-50 rounded-lg p-3 whitespace-pre-line detail-misi"
+                                                    ></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+
+                        <div class="text-center mt-12">
+                            <button
+                                type="submit"
+                                id="voteButton"
+                                disabled
+                                class="bg-gray-400 text-white py-4 px-12 rounded-2xl font-bold text-lg transition-all duration-300 cursor-not-allowed"
+                            >
+                                Pilih Calon Favorit
+                            </button>
+                            <p class="text-sm text-gray-500 mt-3">
+                                Silakan pilih salah satu calon terlebih dahulu
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </main>
+
+            <footer class="bg-secondary border-t border-gray-200">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+                    <div class="text-center">
+                        <p class="text-sm text-gray-600">
+                            Pilketos v2.0 FOSS - Sistem Pemilihan Ketua OSIS
+                        </p>
+                        <p class="text-xs text-gray-500 mt-1">
+                            Made with $20 Claude subscription by Sattar
+                        </p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        <script>
+            document.addEventListener("alpine:init", () => {
+                Alpine.data("voting", () => ({
+                    calons: [
+                        {
+                            id: 1,
+                            nomor: "01",
+                            nama: "Shabira Syahla Alvaliza",
+                            firstName: "Shabira",
+                            lastName: "Syahla Alvaliza",
+                            kelas: "XI-1",
+                            urlFoto:
+                                "storage/app/public/foto_calon/shabira-syahla-alvaliza.png",
+                            visi: "Menjadikan OSIS sebagai wadah yang inklusif, kreatif, dan berprestasi untuk seluruh siswa, serta menciptakan lingkungan sekolah yang harmonis dan berintegritas.",
+                            misi: "1. Mengoptimalkan peran OSIS sebagai penghubung antara siswa dan sekolah.\n2. Mengembangkan program kerja yang kreatif dan bermanfaat bagi seluruh siswa.\n3. Meningkatkan kegiatan akademik dan non-akademik yang mendukung prestasi siswa.\n4. Mempererat kekeluargaan dan solidaritas antar siswa melalui kegiatan positif.\n5. Menjadi aspirasi siswa dan menjunjung tinggi transparansi dalam setiap kegiatan.",
+                        },
+                        {
+                            id: 2,
+                            nomor: "02",
+                            nama: "Faiz Nabil Akram",
+                            firstName: "Faiz",
+                            lastName: "Nabil Akram",
+                            kelas: "XII-1",
+                            urlFoto:
+                                "storage/app/public/foto_calon/faiz-nabil-akram.png",
+                            visi: "Mewujudkan OSIS yang profesional, berwawasan lingkungan, dan berorientasi pada pengembangan karakter siswa untuk menyongsong generasi emas Indonesia.",
+                            misi: "1. Membangun OSIS yang profesional dengan sistem manajemen yang terstruktur dan akuntabel.\n2. Menggalakkan program peduli lingkungan seperti go green dan pengelolaan sampah.\n3. Menyelenggarakan pelatihan kepemimpinan dan soft skill bagi seluruh siswa.\n4. Memperbanyak kegiatan sosial dan bakti masyarakat untuk menumbuhkan kepedulian sosial.\n5. Mendorong siswa berprestasi melalui kompetisi dan pembinaan yang berkelanjutan.",
+                        },
+                        {
+                            id: 3,
+                            nomor: "03",
+                            nama: "Fakih Abdul Karim",
+                            firstName: "Fakih",
+                            lastName: "Abdul Karim",
+                            kelas: "XI-2",
+                            urlFoto:
+                                "storage/app/public/foto_calon/fakih-abdul-karim.png",
+                            visi: "Menjadikan OSIS sebagai organisasi yang progresif, inovatif, dan mampu menjawab tantangan zaman melalui berbagai program unggulan yang berdampak nyata.",
+                            misi: "1. Mendorong inovasi dan kreativitas siswa melalui program-program unggulan berbasis teknologi.\n2. Memperkuat komunikasi dan kolaborasi antar organisasi ekstrakurikuler di sekolah.\n3. Mengadakan seminar, workshop, dan diskusi ilmiah untuk meningkatkan wawasan siswa.\n4. Menjalin kerjasama dengan pihak eksternal untuk memperluas jaringan dan peluang siswa.\n5. Menciptakan budaya disiplin, mandiri, dan berintegritas di lingkungan sekolah.",
+                        },
+                    ],
+                }));
+            });
+
+            document.addEventListener("alpine:initialized", () => {
+                const candidateRadios =
+                    document.querySelectorAll(".candidate-radio");
+                const candidateCards = document.querySelectorAll(".card");
+                const voteButton = document.getElementById("voteButton");
+                const allItems = document.querySelectorAll(".caketos-item");
+                let currentlyExpanded = null;
+                const activeAnimations = new Map();
+
+                function ease(t) {
+                    return t < 0.5
+                        ? 2 * t * t
+                        : 1 - Math.pow(-2 * t + 2, 2) / 2;
+                }
+
+                function cancelAnimation(el) {
+                    const existing = activeAnimations.get(el);
+                    if (existing) {
+                        cancelAnimationFrame(existing);
+                        activeAnimations.delete(el);
+                    }
+                }
+
+                function animateValue(
+                    el,
+                    from,
+                    to,
+                    duration,
+                    callback,
+                    onDone,
+                ) {
+                    cancelAnimation(el);
+                    const start = performance.now();
+
+                    function step(now) {
+                        const elapsed = now - start;
+                        const progress = Math.min(elapsed / duration, 1);
+                        const eased = ease(progress);
+                        callback(from + (to - from) * eased);
+                        if (progress < 1) {
+                            activeAnimations.set(
+                                el,
+                                requestAnimationFrame(step),
+                            );
+                        } else {
+                            activeAnimations.delete(el);
+                            if (onDone) onDone();
+                        }
+                    }
+                    activeAnimations.set(el, requestAnimationFrame(step));
+                }
+
+                function getItemsAfter(item) {
+                    const after = [];
+                    allItems.forEach((other) => {
+                        if (
+                            other !== item &&
+                            other.compareDocumentPosition(item) &
+                                Node.DOCUMENT_POSITION_PRECEDING
+                        ) {
+                            after.push(other);
+                        }
+                    });
+                    return after;
+                }
+
+                function expandPanel(card, container) {
+                    const detailPanel =
+                        container.querySelector(".detail-panel");
+                    const cardWidth = card.offsetWidth;
+                    const overlap = 10;
+                    const slideDistance = cardWidth - overlap;
+
+                    detailPanel.querySelector(".detail-nama").textContent =
+                        card.dataset.nama;
+                    detailPanel.querySelector(".detail-kelas").textContent =
+                        "Kelas " + card.dataset.kelas;
+                    detailPanel.querySelector(".detail-visi").textContent =
+                        card.dataset.visi;
+                    detailPanel.querySelector(".detail-misi").textContent =
+                        card.dataset.misi;
+
+                    const siblingsAfter = getItemsAfter(container);
+
+                    animateValue(
+                        detailPanel,
+                        0,
+                        slideDistance,
+                        400,
+                        (val) => {
+                            detailPanel.style.transform =
+                                "translateX(" + val + "px)";
+                        },
+                        () => {
+                            detailPanel.style.pointerEvents = "auto";
+                        },
+                    );
+
+                    siblingsAfter.forEach((sib) => {
+                        const currentTransform = sib.style.transform;
+                        const currentVal = currentTransform
+                            ? parseFloat(
+                                  currentTransform.match(
+                                      /translateX\((.+)px\)/,
+                                  )?.[1] || 0,
+                              )
+                            : 0;
+                        animateValue(
+                            sib,
+                            currentVal,
+                            slideDistance,
+                            400,
+                            (val) => {
+                                sib.style.transform =
+                                    "translateX(" + val + "px)";
+                            },
+                        );
+                    });
+
+                    detailPanel.style.pointerEvents = "none";
+                    currentlyExpanded = container;
+                }
+
+                function collapsePanel(container) {
+                    const detailPanel =
+                        container.querySelector(".detail-panel");
+                    const currentTransform = detailPanel.style.transform;
+                    const currentVal = currentTransform
+                        ? parseFloat(
+                              currentTransform.match(
+                                  /translateX\((.+)px\)/,
+                              )?.[1] || 0,
+                          )
+                        : 0;
+
+                    const siblingsAfter = getItemsAfter(container);
+
+                    animateValue(
+                        detailPanel,
+                        currentVal,
+                        0,
+                        400,
+                        (val) => {
+                            detailPanel.style.transform =
+                                "translateX(" + val + "px)";
+                        },
+                        () => {
+                            detailPanel.style.pointerEvents = "none";
+                        },
+                    );
+
+                    siblingsAfter.forEach((sib) => {
+                        const sibTransform = sib.style.transform;
+                        const sibCurrent = sibTransform
+                            ? parseFloat(
+                                  sibTransform.match(
+                                      /translateX\((.+)px\)/,
+                                  )?.[1] || 0,
+                              )
+                            : 0;
+                        animateValue(sib, sibCurrent, 0, 400, (val) => {
+                            sib.style.transform = "translateX(" + val + "px)";
+                        });
+                    });
+
+                    currentlyExpanded = null;
+                }
+
+                candidateCards.forEach((card) => {
+                    card.addEventListener("click", function (e) {
+                        if (
+                            e.target.tagName === "LABEL" ||
+                            e.target.closest("label")
+                        ) {
+                            return;
+                        }
+
+                        const container = this.closest(".caketos-item");
+
+                        if (currentlyExpanded === container) {
+                            return;
+                        }
+
+                        if (currentlyExpanded) {
+                            const prevContainer = currentlyExpanded;
+                            collapsePanel(prevContainer);
+                            setTimeout(() => expandPanel(this, container), 50);
+                        } else {
+                            expandPanel(this, container);
+                        }
+                    });
+                });
+
+                candidateRadios.forEach((radio) => {
+                    radio.addEventListener("change", function () {
+                        candidateCards.forEach((card) =>
+                            card.classList.remove("selected"),
+                        );
+                        if (this.checked) {
+                            this.closest(".card").classList.add("selected");
+                            voteButton.disabled = false;
+                            voteButton.classList.remove(
+                                "bg-gray-400",
+                                "cursor-not-allowed",
+                            );
+                            voteButton.classList.add(
+                                "bg-birupesat",
+                                "hover:bg-birupesat-hover",
+                                "cursor-pointer",
+                            );
+                            voteButton.textContent = "VOTE SEKARANG!";
+                            voteButton.nextElementSibling.textContent =
+                                "Klik untuk memberikan suara Anda";
+                        }
+                    });
+                });
+
+                function validateToken(token) {
+                    return new Promise((resolve) => {
+                        setTimeout(
+                            () =>
+                                resolve({
+                                    success: true,
+                                    message: "Token valid",
+                                }),
+                            400,
+                        );
+                    });
+                }
+
+                function showTokenPopup() {
+                    Swal.fire({
+                        title: "Masukkan Display Token",
+                        input: "text",
+                        inputPlaceholder: "Masukkan token di sini...",
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        backdrop: true,
+                        preConfirm: (token) => {
+                            if (!token) {
+                                Swal.showValidationMessage(
+                                    "Token tidak boleh kosong",
+                                );
+                                return false;
+                            }
+                            return validateToken(token).then((data) => {
+                                if (!data.success) {
+                                    Swal.showValidationMessage(
+                                        data.message || "Token tidak valid",
+                                    );
+                                    return false;
+                                }
+                                sessionStorage.setItem("display_token", token);
+                                return true;
+                            });
+                        },
+                    });
+                }
+
+                document
+                    .getElementById("votingForm")
+                    .addEventListener("submit", function (e) {
+                        e.preventDefault();
+
+                        let token = sessionStorage.getItem("display_token");
+                        if (!token) {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Token Hilang",
+                                text: "Silakan masukkan token terlebih dahulu.",
+                            }).then(() => showTokenPopup());
+                            return;
+                        }
+
+                        const selectedCandidate = document.querySelector(
+                            'input[name="id_calon"]:checked',
+                        );
+                        if (!selectedCandidate) {
+                            Swal.fire({
+                                icon: "warning",
+                                title: "Pilihan Belum Dipilih",
+                                text: "Silakan pilih salah satu calon terlebih dahulu!",
+                                confirmButtonText: "OK, Mengerti",
+                            });
+                            return;
+                        }
+
+                        const candidateCard =
+                            selectedCandidate.closest(".card");
+                        const candidateName = candidateCard
+                            .querySelector("h3")
+                            .textContent.trim()
+                            .replace(/\s+/g, " ");
+
+                        Swal.fire({
+                            icon: "question",
+                            title: "Konfirmasi Pilihan",
+                            html: `Apakah Anda yakin ingin memilih <strong>${candidateName}</strong> sebagai calon ketua OSIS?`,
+                            input: "text",
+                            inputLabel: "Masukkan Nama Anda",
+                            inputPlaceholder: "Contoh: Shabira Syahla",
+                            inputAttributes: {
+                                maxlength: 255,
+                                autocapitalize: "off",
+                                autocorrect: "off",
+                            },
+                            showCancelButton: true,
+                            confirmButtonText: "Ya, Pilih Calon Ini",
+                            cancelButtonText: "Batal",
+                            reverseButtons: true,
+                            preConfirm: (nisn) => {
+                                if (!nisn) {
+                                    Swal.showValidationMessage(
+                                        "Nama tidak boleh kosong!",
+                                    );
+                                }
+                                return nisn;
+                            },
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                Swal.fire({
+                                    title: "Memproses Vote...",
+                                    text: "Mohon tunggu sebentar",
+                                    allowOutsideClick: false,
+                                    allowEscapeKey: false,
+                                    showConfirmButton: false,
+                                    didOpen: () => Swal.showLoading(),
+                                });
+
+                                setTimeout(() => {
+                                    Swal.fire({
+                                        icon: "success",
+                                        title: "Vote Berhasil!",
+                                        html: "Terima kasih telah berpartisipasi dalam pemilihan ketua OSIS!",
+                                        confirmButtonText: "Close",
+                                        timer: 3000,
+                                        timerProgressBar: true,
+                                    }).then(() => resetForm());
+                                }, 1000);
+                            }
+                        });
+                    });
+
+                function resetForm() {
+                    document.getElementById("votingForm").reset();
+                    candidateCards.forEach((card) =>
+                        card.classList.remove("selected"),
+                    );
+                    voteButton.disabled = true;
+                    voteButton.classList.remove(
+                        "bg-birupesat",
+                        "hover:bg-birupesat-hover",
+                        "cursor-pointer",
+                    );
+                    voteButton.classList.add(
+                        "bg-gray-400",
+                        "cursor-not-allowed",
+                    );
+                    voteButton.textContent = "Pilih Calon Favorit";
+                    voteButton.nextElementSibling.textContent =
+                        "Silakan pilih salah satu calon terlebih dahulu";
+                    activeAnimations.forEach((id, el) =>
+                        cancelAnimationFrame(id),
+                    );
+                    activeAnimations.clear();
+                    allItems.forEach((item) => {
+                        item.style.transform = "";
+                        const panel = item.querySelector(".detail-panel");
+                        if (panel) {
+                            panel.style.transform = "translateX(0)";
+                            panel.style.pointerEvents = "none";
+                        }
+                    });
+                    currentlyExpanded = null;
+                }
+
+                let token = sessionStorage.getItem("display_token");
+
+                if (!token) {
+                    showTokenPopup();
+                } else {
+                    validateToken(token).then((data) => {
+                        if (!data.success) {
+                            sessionStorage.removeItem("display_token");
+                            showTokenPopup();
+                        }
+                    });
+                }
+            });
+        </script>
+    </body>
+</html>

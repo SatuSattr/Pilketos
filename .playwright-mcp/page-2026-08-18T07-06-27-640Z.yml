@@ -1,0 +1,80 @@
+- generic [ref=f24e2]:
+  - complementary [ref=f24e3]:
+    - generic [ref=f24e5]:
+      - img "Pilketos" [ref=f24e6]
+      - heading "PILKETOS" [level=1] [ref=f24e7]
+    - navigation [ref=f24e8]:
+      - link "Dashboard" [ref=f24e9] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin
+      - link "Kelola Calon" [ref=f24e12] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin/calon
+      - link "Kelola Hak Suara" [ref=f24e15] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin/hak-suara
+      - link "Voting Token" [ref=f24e18] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin/tokens
+      - link "Konfigurasi Admin" [ref=f24e21] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin/admin-config
+      - link "Voting Page" [ref=f24e24] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/voting
+    - generic [ref=f24e27]:
+      - generic [ref=f24e28]:
+        - generic [ref=f24e29]: A
+        - generic [ref=f24e31]:
+          - paragraph [ref=f24e32]: Administrator
+          - paragraph [ref=f24e33]: admin@gmail.com
+      - button "Logout" [ref=f24e35] [cursor=pointer]:
+        - generic [ref=f24e36]: 
+        - text: Logout
+  - generic [ref=f24e37]:
+    - banner [ref=f24e38]:
+      - generic [ref=f24e40]:
+        - heading "Konfigurasi Admin" [level=1] [ref=f24e41]
+        - paragraph [ref=f24e42]: Kelola akun administrator sistem
+      - button "Tambah Admin" [ref=f24e44] [cursor=pointer]:
+        - generic [ref=f24e45]: +
+        - text: Tambah Admin
+    - main [ref=f24e46]:
+      - generic [ref=f24e48]:
+        - heading "Daftar Admin" [level=2] [ref=f24e50]
+        - generic [ref=f24e51]:
+          - generic [ref=f24e52]:
+            - generic [ref=f24e53]: A
+            - generic [ref=f24e55]:
+              - heading "Admin Test" [level=3] [ref=f24e56]
+              - paragraph [ref=f24e57]: admintest@gmail.com
+            - generic [ref=f24e58]:
+              - button "Edit" [ref=f24e59] [cursor=pointer]:
+                - generic [ref=f24e60]: 
+              - button "Hapus" [ref=f24e61] [cursor=pointer]:
+                - generic [ref=f24e62]: 
+          - generic [ref=f24e63]:
+            - generic [ref=f24e64]: A
+            - generic [ref=f24e66]:
+              - heading "Administrator" [level=3] [ref=f24e67]
+              - paragraph [ref=f24e68]: admin@gmail.com
+            - button "Edit" [ref=f24e70] [cursor=pointer]:
+              - generic [ref=f24e71]: 
+      - generic [ref=f24e72]:
+        - generic [ref=f24e73]:
+          - heading "Tambah Admin" [level=2] [ref=f24e74]
+          - button [ref=f24e75] [cursor=pointer]:
+            - generic [ref=f24e76]: 
+        - generic [ref=f24e78]:
+          - generic [ref=f24e79]:
+            - generic [ref=f24e80]: Nama Lengkap
+            - textbox [ref=f24e81]
+          - generic [ref=f24e82]:
+            - generic [ref=f24e83]: Email
+            - textbox [ref=f24e84]
+          - generic [ref=f24e85]:
+            - generic [ref=f24e86]: Password
+            - textbox [ref=f24e87]
+            - paragraph [ref=f24e88]: Minimal 6 karakter. Kosongkan jika tidak ingin mengubah password.
+          - generic [ref=f24e89]:
+            - generic [ref=f24e90]: Konfirmasi Password
+            - textbox [ref=f24e91]
+          - generic [ref=f24e92]:
+            - button "Simpan" [ref=f24e93] [cursor=pointer]:
+              - generic [ref=f24e94]: 
+              - text: Simpan
+            - button "Batal" [ref=f24e95] [cursor=pointer]

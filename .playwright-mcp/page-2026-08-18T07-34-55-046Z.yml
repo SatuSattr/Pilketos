@@ -1,0 +1,94 @@
+- generic [ref=f16e2]:
+  - complementary [ref=f16e3]:
+    - generic [ref=f16e5]:
+      - img "Pilketos" [ref=f16e6]
+      - heading "PILKETOS" [level=1] [ref=f16e7]
+    - navigation [ref=f16e8]:
+      - link "Dashboard" [ref=f16e9] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin
+      - link "Kelola Calon" [ref=f16e12] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin/calon
+      - link "Kelola Hak Suara" [ref=f16e15] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin/hak-suara
+      - link "Voting Token" [ref=f16e18] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin/tokens
+      - link "Konfigurasi Admin" [ref=f16e21] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin/admin-config
+      - link "Voting Page" [ref=f16e24] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/voting
+    - generic [ref=f16e27]:
+      - generic [ref=f16e28]:
+        - generic [ref=f16e29]: A
+        - generic [ref=f16e31]:
+          - paragraph [ref=f16e32]: Administrator
+          - paragraph [ref=f16e33]: admin@gmail.com
+      - button "Logout" [ref=f16e35] [cursor=pointer]:
+        - generic [ref=f16e36]: 
+        - text: Logout
+  - generic [ref=f16e37]:
+    - banner [ref=f16e38]:
+      - generic [ref=f16e40]:
+        - heading "Display Token" [level=1] [ref=f16e41]
+        - paragraph [ref=f16e42]: Kelola token untuk akses halaman voting
+      - button "Tambah Token" [ref=f16e44] [cursor=pointer]:
+        - generic [ref=f16e45]: +
+        - text: Tambah Token
+    - main [ref=f16e46]:
+      - generic [ref=f16e47]:
+        - generic [ref=f16e48]:
+          - generic [ref=f16e50]:
+            - generic [ref=f16e51]:
+              - paragraph [ref=f16e52]: Total Token
+              - heading "1" [level=3] [ref=f16e53]
+            - generic [ref=f16e54]: 
+          - generic [ref=f16e57]:
+            - generic [ref=f16e58]:
+              - paragraph [ref=f16e59]: Token Aktif
+              - heading "1" [level=3] [ref=f16e60]
+            - generic [ref=f16e61]: 
+          - generic [ref=f16e64]:
+            - generic [ref=f16e65]:
+              - paragraph [ref=f16e66]: Token Nonaktif
+              - heading "0" [level=3] [ref=f16e67]
+            - generic [ref=f16e68]: 
+          - generic [ref=f16e71]:
+            - generic [ref=f16e72]:
+              - paragraph [ref=f16e73]: Rasio Aktif
+              - heading "100.0%" [level=3] [ref=f16e74]
+            - generic [ref=f16e75]: 
+        - table [ref=f16e79]:
+          - rowgroup [ref=f16e80]:
+            - row [ref=f16e81]:
+              - columnheader "No" [ref=f16e82]
+              - columnheader "Token" [ref=f16e83]
+              - columnheader "Status" [ref=f16e84]
+              - columnheader "Aksi" [ref=f16e85]
+          - rowgroup [ref=f16e86]:
+            - row [ref=f16e87]:
+              - cell "1" [ref=f16e88]
+              - cell [ref=f16e89]:
+                - code [ref=f16e90]: OI9A3M
+              - cell [ref=f16e91]:
+                - button "Aktif" [ref=f16e93]:
+                  - generic [ref=f16e94]: 
+                  - text: Aktif
+              - cell [ref=f16e95]:
+                - button "Hapus" [ref=f16e96] [cursor=pointer]:
+                  - generic [ref=f16e97]: 
+      - generic [ref=f16e98]:
+        - generic [ref=f16e99]:
+          - heading "Tambah Token" [level=2] [ref=f16e100]
+          - button [ref=f16e101] [cursor=pointer]:
+            - generic [ref=f16e102]: 
+        - generic [ref=f16e104]:
+          - generic [ref=f16e105]:
+            - generic [ref=f16e106]: Token
+            - generic [ref=f16e107]:
+              - textbox "ABC123" [ref=f16e108]
+              - button "Generate" [ref=f16e109] [cursor=pointer]
+            - paragraph [ref=f16e110]: Maksimal 10 karakter. Huruf dan angka saja.
+          - generic [ref=f16e111]:
+            - button "Simpan" [ref=f16e112] [cursor=pointer]:
+              - generic [ref=f16e113]: 
+              - text: Simpan
+            - button "Batal" [ref=f16e114] [cursor=pointer]

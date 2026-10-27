@@ -1,0 +1,148 @@
+- generic [ref=f28e1]:
+  - generic [ref=f28e2]:
+    - complementary [ref=f28e3]:
+      - heading [level=1] [ref=f28e125]: PILKETOS
+      - navigation [ref=f28e8]:
+        - link [ref=f28e126] [cursor=pointer]:
+          - /url: http://localhost:8000/admin
+          - text: Dashboard
+        - link [ref=f28e127] [cursor=pointer]:
+          - /url: http://localhost:8000/admin/calon
+          - text: Kelola Calon
+        - link [ref=f28e128] [cursor=pointer]:
+          - /url: http://localhost:8000/admin/hak-suara
+          - text: Kelola Hak Suara
+        - link [ref=f28e129] [cursor=pointer]:
+          - /url: http://localhost:8000/admin/tokens
+          - text: Voting Token
+        - link [ref=f28e130] [cursor=pointer]:
+          - /url: http://localhost:8000/admin/admin-config
+          - text: Konfigurasi Admin
+        - link [ref=f28e131] [cursor=pointer]:
+          - /url: http://localhost:8000/voting
+          - text: Voting Page
+      - generic [ref=f28e27]:
+        - generic [ref=f28e28]:
+          - generic [ref=f28e29]: A
+          - generic [ref=f28e31]:
+            - paragraph [ref=f28e32]: Administrator
+            - paragraph [ref=f28e33]: admin@gmail.com
+        - button [ref=f28e132] [cursor=pointer]:
+          - generic [ref=f28e36]: 
+          - text: Logout
+    - generic [ref=f28e37]:
+      - banner [ref=f28e38]:
+        - generic [ref=f28e40]:
+          - heading [level=1] [ref=f28e133]: Hak Suara
+          - paragraph [ref=f28e42]: Daftar pemilih yang berhak memberikan suara
+        - generic [ref=f28e43]:
+          - button [ref=f28e134] [cursor=pointer]:
+            - generic [ref=f28e45]: 
+            - text: Import Excel
+          - button [ref=f28e135] [cursor=pointer]:
+            - generic [ref=f28e47]: +
+            - text: Tambah
+      - main [ref=f28e48]:
+        - generic [ref=f28e49]:
+          - generic [ref=f28e50]:
+            - generic [ref=f28e52]:
+              - generic [ref=f28e53]:
+                - paragraph [ref=f28e54]: Total Pemilih
+                - heading [level=3] [ref=f28e136]: "3"
+              - generic [ref=f28e56]: 
+            - generic [ref=f28e59]:
+              - generic [ref=f28e60]:
+                - paragraph [ref=f28e61]: Sudah Memilih
+                - heading [level=3] [ref=f28e137]: "1"
+              - generic [ref=f28e63]: 
+            - generic [ref=f28e66]:
+              - generic [ref=f28e67]:
+                - paragraph [ref=f28e68]: Belum Memilih
+                - heading [level=3] [ref=f28e138]: "2"
+              - generic [ref=f28e70]: 
+            - generic [ref=f28e73]:
+              - generic [ref=f28e74]:
+                - paragraph [ref=f28e75]: Partisipasi
+                - heading [level=3] [ref=f28e139]: 33.3%
+              - generic [ref=f28e77]: 
+          - generic [ref=f28e79]:
+            - generic [ref=f28e81]:
+              - generic [ref=f28e82]:
+                - generic [ref=f28e83]: 
+                - textbox [ref=f28e140]:
+                  - /placeholder: Cari nama pemilih...
+              - combobox [ref=f28e85]
+              - button [ref=f28e141]: Filter
+            - table [ref=f28e88]:
+              - rowgroup [ref=f28e89]:
+                - row [ref=f28e142]:
+                  - columnheader [ref=f28e143]: "No"
+                  - columnheader [ref=f28e144]: Nama
+                  - columnheader [ref=f28e145]: Status
+                  - columnheader [ref=f28e146]: Aksi
+              - rowgroup [ref=f28e95]:
+                - row [ref=f28e147]:
+                  - cell [ref=f28e148]: "1"
+                  - cell [ref=f28e149]: Ahmad Fauzi
+                  - cell [ref=f28e150]:
+                    - generic [ref=f28e100]:
+                      - generic [ref=f28e101]: 
+                      - text: Belum Memilih
+                  - cell [ref=f28e102]:
+                    - button [ref=f28e151] [cursor=pointer]:
+                      - generic [ref=f28e104]: 
+                - row [ref=f28e152]:
+                  - cell [ref=f28e153]: "2"
+                  - cell [ref=f28e154]: Siti Rahayu
+                  - cell [ref=f28e155]:
+                    - generic [ref=f28e109]:
+                      - generic [ref=f28e110]: 
+                      - text: Belum Memilih
+                  - cell [ref=f28e111]:
+                    - button [ref=f28e156] [cursor=pointer]:
+                      - generic [ref=f28e113]: 
+                - row [ref=f28e157]:
+                  - cell [ref=f28e158]: "3"
+                  - cell [ref=f28e159]: Budi Santoso
+                  - cell [ref=f28e160]:
+                    - generic [ref=f28e118]:
+                      - generic [ref=f28e119]: 
+                      - text: Sudah Memilih
+                  - cell [ref=f28e120]:
+                    - button [ref=f28e161] [cursor=pointer]:
+                      - generic [ref=f28e122]: 
+        - generic:
+          - generic:
+            - heading [level=2]: Tambah Hak Suara
+            - button:
+              - generic: 
+          - generic:
+            - generic:
+              - generic:
+                - generic: Nama Lengkap
+                - textbox:
+                  - /placeholder: Masukkan nama lengkap pemilih
+                - paragraph: Hanya huruf, spasi, titik, dan tanda hubung. Nama harus sama dengan yang akan diinput di halaman voting.
+              - generic:
+                - button:
+                  - generic: 
+                  - text: Simpan
+                - button: Batal
+  - dialog [ref=f28e163]:
+    - generic [ref=f28e164]: 
+    - heading "Import dari Excel" [level=2] [ref=f28e167]
+    - generic [ref=f28e168]:
+      - paragraph [ref=f28e169]: Upload file Excel (.xls/.xlsx) dengan format:kolom A = No, kolom B = Nama
+      - link "Download Sample" [ref=f28e170] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/hak-suara/download-sample
+        - generic [ref=f28e171]: 
+        - text: Download Sample
+      - generic [ref=f28e172] [cursor=pointer]:
+        - generic [ref=f28e173]: 
+        - generic [ref=f28e174]: Pilih file Excel
+    - text: "!"
+    - generic [ref=f28e175]:
+      - button "Batal" [ref=f28e176]
+      - button "Import" [active] [ref=f28e177] [cursor=pointer]:
+        - generic [ref=f28e178]: 
+        - text: Import

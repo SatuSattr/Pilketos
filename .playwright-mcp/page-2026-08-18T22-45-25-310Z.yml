@@ -1,0 +1,59 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - main [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - heading [level=1] [ref=e6]: Pemilihan Ketua OSIS
+          - paragraph [ref=e7]: Pilih satu calon ketua OSIS favorit Anda
+        - generic [ref=e8]:
+          - generic [ref=e9]:
+            - generic [ref=e11] [cursor=pointer]:
+              - generic [ref=e12]:
+                - generic [ref=e13]: 
+                - generic [ref=e14]:
+                  - heading [level=3] [ref=e16]: Shabira Syahla Alvaliza
+                  - heading [level=1] [ref=e18]: "01"
+                  - generic [ref=e21]:
+                    - generic [ref=e22]: KELAS
+                    - generic [ref=e23]: XI-1
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading [level=4]: Visi
+                    - paragraph
+                  - generic:
+                    - generic:
+                      - heading [level=4]: Misi
+                    - paragraph
+            - generic [ref=e25] [cursor=pointer]:
+              - generic [ref=e26]:
+                - generic [ref=e27]: 
+                - generic [ref=e28]:
+                  - heading [level=3] [ref=e30]: Faiz Nabil Akram
+                  - heading [level=1] [ref=e32]: "02"
+                  - generic [ref=e35]:
+                    - generic [ref=e36]: KELAS
+                    - generic [ref=e37]: XII-1
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading [level=4]: Visi
+                    - paragraph
+                  - generic:
+                    - generic:
+                      - heading [level=4]: Misi
+                    - paragraph
+          - generic [ref=e38]:
+            - button [disabled] [ref=e39]: Pilih Calon Favorit
+            - paragraph [ref=e40]: Silakan pilih salah satu calon terlebih dahulu
+    - contentinfo [ref=e41]:
+      - generic [ref=e43]:
+        - paragraph [ref=e44]: Pilketos v2.0 FOSS - Sistem Pemilihan Ketua OSIS
+        - paragraph [ref=e45]: Made with $20 Claude subscription by Sattar
+  - dialog [ref=e47]:
+    - heading "Masukkan Display Token" [level=2] [ref=e48]
+    - textbox "Masukkan token di sini..." [active] [ref=e49]
+    - text: "!"
+    - button "OK" [ref=e51] [cursor=pointer]

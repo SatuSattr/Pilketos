@@ -1,0 +1,126 @@
+- generic [ref=f28e2]:
+  - complementary [ref=f28e3]:
+    - generic [ref=f28e5]:
+      - img "Pilketos" [ref=f28e6]
+      - heading "PILKETOS" [level=1] [ref=f28e7]
+    - navigation [ref=f28e8]:
+      - link "Dashboard" [ref=f28e9] [cursor=pointer]:
+        - /url: http://localhost:8000/admin
+      - link "Kelola Calon" [ref=f28e12] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/calon
+      - link "Kelola Hak Suara" [ref=f28e15] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/hak-suara
+      - link "Voting Token" [ref=f28e18] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/tokens
+      - link "Konfigurasi Admin" [ref=f28e21] [cursor=pointer]:
+        - /url: http://localhost:8000/admin/admin-config
+      - link "Voting Page" [ref=f28e24] [cursor=pointer]:
+        - /url: http://localhost:8000/voting
+    - generic [ref=f28e27]:
+      - generic [ref=f28e28]:
+        - generic [ref=f28e29]: A
+        - generic [ref=f28e31]:
+          - paragraph [ref=f28e32]: Administrator
+          - paragraph [ref=f28e33]: admin@gmail.com
+      - button "Logout" [ref=f28e35] [cursor=pointer]:
+        - generic [ref=f28e36]: 
+        - text: Logout
+  - generic [ref=f28e37]:
+    - banner [ref=f28e38]:
+      - generic [ref=f28e40]:
+        - heading "Hak Suara" [level=1] [ref=f28e41]
+        - paragraph [ref=f28e42]: Daftar pemilih yang berhak memberikan suara
+      - generic [ref=f28e43]:
+        - button "Import Excel" [ref=f28e44] [cursor=pointer]:
+          - generic [ref=f28e45]: 
+          - text: Import Excel
+        - button "Tambah" [ref=f28e46] [cursor=pointer]:
+          - generic [ref=f28e47]: +
+          - text: Tambah
+    - main [ref=f28e48]:
+      - generic [ref=f28e49]:
+        - generic [ref=f28e50]:
+          - generic [ref=f28e52]:
+            - generic [ref=f28e53]:
+              - paragraph [ref=f28e54]: Total Pemilih
+              - heading "3" [level=3] [ref=f28e55]
+            - generic [ref=f28e56]: 
+          - generic [ref=f28e59]:
+            - generic [ref=f28e60]:
+              - paragraph [ref=f28e61]: Sudah Memilih
+              - heading "1" [level=3] [ref=f28e62]
+            - generic [ref=f28e63]: 
+          - generic [ref=f28e66]:
+            - generic [ref=f28e67]:
+              - paragraph [ref=f28e68]: Belum Memilih
+              - heading "2" [level=3] [ref=f28e69]
+            - generic [ref=f28e70]: 
+          - generic [ref=f28e73]:
+            - generic [ref=f28e74]:
+              - paragraph [ref=f28e75]: Partisipasi
+              - heading "33.3%" [level=3] [ref=f28e76]
+            - generic [ref=f28e77]: 
+        - generic [ref=f28e79]:
+          - generic [ref=f28e81]:
+            - generic [ref=f28e82]:
+              - generic [ref=f28e83]: 
+              - textbox "Cari nama pemilih..." [ref=f28e84]
+            - combobox [ref=f28e85]:
+              - option "Semua Status" [selected]
+              - option "Sudah Memilih"
+              - option "Belum Memilih"
+            - button "Filter" [ref=f28e86]
+          - table [ref=f28e88]:
+            - rowgroup [ref=f28e89]:
+              - row [ref=f28e90]:
+                - columnheader "No" [ref=f28e91]
+                - columnheader "Nama" [ref=f28e92]
+                - columnheader "Status" [ref=f28e93]
+                - columnheader "Aksi" [ref=f28e94]
+            - rowgroup [ref=f28e95]:
+              - row [ref=f28e96]:
+                - cell "1" [ref=f28e97]
+                - cell "Ahmad Fauzi" [ref=f28e98]
+                - cell [ref=f28e99]:
+                  - generic [ref=f28e100]:
+                    - generic [ref=f28e101]: 
+                    - text: Belum Memilih
+                - cell [ref=f28e102]:
+                  - button "Hapus" [ref=f28e103] [cursor=pointer]:
+                    - generic [ref=f28e104]: 
+              - row [ref=f28e105]:
+                - cell "2" [ref=f28e106]
+                - cell "Siti Rahayu" [ref=f28e107]
+                - cell [ref=f28e108]:
+                  - generic [ref=f28e109]:
+                    - generic [ref=f28e110]: 
+                    - text: Belum Memilih
+                - cell [ref=f28e111]:
+                  - button "Hapus" [ref=f28e112] [cursor=pointer]:
+                    - generic [ref=f28e113]: 
+              - row [ref=f28e114]:
+                - cell "3" [ref=f28e115]
+                - cell "Budi Santoso" [ref=f28e116]
+                - cell [ref=f28e117]:
+                  - generic [ref=f28e118]:
+                    - generic [ref=f28e119]: 
+                    - text: Sudah Memilih
+                - cell [ref=f28e120]:
+                  - button "Hapus" [ref=f28e121] [cursor=pointer]:
+                    - generic [ref=f28e122]: 
+      - generic:
+        - generic:
+          - heading "Tambah Hak Suara" [level=2]
+          - button:
+            - generic: 
+        - generic:
+          - generic:
+            - generic:
+              - generic: Nama Lengkap
+              - textbox "Masukkan nama lengkap pemilih"
+              - paragraph: Hanya huruf, spasi, titik, dan tanda hubung. Nama harus sama dengan yang akan diinput di halaman voting.
+            - generic:
+              - button "Simpan":
+                - generic: 
+                - text: Simpan
+              - button "Batal"
